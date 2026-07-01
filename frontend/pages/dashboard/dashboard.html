@@ -8,8 +8,7 @@
 
 <title>MPI Dashboard</title>
 
-<link rel="stylesheet" href="../../css/layout.css">
-<link rel="stylesheet" href="../../css/dashboard.css">
+<link rel="stylesheet" href="../../css/styles.css">
 
 </head>
 
@@ -17,40 +16,52 @@
 
     <!-- Sidebar -->
 
-    <div class="sidebar">
+<aside class="sidebar">
 
-        <div class="logo">
+    <div class="logo">
 
-    <img src="../../images/mpi-logo.png"
-         alt="MPI Logo"
-         class="logo-image">
+        <img
+            src="../../images/mpi-logo.png"
+            alt="MPI Logo"
+            class="logo-image">
 
-    <h1>MPI</h1>
+        <h1>MPI</h1>
 
-    <p>Maxwell Property Intelligence</p>
-
-</div>
-
-        <nav>
-
-            <a class="active">🏠 Dashboard</a>
-            <a>🏘 Properties</a>
-            <a>🏢 Businesses</a>
-            <a>📈 Portfolio</a>
-            <a>🤖 AI Deal Finder</a>
-            <a>⭐ Saved Deals</a>
-            <a>📊 Reports</a>
-            <a>⚙ Settings</a>
-
-        </nav>
-
-        <div class="version">
-
-            Version 0.1
-
-        </div>
+        <p>Maxwell Property Intelligence</p>
 
     </div>
+
+    <nav class="sidebar-nav">
+
+        <ul class="sidebar-menu">
+
+            <li><a class="active" href="#">🏠 Dashboard</a></li>
+
+            <li><a href="#">🏘 Properties</a></li>
+
+            <li><a href="#">🏢 Businesses</a></li>
+
+            <li><a href="#">📈 Portfolio</a></li>
+
+            <li><a href="#">🤖 AI Deal Finder</a></li>
+
+            <li><a href="#">⭐ Saved Deals</a></li>
+
+            <li><a href="#">📊 Reports</a></li>
+
+            <li><a href="#">⚙ Settings</a></li>
+
+        </ul>
+
+    </nav>
+
+    <div class="version">
+
+        Version 0.1.0
+
+    </div>
+
+</aside>
 
     <!-- Top Navigation -->
 
@@ -96,6 +107,95 @@
         </p>
 
     </section>
+
+    <section class="dashboard-summary">
+
+    <div class="dashboard-cards">
+
+    <article class="card">
+
+    <h3 class="card-title">
+        Portfolio Value
+    </h3>
+
+    <h2 class="card-value">
+        $2,487,000
+    </h2>
+
+    <div class="card-change">
+        ▲ 12.4%
+    </div>
+
+    <p class="card-subtitle">
+        vs last month
+    </p>
+
+</article>
+
+
+    <article class="card">
+
+        <h3 class="card-title">
+            Monthly Cash Flow
+        </h3>
+
+        <h2 class="card-value">
+            $18,420
+        </h2>
+
+        <div class="card-change">
+            ▲ 7.2%
+        </div>
+
+        <p class="card-subtitle">
+            vs last month
+        </p>
+
+</article>
+
+    <article class="card">
+
+        <h3 class="card-title">
+            Active Deals
+        </h3>
+
+        <h2 class="card-value">
+            48
+        </h2>
+
+        <div class="card-change">
+            —
+        </div>
+
+        <p class="card-subtitle">
+            No change
+        </p>
+
+</article>
+
+    <article class="card">
+
+        <h3 class="card-title">
+            AI Opportunities
+        </h3>
+
+        <h2 class="card-value">
+            12
+        </h2>
+
+        <div class="card-change">
+            ▲ 2 new
+        </div>
+
+        <p class="card-subtitle">
+            vs last week
+        </p>
+
+</article>
+
+ </div>
+
+</section>
 
 </main>
 

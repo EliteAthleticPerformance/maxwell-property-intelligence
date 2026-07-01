@@ -1,22 +1,29 @@
-/* ===========================================
-   MPI Layout
-=========================================== */
+/* ==========================================
+   Maxwell Property Intelligence
 
-*{
+   Layout System
+
+   Version: 1.0
+
+   Author: Brent Maxwell
+
+========================================== */
+
+* {
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
-body{
+body {
 
     font-family:Inter,Arial,sans-serif;
 
-    background:#F8FAFC;
+    background:var(--surface);
 
 }
 
-.sidebar{
+.sidebar {
 
     position:fixed;
 
@@ -24,11 +31,11 @@ body{
 
     top:0;
 
-    width:300px;
+    width:var(--sidebar-width);
 
     height:100vh;
 
-    background:#0F172A;
+    background:var(--navy);
 
     color:white;
 
@@ -38,7 +45,17 @@ body{
 
 }
 
-.logo{
+.sidebar-menu {
+
+    list-style:none;
+
+    margin:0;
+
+    padding:0;
+
+}
+
+.logo {
 
     padding:50px 25px;
 
@@ -46,15 +63,15 @@ body{
 
 }
 
-.logo h1{
+.logo h1 {
 
     font-size:42px;
 
-    color:#2563EB;
+    color:var(--primary-blue);
 
 }
 
-.logo p{
+.logo p {
 
     margin-top:10px;
 
@@ -62,61 +79,56 @@ body{
 
     line-height:22px;
 
-    color:#CBD5E1;
+    color:var(--text-light);
 
 }
 
-.logo-image{
+.logo-image {
 
     width:70px;
 
     height:70px;
 
-    margin-bottom:20px;
+    margin-bottom:var(--space-4);
 
 }
 
-nav{
+nav {
 
     display:flex;
 
     flex-direction:column;
 
-    margin-top:25px;
+    margin-top:var(--space-4);
 
 }
 
-nav a{
+nav a {
 
-    color:#CBD5E1;
+    color:var(--text-light);
 
     text-decoration:none;
 
-    padding:18px 28px;
+    padding:18px var(--space-5);
 
-    transition:.25s;
+    transition: var(--transition-normal);
 
     font-size:16px;
 
 }
 
-nav a{
 
-    transition:.25s;
+nav a:hover {
 
-}
-
-nav a:hover{
-
-    background:#1E293B;
+    background:var(--deep-blue);
 
     padding-left:38px;
 
 }
 
-nav a.active{
+nav a.active {
 
-    background:#2563EB;
+    background:var(--primary-blue);
 
     color:white;
 
@@ -124,35 +136,35 @@ nav a.active{
 
 }
 
-.version{
+.version {
 
     margin-top:auto;
 
-    padding:30px;
+    padding:var(--space-5);
 
     font-size:13px;
 
-    color:#94A3B8;
+    color:var(--text-light);
 
 }/* ==========================================
    TOP NAVIGATION
 ========================================== */
 
-.top-navbar{
+.top-navbar {
 
     position:fixed;
 
-    left:300px;
+    left:var(--sidebar-width);
 
     right:0;
 
     top:0;
 
-    height:80px;
+    height:var(--navbar-height);
 
-    background:white;
+    background:var(--surface);
 
-    border-bottom:1px solid #E2E8F0;
+    border-bottom:1px solid var(--border);
 
     display:flex;
 
@@ -162,19 +174,19 @@ nav a.active{
 
     padding:0 40px;
 
-    z-index:100;
+    z-index: var(--z-navbar);
 
 }
 
-.search-container input{
+.search-container input {
 
     width:520px;
 
     padding:14px 18px;
 
-    border:1px solid #CBD5E1;
+    border:1px solid var(--border);
 
-    border-radius:10px;
+    border-radius:var(--radius-md);
 
     font-size:15px;
 
@@ -182,23 +194,23 @@ nav a.active{
 
 }
 
-.search-container input:focus{
+.search-container input:focus {
 
-    border-color:#2563EB;
+    border-color:var(--primary-blue);
 
 }
 
-.navbar-right{
+.navbar-right {
 
     display:flex;
 
     align-items:center;
 
-    gap:30px;
+    gap:var(--space-5);
 
 }
 
-.notification{
+.notification {
 
     font-size:24px;
 
@@ -206,17 +218,17 @@ nav a.active{
 
 }
 
-.today-date{
+.today-date {
 
-    color:#64748B;
+    color:var(--text-secondary);
 
     font-size:15px;
 
 }
 
-.profile{
+.profile {
 
-    font-weight:600;
+    font-weight:var(--font-semibold);
 
     cursor:pointer;
 
