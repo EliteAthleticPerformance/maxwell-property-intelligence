@@ -66,6 +66,16 @@ body{
 
 }
 
+.logo-image{
+
+    width:70px;
+
+    height:70px;
+
+    margin-bottom:20px;
+
+}
+
 nav{
 
     display:flex;
@@ -123,5 +133,91 @@ nav a.active{
     font-size:13px;
 
     color:#94A3B8;
+
+}/* ==========================================
+   TOP NAVIGATION
+========================================== */
+
+.top-navbar{
+
+    position:fixed;
+
+    left:300px;
+
+    right:0;
+
+    top:0;
+
+    height:80px;
+
+    background:white;
+
+    border-bottom:1px solid #E2E8F0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    z-index:100;
+
+}
+
+.search-container input{
+
+    width:520px;
+
+    padding:14px 18px;
+
+    border:1px solid #CBD5E1;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+}
+
+.search-container input:focus{
+
+    border-color:#2563EB;
+
+}
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+
+}
+
+.notification{
+
+    font-size:24px;
+
+    cursor:pointer;
+
+}
+
+.today-date{
+
+    color:#64748B;
+
+    font-size:15px;
+
+}
+
+.profile{
+
+    font-weight:600;
+
+    cursor:pointer;
 
 }

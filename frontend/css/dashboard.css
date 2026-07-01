@@ -1,0 +1,37 @@
+/* ==========================================
+   DASHBOARD
+========================================== */
+
+.dashboard-content{
+
+    margin-left:300px;
+
+    margin-top:80px;
+
+    padding:40px;
+
+}
+
+.welcome-section{
+
+    margin-bottom:35px;
+
+}
+
+.welcome-section h2{
+
+    font-size:36px;
+
+    color: var(--text-primary);
+
+    margin-bottom:10px;
+
+}
+
+.welcome-section p{
+
+    font-size:18px;
+
+    color: var(--text-secondary);
+
+}

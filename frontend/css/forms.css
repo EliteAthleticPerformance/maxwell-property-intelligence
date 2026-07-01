@@ -1,0 +1,19 @@
+.input{
+
+    width:100%;
+
+    padding:14px;
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius-md);
+
+    outline:none;
+
+}
+
+.input:focus{
+
+    border-color:var(--primary-blue);
+
+}
