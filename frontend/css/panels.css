@@ -1,0 +1,146 @@
+/* ==========================================
+   Maxwell Property Intelligence
+
+   Panel Component
+
+   Version: 1.0
+
+========================================== */
+
+.panel {
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: var(--radius-lg);
+
+    box-shadow: var(--shadow-sm);
+
+    padding: var(--space-4);
+
+    min-height:320px;
+
+    transition: var(--transition-normal);
+
+    transition:var(--transition-normal);
+
+}
+
+.panel:hover {
+
+    box-shadow: var(--shadow-md);
+
+    transform: translateY(-2px);
+
+}
+
+.panel-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: var(--space-4);
+
+}
+
+.panel-title {
+
+    font-size: 22px;
+
+    font-weight: var(--font-semibold);
+
+    color: var(--text-primary);
+
+}
+
+.panel-link {
+
+    color: var(--primary-blue);
+
+    font-size: 14px;
+
+    font-weight: var(--font-semibold);
+
+    text-decoration: none;
+
+    transition: var(--transition-fast);
+
+    outline: none;
+
+}
+
+.panel-link:hover {
+
+    opacity: .75;
+
+}
+
+.panel-link:focus {
+
+    outline: none;
+
+}
+
+.panel-body {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: var(--space-3);
+
+}
+
+/* ==========================================
+   PANEL ITEMS
+========================================== */
+
+.panel-item {
+
+    display: flex;
+
+    flex-direction: column;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--border);
+
+    transition: var(--transition-fast);
+
+    cursor: pointer;
+
+}
+
+.panel-item:last-child {
+
+    border-bottom: none;
+
+}
+
+.panel-item:hover {
+
+    padding-left: 8px;
+
+}
+
+.panel-item strong {
+
+    font-size: 15px;
+
+    color: var(--text-primary);
+
+    margin-bottom: 4px;
+
+}
+
+.panel-item span {
+
+    font-size: 13px;
+
+    color: var(--text-secondary);
+
+}

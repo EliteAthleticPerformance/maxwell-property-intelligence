@@ -2,50 +2,97 @@
    DASHBOARD
 ========================================== */
 
-.dashboard-content{
+.dashboard-content {
 
-    margin-left:300px;
+    margin-left: var(--sidebar-width);
+    margin-top: var(--navbar-height);
 
-    margin-top:80px;
+    padding: 40px;
 
-    padding:40px;
-
-}
-
-.welcome-section{
-
-    margin-bottom:35px;
+    max-width: var(--container-max);
 
 }
 
-.welcome-section h2{
+.welcome-section {
 
-    font-size:36px;
+    margin-bottom: 35px;
+
+}
+
+.welcome-section h2 {
+
+    font-size: 36px;
+    font-weight: var(--font-bold);
 
     color: var(--text-primary);
 
-    margin-bottom:10px;
+    margin-bottom: 10px;
 
 }
 
-.welcome-section p{
+.welcome-section p {
 
-    font-size:18px;
+    font-size: 18px;
 
     color: var(--text-secondary);
 
-}/* ==========================================
+}
+
+/* ==========================================
    KPI CARDS
 ========================================== */
 
-.dashboard-cards{
+.dashboard-cards {
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns: repeat(4, 1fr);
 
-    gap:24px;
+    gap: 24px;
 
-    margin-top:30px;
+    margin-top: 30px;
+
+    margin-bottom: 32px;
+
+}
+
+/* ==========================================
+   DASHBOARD PANELS
+========================================== */
+
+.dashboard-panels {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 24px;
+
+    margin-top: 30px;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1400px){
+
+    .dashboard-cards{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media (max-width:900px){
+
+    .dashboard-cards,
+    .dashboard-panels{
+
+        grid-template-columns:1fr;
+
+    }
 
 }
