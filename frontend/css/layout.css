@@ -1,0 +1,127 @@
+/* ===========================================
+   MPI Layout
+=========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+
+    font-family:Inter,Arial,sans-serif;
+
+    background:#F8FAFC;
+
+}
+
+.sidebar{
+
+    position:fixed;
+
+    left:0;
+
+    top:0;
+
+    width:300px;
+
+    height:100vh;
+
+    background:#0F172A;
+
+    color:white;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.logo{
+
+    padding:50px 25px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+}
+
+.logo h1{
+
+    font-size:42px;
+
+    color:#2563EB;
+
+}
+
+.logo p{
+
+    margin-top:10px;
+
+    font-size:14px;
+
+    line-height:22px;
+
+    color:#CBD5E1;
+
+}
+
+nav{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-top:25px;
+
+}
+
+nav a{
+
+    color:#CBD5E1;
+
+    text-decoration:none;
+
+    padding:18px 28px;
+
+    transition:.25s;
+
+    font-size:16px;
+
+}
+
+nav a{
+
+    transition:.25s;
+
+}
+
+nav a:hover{
+
+    background:#1E293B;
+
+    padding-left:38px;
+
+}
+
+nav a.active{
+
+    background:#2563EB;
+
+    color:white;
+
+    border-left:5px solid white;
+
+}
+
+.version{
+
+    margin-top:auto;
+
+    padding:30px;
+
+    font-size:13px;
+
+    color:#94A3B8;
+
+}
