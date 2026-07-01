@@ -99,3 +99,37 @@ All notable changes to this project will be documented in this file.
 - Reporting
 - AI Opportunity Finder
 - Premium Subscription Features
+
+## DS-1 - Color Variables
+
+### Added
+
+- Centralized design tokens
+- Brand color variables
+- Text color variables
+- Background variables
+- Status colors
+- Shadow variables
+- Border radius variables
+- Global spacing scale
+
+# Version 0.1.0 - MPI Foundation
+
+## Added
+
+- Initial project architecture
+- GitHub repository
+- Versioning strategy
+- Brand guide
+- Design system
+- Global CSS variables
+- Typography foundation
+- Layout system
+- Sidebar navigation
+- Top navigation
+- Dashboard shell
+- KPI card component
+
+## Notes
+
+This release establishes the core architecture and design system for Maxwell Property Intelligence.

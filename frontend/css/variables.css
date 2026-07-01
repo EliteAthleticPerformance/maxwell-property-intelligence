@@ -72,4 +72,53 @@
     --space-6: 48px;
     --space-7: 64px;
 
+    /* =======================================
+   LAYOUT
+======================================= */
+
+--sidebar-width:300px;
+
+--navbar-height:80px;
+
+--content-max-width:1600px;
+
+/* =======================================
+   TRANSITIONS
+======================================= */
+
+--transition-fast: 0.2s ease;
+--transition-normal: 0.3s ease;
+--transition-slow: 0.5s ease;
+
+/* =======================================
+   Z-INDEX
+======================================= */
+
+--z-sidebar: 100;
+--z-navbar: 200;
+--z-dropdown: 500;
+--z-modal: 1000;
+--z-toast: 1100;
+
+/* =======================================
+   CONTAINERS
+======================================= */
+
+--container-sm: 720px;
+--container-md: 960px;
+--container-lg: 1200px;
+--container-xl: 1440px;
+--container-max: 1600px;
+
+/* =======================================
+   TYPOGRAPHY
+======================================= */
+
+--font-regular:400;
+--font-medium:500;
+--font-semibold:600;
+--font-bold:700;
+
+
+
 }

@@ -57,7 +57,10 @@ body {
 
 .logo {
 
-    padding:50px 25px;
+    padding:
+        var(--space-6)
+        var(--space-5);
+
 
     border-bottom:1px solid rgba(255,255,255,.08);
 
@@ -93,7 +96,7 @@ body {
 
 }
 
-nav {
+.sidebar-nav {
 
     display:flex;
 
@@ -103,7 +106,7 @@ nav {
 
 }
 
-nav a {
+.sidebar-nav a {
 
     color:var(--text-light);
 
@@ -118,7 +121,7 @@ nav a {
 }
 
 
-nav a:hover {
+.sidebar-nav a:hover {
 
     background:var(--deep-blue);
 
@@ -126,7 +129,7 @@ nav a:hover {
 
 }
 
-nav a.active {
+.sidebar-nav a.active {
 
     background:var(--primary-blue);
 
@@ -146,7 +149,9 @@ nav a.active {
 
     color:var(--text-light);
 
-}/* ==========================================
+}
+
+/* ==========================================
    TOP NAVIGATION
 ========================================== */
 
