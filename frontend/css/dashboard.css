@@ -7,7 +7,7 @@
     margin-left: var(--sidebar-width);
     margin-top: var(--navbar-height);
 
-    padding: 40px;
+    padding: var(--space-6);
 
     max-width: var(--container-max);
 
@@ -94,5 +94,29 @@
         grid-template-columns:1fr;
 
     }
+
+}
+
+/* ==========================================
+   CHART SECTION
+========================================== */
+
+.dashboard-chart{
+
+    margin-top:24px;
+
+}
+
+.chart-panel{
+
+    min-height:380px;
+
+}
+
+.chart-container{
+
+    position:relative;
+
+    height:280px;
 
 }

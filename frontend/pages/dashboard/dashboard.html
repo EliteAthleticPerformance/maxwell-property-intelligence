@@ -1,69 +1,64 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <title>MPI Dashboard</title>
 
-<title>MPI Dashboard</title>
-
-<link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles.css">
 
 </head>
 
 <body>
 
-    <!-- Sidebar -->
+    <!-- ==========================================
+         SIDEBAR
+    ========================================== -->
 
-<aside class="sidebar">
+    <aside class="sidebar">
 
-    <div class="logo">
+        <div class="logo">
 
-        <img
-            src="../../images/mpi-logo.png"
-            alt="MPI Logo"
-            class="logo-image">
+            <img
+                src="../../images/mpi-logo.png"
+                alt="MPI Logo"
+                class="logo-image">
 
-        <h1>MPI</h1>
+            <h1>MPI</h1>
 
-        <p>Maxwell Property Intelligence</p>
+            <p>Maxwell Property Intelligence</p>
 
-    </div>
+        </div>
 
-    <nav class="sidebar-nav">
+        <nav class="sidebar-nav">
 
-        <ul class="sidebar-menu">
+            <ul class="sidebar-menu">
 
-            <li><a class="active" href="#">🏠 Dashboard</a></li>
+                <li><a class="active" href="#">🏠 Dashboard</a></li>
+                <li><a href="#">🏘 Properties</a></li>
+                <li><a href="#">🏢 Businesses</a></li>
+                <li><a href="#">📈 Portfolio</a></li>
+                <li><a href="#">🤖 AI Deal Finder</a></li>
+                <li><a href="#">⭐ Saved Deals</a></li>
+                <li><a href="#">📊 Reports</a></li>
+                <li><a href="#">⚙ Settings</a></li>
 
-            <li><a href="#">🏘 Properties</a></li>
+            </ul>
 
-            <li><a href="#">🏢 Businesses</a></li>
+        </nav>
 
-            <li><a href="#">📈 Portfolio</a></li>
+        <div class="version">
 
-            <li><a href="#">🤖 AI Deal Finder</a></li>
+            Version 0.1.0
 
-            <li><a href="#">⭐ Saved Deals</a></li>
+        </div>
 
-            <li><a href="#">📊 Reports</a></li>
+    </aside>
 
-            <li><a href="#">⚙ Settings</a></li>
-
-        </ul>
-
-    </nav>
-
-    <div class="version">
-
-        Version 0.1.0
-
-    </div>
-
-</aside>
-
-    <!-- Top Navigation -->
+    <!-- ==========================================
+         TOP NAVBAR
+    ========================================== -->
 
     <header class="top-navbar">
 
@@ -71,8 +66,7 @@
 
             <input
                 type="text"
-                placeholder="Search properties, businesses, or addresses..."
-            >
+                placeholder="Search properties, businesses, or addresses...">
 
         </div>
 
@@ -96,186 +90,222 @@
 
     </header>
 
+    <!-- ==========================================
+         MAIN CONTENT
+    ========================================== -->
+
     <main class="dashboard-content">
 
-    <section class="welcome-section">
+        <!-- Welcome -->
 
-        <h2>Welcome back, Brent 👋</h2>
+        <section class="welcome-section">
 
-        <p>
-            Smarter Investments. Powered by Intelligence.
-        </p>
+            <h2>Welcome back, Brent 👋</h2>
 
-    </section>
+            <p>
+                Smarter Investments. Powered by Intelligence.
+            </p>
 
-    <section class="dashboard-summary">
+        </section>
 
-    <div class="dashboard-cards">
+        <!-- ==========================================
+             KPI CARDS
+        ========================================== -->
 
-    <article class="card">
+        <section class="dashboard-summary">
 
-    <h3 class="card-title">
-        Portfolio Value
-    </h3>
+            <div class="dashboard-cards">
 
-    <h2 class="card-value">
-        $2,487,000
-    </h2>
+                <article class="card">
 
-    <div class="card-change">
-        ▲ 12.4%
-    </div>
+                    <h3 class="card-title">Portfolio Value</h3>
 
-    <p class="card-subtitle">
-        vs last month
-    </p>
+                    <h2 class="card-value">$2,487,000</h2>
 
-</article>
+                    <div class="card-change">▲ 12.4%</div>
 
+                    <p class="card-subtitle">vs last month</p>
 
-    <article class="card">
+                </article>
 
-        <h3 class="card-title">
-            Monthly Cash Flow
-        </h3>
+                <article class="card">
 
-        <h2 class="card-value">
-            $18,420
-        </h2>
+                    <h3 class="card-title">Monthly Cash Flow</h3>
 
-        <div class="card-change">
-            ▲ 7.2%
-        </div>
+                    <h2 class="card-value">$18,420</h2>
 
-        <p class="card-subtitle">
-            vs last month
-        </p>
+                    <div class="card-change">▲ 7.2%</div>
 
-</article>
+                    <p class="card-subtitle">vs last month</p>
 
-    <article class="card">
+                </article>
 
-        <h3 class="card-title">
-            Active Deals
-        </h3>
+                <article class="card">
 
-        <h2 class="card-value">
-            48
-        </h2>
+                    <h3 class="card-title">Active Deals</h3>
 
-        <div class="card-change">
-            —
-        </div>
+                    <h2 class="card-value">48</h2>
 
-        <p class="card-subtitle">
-            No change
-        </p>
+                    <div class="card-change">—</div>
 
-</article>
+                    <p class="card-subtitle">No change</p>
 
-    <article class="card">
+                </article>
 
-        <h3 class="card-title">
-            AI Opportunities
-        </h3>
+                <article class="card">
 
-        <h2 class="card-value">
-            12
-        </h2>
+                    <h3 class="card-title">AI Opportunities</h3>
 
-        <div class="card-change">
-            ▲ 2 new
-        </div>
+                    <h2 class="card-value">12</h2>
 
-        <p class="card-subtitle">
-            vs last week
-        </p>
+                    <div class="card-change">▲ 2 new</div>
 
-    </article>
+                    <p class="card-subtitle">vs last week</p>
 
-    </div>
+                </article>
 
-</section>
+            </div>
 
-<!-- ==========================================
-     DASHBOARD PANELS
-========================================== -->
+        </section>
 
-<section class="dashboard-panels">
+        <!-- ==========================================
+             INFORMATION PANELS
+        ========================================== -->
 
-    <section class="panel">
+        <section class="dashboard-panels">
 
-        <div class="panel-header">
+            <!-- Recent Opportunities -->
 
-            <h3 class="panel-title">
-                Recent Opportunities
-            </h3>
+            <section class="panel">
 
-            <a href="#" class="panel-link">
-                View All
-            </a>
+                <div class="panel-header">
 
-        </div>
+                    <h3 class="panel-title">
+                        Recent Opportunities
+                    </h3>
 
-        <div class="panel-body">
+                    <a href="#" class="panel-link">
+                        View All
+                    </a>
 
-            <div class="panel-item">
-    <strong>🏠 123 Market Street</strong>
-    <span>Nashville, TN • 8.7% Cap Rate</span>
-</div>
+                </div>
 
-<div class="panel-item">
-    <strong>🏠 456 Oak Avenue</strong>
-    <span>Atlanta, GA • 12.1% Cap Rate</span>
-</div>
+                <div class="panel-body">
 
-<div class="panel-item">
-    <strong>🏠 789 Business Park</strong>
-    <span>Dallas, TX • 9.3% Cap Rate</span>
-</div>
+                    <div class="panel-item">
 
-        </div>
+                        <strong>🏠 123 Market Street</strong>
 
-    </section>
+                        <span>Nashville, TN • 8.7% Cap Rate</span>
 
-    <section class="panel">
+                    </div>
 
-        <div class="panel-header">
+                    <div class="panel-item">
 
-            <h3 class="panel-title">
-                <div class="panel-item">
-    <strong>🤖 Strong Buy</strong>
-    <span>Multifamily • Austin, TX</span>
-</div>
+                        <strong>🏠 456 Oak Avenue</strong>
 
-<div class="panel-item">
-    <strong>🤖 High Potential</strong>
-    <span>Retail Center • Phoenix, AZ</span>
-</div>
+                        <span>Atlanta, GA • 12.1% Cap Rate</span>
 
-<div class="panel-item">
-    <strong>🤖 Value Opportunity</strong>
-    <span>Industrial Warehouse • Tampa, FL</span>
-</div>
-            </h3>
+                    </div>
 
-            <a href="#" class="panel-link">
-                View All
-            </a>
+                    <div class="panel-item">
 
-        </div>
+                        <strong>🏠 789 Business Park</strong>
 
-        <div class="panel-body">
+                        <span>Dallas, TX • 9.3% Cap Rate</span>
 
-            
+                    </div>
 
-        </div>
+                </div>
 
-    </section>
+            </section>
 
-</section>
+            <!-- AI Recommendations -->
 
-</main>
+            <section class="panel">
+
+                <div class="panel-header">
+
+                    <h3 class="panel-title">
+                        AI Recommendations
+                    </h3>
+
+                    <a href="#" class="panel-link">
+                        View All
+                    </a>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="panel-item">
+
+                        <strong>🤖 Strong Buy</strong>
+
+                        <span>Multifamily • Austin, TX</span>
+
+                    </div>
+
+                    <div class="panel-item">
+
+                        <strong>🤖 High Potential</strong>
+
+                        <span>Retail Center • Phoenix, AZ</span>
+
+                    </div>
+
+                    <div class="panel-item">
+
+                        <strong>🤖 Value Opportunity</strong>
+
+                        <span>Industrial Warehouse • Tampa, FL</span>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+        <!-- ==========================================
+             CHART SECTION
+        ========================================== -->
+
+        <section class="dashboard-chart">
+
+            <section class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <h3 class="panel-title">
+
+                        Portfolio Performance
+
+                    </h3>
+
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="chart-container">
+
+                        <canvas id="portfolioChart"></canvas>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script src="../../js/charts/portfolio-chart.js"></script>
 
 </body>
+
 </html>
