@@ -12,6 +12,144 @@ const Dashboard = {
     period: "30D",
 
     // ------------------------------------
+// AI Scanner
+// ------------------------------------
+
+scannerTypes: [
+
+    "Residential Rentals",
+    "Multifamily",
+    "Commercial",
+    "Tax Liens",
+    "Car Washes",
+    "Laundromats",
+    "Self Storage",
+    "Mobile Home Parks",
+    "RV Parks",
+    "Industrial Warehouses",
+    "Storage Units",
+    "Ice Machines"
+
+],
+
+scannerIndex: -1,
+scannerProperties: 0,
+scannerDeals: 0,
+
+activityMessages:[
+
+{
+    type:"🏠 Duplex",
+    city:"Kansas City, MO",
+    price:248000,
+    cap:"8.9%",
+    cash:612,
+    confidence:96
+},
+
+{
+    type:"🏢 12-Unit Apartment",
+    city:"Independence, MO",
+    price:1185000,
+    cap:"9.6%",
+    cash:4285,
+    confidence:94
+},
+
+{
+    type:"🏪 Retail Strip Center",
+    city:"Lee's Summit, MO",
+    price:1825000,
+    cap:"8.1%",
+    cash:6420,
+    confidence:91
+},
+
+{
+    type:"🏠 Single Family Rental",
+    city:"Overland Park, KS",
+    price:329900,
+    cap:"7.8%",
+    cash:515,
+    confidence:88
+},
+
+{
+    type:"🚗 Car Wash",
+    city:"Belton, MO",
+    price:975000,
+    cap:"10.4%",
+    cash:8120,
+    confidence:95
+},
+
+{
+    type:"🧺 Laundromat",
+    city:"Grandview, MO",
+    price:425000,
+    cap:"11.3%",
+    cash:3875,
+    confidence:93
+},
+
+{
+    type:"🏢 Self Storage",
+    city:"Blue Springs, MO",
+    price:2150000,
+    cap:"8.7%",
+    cash:11920,
+    confidence:97
+},
+
+{
+    type:"🏕 RV Park",
+    city:"Branson, MO",
+    price:3890000,
+    cap:"9.5%",
+    cash:23650,
+    confidence:92
+},
+
+{
+    type:"🏭 Industrial Warehouse",
+    city:"Olathe, KS",
+    price:2875000,
+    cap:"8.2%",
+    cash:14780,
+    confidence:90
+},
+
+{
+    type:"🏘 Mobile Home Park",
+    city:"Sedalia, MO",
+    price:1495000,
+    cap:"10.7%",
+    cash:10320,
+    confidence:96
+},
+
+{
+    type:"❄ Ice Machine Route",
+    city:"Kansas City Metro",
+    price:268000,
+    cap:"14.1%",
+    cash:4560,
+    confidence:89
+},
+
+{
+    type:"📜 Tax Lien Portfolio",
+    city:"Cass County, MO",
+    price:96500,
+    cap:"18.8%",
+    cash:1740,
+    confidence:98
+}
+
+],
+
+    
+    // ------------------------------------
     // Chart Data
     // ------------------------------------
 
@@ -199,11 +337,9 @@ trends: {
 
     this.attachEvents();
 
-    this.updateChart(this.period);
+    this.refreshDashboard(this.period);
 
-    this.updateKPIs(this.period);
-
-    this.updateTrends(this.period);
+this.startScanner();
 
 },
 
@@ -221,11 +357,7 @@ trends: {
 
     this.period = e.target.value;
 
-    this.updateChart(this.period);
-
-    this.updateKPIs(this.period);
-
-    this.updateTrends(this.period);
+this.refreshDashboard(this.period);
 
 });
 
@@ -247,6 +379,38 @@ trends: {
 
         window.portfolioChart.update();
     },    
+
+    // ------------------------------------
+// Refresh Entire Dashboard
+// ------------------------------------
+
+refreshDashboard(period) {
+
+    this.updateChart(period);
+
+    this.updateKPIs(period);
+
+    this.updateTrends(period);
+
+},
+
+// ------------------------------------
+// AI Scanner Engine
+// ------------------------------------
+
+startScanner() {
+
+    this.updateScanner();
+    this.addActivity();
+
+    setInterval(() => {
+
+        this.updateScanner();
+        this.addActivity();
+
+    }, 2500);
+
+},
 
     animateValue(elementId, endValue, prefix = "", suffix = "") {
 
@@ -294,33 +458,173 @@ trends: {
 
 },
 
+updateScanner() {
+
+    const title = document.getElementById("scannerTitle");
+    const properties = document.getElementById("scannerProperties");
+    const deals = document.getElementById("scannerDeals");
+    const lastScan = document.getElementById("scannerLastScan");
+
+    if (!title) return;
+
+    // Next asset class
+
+    this.scannerIndex++;
+
+    if (this.scannerIndex >= this.scannerTypes.length) {
+
+        this.scannerIndex = 0;
+
+    }
+
+    title.textContent =
+        "Scanning " +
+        this.scannerTypes[this.scannerIndex] +
+        "...";
+    
+    const items = document.querySelectorAll(".scanner-item");
+
+items.forEach(item => {
+
+    item.classList.remove("active");
+
+});
+
+if(items[this.scannerIndex]){
+
+    items[this.scannerIndex].classList.add("active");
+
+}    
+
+    // Increase property count
+
+    this.scannerProperties +=
+        Math.floor(Math.random() * 180) + 50;
+
+    properties.textContent =
+        this.scannerProperties.toLocaleString();
+
+    // Occasionally discover a deal
+
+    if (Math.random() > .65) {
+
+        this.scannerDeals++;
+
+        deals.textContent =
+            this.scannerDeals;
+
+        this.pulseCard("aiCard");
+
+    }
+
+    // Update time
+
+    lastScan.textContent =
+        new Date().toLocaleTimeString([], {
+
+            hour: "numeric",
+
+            minute: "2-digit",
+
+            second: "2-digit"
+
+        });
+
+        },
+
+        addActivity(){
+
+    const container =
+        document.getElementById("activityContainer");
+
+    if(!container) return;
+
+    const deal =
+        this.activityMessages[
+            Math.floor(
+                Math.random() *
+                this.activityMessages.length
+            )
+        ];
+
+    const item =
+        document.createElement("div");
+
+    item.className="activity-item";
+
+    item.innerHTML=`
+
+        <div class="activity-dot"></div>
+
+        <div class="activity-content">
+
+            <div class="activity-time">
+
+                ${new Date().toLocaleTimeString([],{
+
+                    hour:"numeric",
+                    minute:"2-digit",
+                    second:"2-digit"
+
+                })}
+
+            </div>
+
+            <div class="activity-message">
+
+                <strong>${deal.type}</strong><br>
+
+                ${deal.city}<br><br>
+
+                💰 Price:
+                $${deal.price.toLocaleString()}<br>
+
+                📈 Cap Rate:
+                ${deal.cap}<br>
+
+                💵 Cash Flow:
+                $${deal.cash.toLocaleString()}/mo<br>
+
+                🤖 AI Confidence:
+                ${deal.confidence}%
+
+            </div>
+
+        </div>
+
+    `;
+
+    container.prepend(item);
+
+    while(container.children.length>6){
+
+        container.removeChild(container.lastChild);
+
+    }
+
+},
+
 updateKPIs(period) {
 
     const data = this.kpis[period];
-    
+
     if (!data) return;
 
-    this.animateValue(
-        "portfolioValue",
-        data.portfolio,
-        "$"
+    const currentAI = Number(
+        document.getElementById("aiDeals")
+            .textContent.replace(/,/g, "")
     );
 
-    this.animateValue(
-        "cashFlow",
-        data.cashFlow,
-        "$"
-    );
+    this.animateValue("portfolioValue", data.portfolio, "$");
+    this.animateValue("cashFlow", data.cashFlow, "$");
+    this.animateValue("activeDeals", data.deals);
+    this.animateValue("aiDeals", data.ai);
 
-    this.animateValue(
-        "activeDeals",
-        data.deals
-    );
+    if (currentAI !== data.ai) {
 
-    this.animateValue(
-        "aiDeals",
-        data.ai
-    );
+        this.pulseCard("aiCard");
+
+    }
 
 },
 
@@ -346,24 +650,67 @@ setTrend(id, value, suffix = "") {
 
     if (!el) return;
 
+    el.classList.remove(
+        "trend-up",
+        "trend-down",
+        "trend-neutral"
+    );
+
     if (value > 0) {
 
-        el.style.color = "var(--success)";
-        el.textContent = `▲ ${value}${suffix}`;
+    el.classList.add("trend-up");
 
-    } else if (value < 0) {
+    el.innerHTML = `
+        <span class="trend-arrow">▲</span>
+        ${value}${suffix}
+    `;
 
-        el.style.color = "var(--danger)";
-        el.textContent = `▼ ${Math.abs(value)}${suffix}`;
+} else if (value < 0) {
 
-    } else {
+    el.classList.add("trend-down");
 
-        el.style.color = "var(--text-secondary)";
-        el.textContent = "—";
+    el.innerHTML = `
+        <span class="trend-arrow">▼</span>
+        ${Math.abs(value)}${suffix}
+    `;
 
-    }
+} else {
+
+    el.classList.add("trend-neutral");
+
+    el.innerHTML = `
+        <span class="trend-arrow">—</span>
+    `;
 
 }
+
+/* Animate ALL badges */
+
+el.style.animation = "none";
+
+void el.offsetWidth;
+
+el.style.animation = "badgePop .25s ease";
+
+},
+
+
+
+pulseCard(cardId){
+
+    const card = document.getElementById(cardId);
+
+    if(!card) return;
+
+    card.classList.remove("card-ai-pulse");
+
+    void card.offsetWidth;
+
+    card.classList.add("card-ai-pulse");
+
+},
+
+
 
 };
 

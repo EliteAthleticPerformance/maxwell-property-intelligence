@@ -64,6 +64,60 @@ transform:translateY(0);
 
 }
 
+/* ==========================================
+   KPI TREND BADGES
+========================================== */
+
+.card-change{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:all .25s ease;
+
+}
+
+.trend-up{
+
+    background:#ECFDF3;
+
+    color:#16A34A;
+
+}
+
+.trend-down{
+
+    background:#FEF2F2;
+
+    color:#DC2626;
+
+}
+
+.trend-neutral{
+
+    background:#F3F4F6;
+
+    color:#6B7280;
+
+}
+
+.trend-arrow{
+
+    font-size:12px;
+
+}
+
 .card-subtitle{
 
     color:var(--text-secondary);
@@ -94,5 +148,15 @@ transform:translateY(0);
 .card:nth-child(4){
 
     animation-delay:.24s;
+
+}
+
+/* ==========================================
+   AI CARD ALERT
+========================================== */
+
+.card-ai-pulse{
+
+    animation:aiPulse .8s ease;
 
 }
