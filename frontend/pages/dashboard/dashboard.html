@@ -82,9 +82,19 @@
 
             <div class="profile">
 
-                👤 Brent ▼
+    <div class="avatar-placeholder">
+        BM
+    </div>
 
-            </div>
+    <span class="profile-name">
+        Brent Maxwell
+    </span>
+
+    <span class="profile-chevron">
+        ▼
+    </span>
+
+</div>
 
         </div>
 
@@ -114,57 +124,73 @@
 
         <section class="dashboard-summary">
 
-            <div class="dashboard-cards">
+    <section class="dashboard-cards">
 
-                <article class="card">
+        <article class="card" id="portfolioCard">
 
                     <h3 class="card-title">Portfolio Value</h3>
 
-                    <h2 class="card-value">$2,487,000</h2>
+                    <h2 class="card-value" id="portfolioValue">
+    $2,487,000
+</h2>
 
-                    <div class="card-change">▲ 12.4%</div>
+                    <div class="card-change" id="portfolioTrend">
+    ▲ 12.4%
+</div>
 
                     <p class="card-subtitle">vs last month</p>
 
                 </article>
 
-                <article class="card">
+                <article class="card" id="cashFlowCard">
 
                     <h3 class="card-title">Monthly Cash Flow</h3>
 
-                    <h2 class="card-value">$18,420</h2>
+                    <h2 class="card-value" id="cashFlow">
+    $18,420
+</h2>
 
-                    <div class="card-change">▲ 7.2%</div>
+                    <div class="card-change" id="cashFlowTrend">
+    ▲ 7.2%
+</div>
 
                     <p class="card-subtitle">vs last month</p>
 
                 </article>
 
-                <article class="card">
+                <article class="card" id="activeDealsCard">
 
                     <h3 class="card-title">Active Deals</h3>
 
-                    <h2 class="card-value">48</h2>
+                    <h2 class="card-value" id="activeDeals">
+    48
+</h2>
 
-                    <div class="card-change">—</div>
+                    <div class="card-change" id="activeDealsTrend">
+    —
+</div>
 
                     <p class="card-subtitle">No change</p>
 
                 </article>
 
-                <article class="card">
+                <article class="card" id="aiCard">
 
                     <h3 class="card-title">AI Opportunities</h3>
 
-                    <h2 class="card-value">12</h2>
+                    <h2 class="card-value" id="aiDeals">
+    12
+</h2>
 
-                    <div class="card-change">▲ 2 new</div>
+                    <div class="card-change" id="aiDealsTrend">
+    ▲ 2 New
+</div>
 
                     <p class="card-subtitle">vs last week</p>
 
                 </article>
 
-            </div>
+            </section>
 
         </section>
 
@@ -176,7 +202,7 @@
 
             <!-- Recent Opportunities -->
 
-            <section class="panel">
+            <section class="panel" id="recentOpportunities">
 
                 <div class="panel-header">
 
@@ -222,7 +248,7 @@
 
             <!-- AI Recommendations -->
 
-            <section class="panel">
+            <section class="panel" id="aiRecommendations">
 
                 <div class="panel-header">
 
@@ -274,17 +300,29 @@
 
         <section class="dashboard-chart">
 
-            <section class="panel chart-panel">
+            <section class="panel chart-panel" id="portfolioChartPanel">
 
-                <div class="panel-header">
+                <div class="panel-header chart-header">
 
-                    <h3 class="panel-title">
+    <h3 class="panel-title">
+        Portfolio Performance
+    </h3>
 
-                        Portfolio Performance
+    <label for="chartPeriod" class="sr-only">
+    Chart Time Period
+</label>
 
-                    </h3>
+    <select id="chartPeriod">
 
-                </div>
+        <option value="7D">7 Days</option>
+        <option value="30D" selected>30 Days</option>
+        <option value="90D">90 Days</option>
+        <option value="1Y">1 Year</option>
+        <option value="ALL">All Time</option>
+
+    </select>
+
+</div>
 
                 <div class="panel-body">
 
@@ -305,6 +343,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script src="../../js/charts/portfolio-chart.js"></script>
+
+    <script src="../../js/dashboard.js"></script>
 
 </body>
 

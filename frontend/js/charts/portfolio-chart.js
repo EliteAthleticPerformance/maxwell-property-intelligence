@@ -1,9 +1,11 @@
 const ctx = document.getElementById("portfolioChart");
 
-new Chart(ctx, {
+window.portfolioChart = new Chart(ctx, {
+
     type: "line",
 
     data: {
+
         labels: [
             "Jan",
             "Feb",
@@ -14,6 +16,7 @@ new Chart(ctx, {
         ],
 
         datasets: [{
+
             label: "Portfolio Value",
 
             data: [
@@ -26,6 +29,7 @@ new Chart(ctx, {
             ],
 
             borderColor: "#2563EB",
+
             backgroundColor: "rgba(37,99,235,.12)",
 
             borderWidth: 3,
@@ -37,7 +41,9 @@ new Chart(ctx, {
             pointRadius: 4,
 
             pointHoverRadius: 6
+
         }]
+
     },
 
     options: {
