@@ -36,118 +36,208 @@ scannerIndex: -1,
 scannerProperties: 0,
 scannerDeals: 0,
 
-activityMessages:[
+
+
+// ------------------------------------
+// AI Deal Discovery
+// ------------------------------------
+
+deals: [
 
 {
-    type:"🏠 Duplex",
-    city:"Kansas City, MO",
-    price:248000,
-    cap:"8.9%",
-    cash:612,
-    confidence:96
+    icon: "🏠",
+    type: "Duplex",
+    city: "Kansas City, MO",
+    price: 248000,
+    capRate: 8.9,
+    cashFlow: 612,
+    confidence: 96,
+
+    statuses: [
+        "PRICE DROP",
+        "HIGH CONFIDENCE",
+        "OFF MARKET"
+    ]
 },
 
 {
-    type:"🏢 12-Unit Apartment",
-    city:"Independence, MO",
-    price:1185000,
-    cap:"9.6%",
-    cash:4285,
-    confidence:94
+    icon: "🏢",
+    type: "12-Unit Apartment",
+    city: "Independence, MO",
+    price: 1185000,
+    capRate: 9.6,
+    cashFlow: 4285,
+    confidence: 94,
+
+    statuses: [
+        "DISTRESSED",
+        "OFF MARKET",
+        "PRICE DROP"
+    ]
 },
 
 {
-    type:"🏪 Retail Strip Center",
-    city:"Lee's Summit, MO",
-    price:1825000,
-    cap:"8.1%",
-    cash:6420,
-    confidence:91
+    icon: "🏪",
+    type: "Retail Strip Center",
+    city: "Lee's Summit, MO",
+    price: 1825000,
+    capRate: 8.1,
+    cashFlow: 6420,
+    confidence: 91,
+
+    statuses: [
+        "OWNER FINANCING",
+        "PRICE DROP",
+        "OFF MARKET"
+    ]
 },
 
 {
-    type:"🏠 Single Family Rental",
-    city:"Overland Park, KS",
-    price:329900,
-    cap:"7.8%",
-    cash:515,
-    confidence:88
+    icon: "🏠",
+    type: "Single Family Rental",
+    city: "Overland Park, KS",
+    price: 329900,
+    capRate: 7.8,
+    cashFlow: 515,
+    confidence: 88,
+
+    statuses: [
+        "HIGH CONFIDENCE",
+        "PRICE DROP",
+        "OFF MARKET"
+    ]
 },
 
 {
-    type:"🚗 Car Wash",
-    city:"Belton, MO",
-    price:975000,
-    cap:"10.4%",
-    cash:8120,
-    confidence:95
+    icon: "🚗",
+    type: "Car Wash",
+    city: "Belton, MO",
+    price: 975000,
+    capRate: 10.4,
+    cashFlow: 8120,
+    confidence: 95,
+
+    statuses: [
+        "OWNER FINANCING",
+        "PRICE DROP",
+        "DISTRESSED"
+    ]
 },
 
 {
-    type:"🧺 Laundromat",
-    city:"Grandview, MO",
-    price:425000,
-    cap:"11.3%",
-    cash:3875,
-    confidence:93
+    icon: "🧺",
+    type: "Laundromat",
+    city: "Grandview, MO",
+    price: 425000,
+    capRate: 11.3,
+    cashFlow: 3875,
+    confidence: 93,
+
+    statuses: [
+        "OWNER FINANCING",
+        "DISTRESSED",
+        "PRICE DROP"
+    ]
 },
 
 {
-    type:"🏢 Self Storage",
-    city:"Blue Springs, MO",
-    price:2150000,
-    cap:"8.7%",
-    cash:11920,
-    confidence:97
+    icon: "🏢",
+    type: "Self Storage",
+    city: "Blue Springs, MO",
+    price: 2150000,
+    capRate: 8.7,
+    cashFlow: 11920,
+    confidence: 97,
+
+    statuses: [
+        "DISTRESSED",
+        "PRICE DROP",
+        "OFF MARKET",
+        "HIGH CONFIDENCE"
+    ]
 },
 
 {
-    type:"🏕 RV Park",
-    city:"Branson, MO",
-    price:3890000,
-    cap:"9.5%",
-    cash:23650,
-    confidence:92
+    icon: "🏕",
+    type: "RV Park",
+    city: "Branson, MO",
+    price: 3890000,
+    capRate: 9.5,
+    cashFlow: 23650,
+    confidence: 92,
+
+    statuses: [
+        "OFF MARKET",
+        "OWNER FINANCING",
+        "PRICE DROP"
+    ]
 },
 
 {
-    type:"🏭 Industrial Warehouse",
-    city:"Olathe, KS",
-    price:2875000,
-    cap:"8.2%",
-    cash:14780,
-    confidence:90
+    icon: "🏭",
+    type: "Industrial Warehouse",
+    city: "Olathe, KS",
+    price: 2875000,
+    capRate: 8.2,
+    cashFlow: 14780,
+    confidence: 90,
+
+    statuses: [
+        "OFF MARKET",
+        "PRICE DROP",
+        "HIGH CONFIDENCE"
+    ]
 },
 
 {
-    type:"🏘 Mobile Home Park",
-    city:"Sedalia, MO",
-    price:1495000,
-    cap:"10.7%",
-    cash:10320,
-    confidence:96
+    icon: "🏘",
+    type: "Mobile Home Park",
+    city: "Sedalia, MO",
+    price: 1495000,
+    capRate: 10.7,
+    cashFlow: 10320,
+    confidence: 96,
+
+    statuses: [
+        "DISTRESSED",
+        "OWNER FINANCING",
+        "HIGH CONFIDENCE"
+    ]
 },
 
 {
-    type:"❄ Ice Machine Route",
-    city:"Kansas City Metro",
-    price:268000,
-    cap:"14.1%",
-    cash:4560,
-    confidence:89
+    icon: "❄️",
+    type: "Ice Machine Route",
+    city: "Kansas City Metro",
+    price: 268000,
+    capRate: 14.1,
+    cashFlow: 4560,
+    confidence: 89,
+
+    statuses: [
+        "HIGH CONFIDENCE",
+        "OWNER FINANCING",
+        "PRICE DROP"
+    ]
 },
 
 {
-    type:"📜 Tax Lien Portfolio",
-    city:"Cass County, MO",
-    price:96500,
-    cap:"18.8%",
-    cash:1740,
-    confidence:98
+    icon: "📜",
+    type: "Tax Lien Portfolio",
+    city: "Cass County, MO",
+    price: 96500,
+    capRate: 18.8,
+    cashFlow: 1740,
+    confidence: 98,
+
+    statuses: [
+        "DISTRESSED",
+        "HIGH CONFIDENCE",
+        "OFF MARKET"
+    ]
 }
 
 ],
-
     
     // ------------------------------------
     // Chart Data
@@ -337,7 +427,9 @@ trends: {
 
     this.attachEvents();
 
-    this.refreshDashboard(this.period);
+this.renderDeals();
+
+this.refreshDashboard(this.period);
 
 this.startScanner();
 
@@ -391,6 +483,132 @@ refreshDashboard(period) {
     this.updateKPIs(period);
 
     this.updateTrends(period);
+
+},
+
+// ------------------------------------
+// Create Deal Card
+// ------------------------------------
+
+createDealCard(deal) {
+
+    return `
+
+        <article class="deal-card">
+
+            <div class="deal-header">
+
+                <h3>
+
+    <span class="deal-icon">
+
+        ${deal.icon}
+
+    </span>
+
+    ${deal.type}
+
+</h3>
+
+                <span class="deal-confidence">
+
+                    ${deal.confidence}% AI
+
+                </span>
+
+            </div>
+
+            <p class="deal-city">
+
+                ${deal.city}
+
+            </p>
+
+            <div class="deal-price">
+
+                $${deal.price.toLocaleString()}
+
+            </div>
+
+            <hr class="deal-divider">
+
+            <div class="deal-stats">
+
+    <div class="deal-stat">
+
+        <span>📈 Cap Rate</span>
+
+        <strong>${deal.capRate}%</strong>
+
+    </div>
+
+    <div class="deal-stat">
+
+        <span>💵 Potential CF</span>
+
+        <strong>$${deal.cashFlow.toLocaleString()}/mo</strong>
+
+    </div>
+
+</div>
+
+        </article>
+
+    `;
+
+},
+
+// ------------------------------------
+// Render Deals
+// ------------------------------------
+
+renderDeals() {
+
+    const container = document.getElementById("dealContainer");
+
+    if (!container) return;
+
+    let html = "";
+
+    this.deals.forEach(deal => {
+
+        html += this.createDealCard(deal);
+
+    });
+
+    container.innerHTML = html;
+
+},
+
+// ========================================
+// Get Smart Deal Status
+// ========================================
+
+    getDealStatus(deal){
+
+    if(deal.confidence >= 97){
+
+        return "HIGH CONFIDENCE";
+
+    }
+
+    if(deal.capRate >= 12){
+
+        return "DISTRESSED";
+
+    }
+
+    if(deal.cashFlow >= 10000){
+
+        return "OWNER FINANCING";
+
+    }
+
+    return deal.statuses[
+        Math.floor(
+            Math.random()*deal.statuses.length
+        )
+    ];
 
 },
 
@@ -532,7 +750,13 @@ if(items[this.scannerIndex]){
 
         },
 
-        addActivity(){
+        
+
+   // ========================================
+// Add Activity Feed Item
+// ========================================
+
+addActivity(){
 
     const container =
         document.getElementById("activityContainer");
@@ -540,67 +764,171 @@ if(items[this.scannerIndex]){
     if(!container) return;
 
     const deal =
-        this.activityMessages[
+        this.deals[
             Math.floor(
                 Math.random() *
-                this.activityMessages.length
+                this.deals.length
             )
         ];
 
-    const item =
-        document.createElement("div");
+    const status =
+    this.getDealStatus(deal);
 
-    item.className="activity-item";
+    const time =
+    new Date().toLocaleTimeString([],{
 
-    item.innerHTML=`
+        hour:"numeric",
+        minute:"2-digit"
 
-        <div class="activity-dot"></div>
+    }); 
 
-        <div class="activity-content">
+const item =
+    document.createElement("div");
 
-            <div class="activity-time">
+item.className = "activity-item";
 
-                ${new Date().toLocaleTimeString([],{
-
-                    hour:"numeric",
-                    minute:"2-digit",
-                    second:"2-digit"
-
-                })}
-
-            </div>
-
-            <div class="activity-message">
-
-                <strong>${deal.type}</strong><br>
-
-                ${deal.city}<br><br>
-
-                💰 Price:
-                $${deal.price.toLocaleString()}<br>
-
-                📈 Cap Rate:
-                ${deal.cap}<br>
-
-                💵 Cash Flow:
-                $${deal.cash.toLocaleString()}/mo<br>
-
-                🤖 AI Confidence:
-                ${deal.confidence}%
-
-            </div>
-
-        </div>
-
-    `;
+item.innerHTML =
+    this.createTimelineItem(
+        deal,
+        status,
+        time
+    );
 
     container.prepend(item);
 
-    while(container.children.length>6){
+    while(container.children.length > 6){
 
-        container.removeChild(container.lastChild);
+        container.removeChild(
+            container.lastChild
+        );
 
     }
+
+},
+
+// ========================================
+// Create Discovery Timeline Item
+// ========================================
+
+createTimelineItem(deal, badge, time){
+
+
+    const badgeClass = {
+
+        "DISTRESSED":"distressed",
+
+        "OFF MARKET":"offmarket",
+
+        "OWNER FINANCING":"owner",
+
+        "PRICE DROP":"pricedrop",
+
+        "HIGH CONFIDENCE":"confidence"
+
+    }[badge] || "default";
+
+    return `
+
+<div class="timeline-item"
+     onclick="Dashboard.openDeal('${deal.type}')">
+
+    <div class="timeline-left">
+
+        <div class="timeline-top">
+
+            <span class="timeline-dot"></span>
+
+            <span class="timeline-badge ${badgeClass}">
+
+                ${badge}
+
+            </span>
+
+            <span class="timeline-time">
+
+                ${time}
+
+            </span>
+
+        </div>
+
+        <div class="timeline-property">
+
+            <div class="timeline-icon">
+
+                ${deal.icon}
+
+            </div>
+
+            <div class="timeline-info">
+
+                <h3>
+
+                    ${deal.type}
+
+                </h3>
+
+                <p>
+
+                    ${deal.city}
+
+                </p>
+
+            </div>
+
+            <span class="ai-pill">
+
+    ${deal.confidence}% AI
+
+</span>
+
+        </div>
+
+    </div>
+
+    <div class="timeline-right">
+
+        <div class="timeline-stat">
+
+            <label>💰 Price</label>
+
+            <strong>
+
+                $${deal.price.toLocaleString()}
+
+            </strong>
+
+        </div>
+
+        <div class="timeline-stat">
+
+            <label>📈 Cap Rate</label>
+
+            <strong>
+
+                ${deal.capRate}%
+
+            </strong>
+
+        </div>
+
+        <div class="timeline-stat">
+
+            <label>💵 Potential CF</label>
+
+            <strong>
+
+                $${deal.cashFlow.toLocaleString()}/mo
+
+            </strong>
+
+        </div>
+
+    </div>
+
+</div>
+
+`;
 
 },
 
@@ -710,6 +1038,15 @@ pulseCard(cardId){
 
 },
 
+// ========================================
+// Open Deal (Placeholder)
+// ========================================
+
+openDeal(dealType){
+
+    console.log("Opening:", dealType);
+
+},
 
 
 };

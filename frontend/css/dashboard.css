@@ -263,14 +263,12 @@
 }
 
 /* ==========================================
-   AI ACTIVITY FEED
+   LIVE MARKET ACTIVITY
 ========================================== */
 
 #activityFeed{
 
-    margin-top:30px;
-
-    margin-bottom:30px;
+    margin:30px 0;
 
 }
 
@@ -280,101 +278,273 @@
 
     flex-direction:column;
 
-    gap:14px;
-
-    max-height:340px;
-
-    overflow-y:auto;
-
-    padding-right:6px;
+    gap:24px;
 
 }
 
-.activity-item{
+/* ---------- Card ---------- */
 
-    display:flex;
+.timeline-item{
 
-    align-items:flex-start;
+    display:grid;
 
-    gap:16px;
+    grid-template-columns:460px 1fr;
 
-    padding:16px 20px;
+    align-items:center;
+
+    gap:56px;
+
+    padding:24px 28px;
 
     background:var(--surface);
 
     border:1px solid var(--border);
 
-    border-radius:12px;
-
-    animation:floatUp .35s ease;
+    border-radius:18px;
 
     transition:all .25s ease;
 
 }
 
-.activity-item:hover{
+.timeline-item:hover{
 
-    transform:translateX(6px);
+    transform:translateY(-4px);
 
-    box-shadow:var(--shadow-sm);
+    border-color:rgba(37,99,235,.25);
+
+    box-shadow:
+        0 12px 32px rgba(0,0,0,.08),
+        0 0 0 1px rgba(37,99,235,.08);
 
 }
 
-.activity-dot{
+/* ---------- Left Side ---------- */
+
+.timeline-left{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+    padding-right:40px;
+
+    border-right:1px solid var(--border);
+
+}
+
+/* ---------- Header ---------- */
+
+.timeline-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.timeline-dot{
 
     width:12px;
 
     height:12px;
 
-    margin-top:6px;
-
     border-radius:50%;
 
     background:#16a34a;
-
-    flex-shrink:0;
 
     animation:livePulse 1.2s infinite;
 
 }
 
-.activity-content{
+.timeline-time{
 
-    flex:1;
-
-}
-
-.activity-time{
-
-    font-size:12px;
+    margin-left:auto;
 
     color:var(--text-secondary);
 
-    margin-bottom:4px;
+    font-size:14px;
 
 }
 
-.activity-message{
+/* ---------- Badge ---------- */
 
-    font-size:14px;
+.timeline-badge{
 
-    line-height:1.6;
+    padding:7px 16px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.timeline-badge.distressed{
+
+    background:#fde8e8;
+
+    color:#dc2626;
+
+}
+
+.timeline-badge.offmarket{
+
+    background:#fff4e5;
+
+    color:#ea580c;
+
+}
+
+.timeline-badge.owner{
+
+    background:#e8f0ff;
+
+    color:#2563eb;
+
+}
+
+.timeline-badge.pricedrop{
+
+    background:#e6fffb;
+
+    color:#0891b2;
+
+}
+
+.timeline-badge.confidence{
+
+    background:#f3e8ff;
+
+    color:#7c3aed;
+
+}
+
+/* ---------- Property ---------- */
+
+.timeline-property{
+
+    display:grid;
+
+    grid-template-columns:auto 1fr auto;
+
+    align-items:center;
+
+    column-gap:18px;
+
+}
+
+.timeline-icon{
+
+    font-size:40px;
+
+}
+
+.timeline-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.timeline-info h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.timeline-info p{
+
+    margin-top:6px;
+
+    color:var(--text-secondary);
+
+    font-size:15px;
+
+}
+
+/* ---------- AI Pill ---------- */
+
+.ai-pill{
+
+     justify-self:end;
+
+    padding:8px 18px;
+
+    background:#e8f8ec;
+
+    color:#16a34a;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+/* ---------- Right Side ---------- */
+
+.timeline-right{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    align-items:center;
+
+}
+
+.timeline-stat{
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding-left:36px;
+
+    border-left:1px solid var(--border);
+
+}
+
+.timeline-stat:first-child{
+
+    border-left:none;
+
+    padding-left:0;
+
+}
+
+.timeline-stat label{
+
+    font-size:13px;
+
+    color:var(--text-secondary);
+
+}
+
+.timeline-stat strong{
+
+    margin-top:8px;
+
+    font-size:28px;
+
+    font-weight:800;
 
     color:var(--text-primary);
 
 }
 
-.activity-message strong{
 
-    display:block;
-
-    font-size:18px;
-
-    margin-bottom:6px;
-
-    color:var(--primary-blue);
-
-}
 
 /* ==========================================
    RESPONSIVE
@@ -412,6 +582,28 @@
         width:100%;
 
     }
+
+    .timeline-item{
+
+    grid-template-columns:1fr;
+
+}
+
+.timeline-right{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+
+}
+
+.timeline-stat{
+
+    border-left:none;
+
+    padding-left:0;
+
+}
 
 }
 

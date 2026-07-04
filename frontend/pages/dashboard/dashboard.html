@@ -124,7 +124,7 @@
 
         <section class="dashboard-summary">
 
-    <section class="dashboard-cards">
+    <div class="dashboard-cards">
 
         <article class="card" id="portfolioCard">
 
@@ -193,6 +193,24 @@
             </section>
 
         </section>
+
+<!-- ==========================================
+     AI INTELLIGENCE CENTER
+========================================== -->
+
+<section id="aiCenter"> 
+    
+    <div class="ai-center-header">
+
+    <h2>
+        🤖 AI Intelligence Center
+    </h2>
+
+    <p>
+        Real-time AI-powered market scanning and investment discovery
+    </p>
+
+</div>
 
 <!-- ==========================================
      AI MARKET SCANNER
@@ -323,6 +341,45 @@
 </section>
 
 <!-- ==========================================
+     AI DEAL DISCOVERY
+========================================== -->
+
+<section class="panel" id="dealDiscovery">
+
+    <div class="panel-header">
+
+        <div>
+
+            <h3 class="panel-title">
+
+                🔥 Live Deal Discovery
+
+            </h3>
+
+            <p class="panel-subtitle">
+
+                New investment opportunities generated in real time
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="panel-body">
+
+        <div
+            id="dealContainer"
+            class="deal-grid">
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================
      AI ACTIVITY FEED
 ========================================== -->
 
@@ -332,22 +389,74 @@
 
         <h3 class="panel-title">
 
-            ⚡ AI Activity Feed
+            🔥 Live Market Activity
 
         </h3>
+
+        <span class="scanner-status">
+
+            <span class="live-dot"></span>
+
+            LIVE
+
+        </span>
 
     </div>
 
     <div class="panel-body">
 
-        <div id="activityContainer">
-
-        </div>
+        <div id="activityContainer"></div>
 
     </div>
 
+
+
 </section>
 
+
+<!-- ==========================================
+             CHART SECTION
+        ========================================== -->
+
+        <section class="dashboard-chart">
+
+            <section class="panel chart-panel" id="portfolioChartPanel">
+
+                <div class="panel-header chart-header">
+
+    <h3 class="panel-title">
+        📈 Portfolio Performance
+    </h3>
+
+    <label for="chartPeriod" class="sr-only">
+    Chart Time Period
+</label>
+
+    <select id="chartPeriod">
+
+        <option value="7D">7 Days</option>
+        <option value="30D" selected>30 Days</option>
+        <option value="90D">90 Days</option>
+        <option value="1Y">1 Year</option>
+        <option value="ALL">All Time</option>
+
+    </select>
+
+</div>
+
+                <div class="panel-body">
+
+                    <div class="chart-container">
+
+                        <canvas id="portfolioChart"></canvas>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
 
 
 <!-- ==========================================
@@ -450,50 +559,7 @@
 
         </section>
 
-        <!-- ==========================================
-             CHART SECTION
-        ========================================== -->
-
-        <section class="dashboard-chart">
-
-            <section class="panel chart-panel" id="portfolioChartPanel">
-
-                <div class="panel-header chart-header">
-
-    <h3 class="panel-title">
-        Portfolio Performance
-    </h3>
-
-    <label for="chartPeriod" class="sr-only">
-    Chart Time Period
-</label>
-
-    <select id="chartPeriod">
-
-        <option value="7D">7 Days</option>
-        <option value="30D" selected>30 Days</option>
-        <option value="90D">90 Days</option>
-        <option value="1Y">1 Year</option>
-        <option value="ALL">All Time</option>
-
-    </select>
-
-</div>
-
-                <div class="panel-body">
-
-                    <div class="chart-container">
-
-                        <canvas id="portfolioChart"></canvas>
-
-                    </div>
-
-                </div>
-
-            </section>
-
-        </section>
-
+        
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

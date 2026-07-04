@@ -76,3 +76,95 @@
     color:var(--text-secondary);
 
 }
+
+/* ==========================================
+   AI DEAL CARDS
+========================================== */
+
+#dealDiscovery .panel-body{
+    padding-bottom:24px;
+}
+
+.deal-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+    gap:20px;
+}
+
+.deal-card{
+
+    background:var(--surface);
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:22px;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.deal-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:var(--shadow-lg);
+
+    border-color:var(--primary-blue);
+    
+}
+
+.deal-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:12px;
+
+}
+
+.deal-confidence{
+
+    background:#E9F9EE;
+
+    color:#16A34A;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    text-transform:uppercase;
+
+}
+
+.deal-price{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin:18px 0;
+
+}
+
+.deal-stats{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:18px;
+
+}
