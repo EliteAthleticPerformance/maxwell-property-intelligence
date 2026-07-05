@@ -559,8 +559,191 @@
 
         </section>
 
-        
+               
     </main>
+
+
+    <!-- ==========================================
+     DRAWER OVERLAY
+========================================== -->
+
+<div
+    id="drawerOverlay"
+    class="drawer-overlay">
+</div>
+
+
+    <!-- ==========================================
+     AI DEAL DRAWER
+========================================== -->
+
+<aside
+    id="dealDrawer"
+    class="deal-drawer">
+
+    <div class="drawer-header">
+
+        <button
+    id="closeDrawer"
+    class="drawer-close">
+
+    ✕
+
+</button>
+
+        <h2 id="drawerTitle">
+
+    <span id="drawerIcon"></span>
+
+    <span id="drawerProperty"></span>
+
+</h2>
+
+        <p id="drawerCity">
+
+    City, State
+
+</p>
+
+    </div>
+
+    <div class="drawer-body">
+
+    <!-- ==========================================
+     Property Photo
+========================================== -->
+
+<div class="drawer-photo">
+
+    <img
+        id="drawerImage"
+        src="https://placehold.co/800x500/e2e8f0/64748b?text=No+Image"
+        alt="Property Photo">
+
+</div>
+
+<section class="drawer-summary">
+
+        <div class="drawer-score">
+
+    <span>
+
+        AI Investment Score
+
+    </span>
+
+    <strong id="drawerScore">
+
+        97%
+
+    </strong>
+
+    <div
+    id="drawerStars"
+    class="drawer-stars">
+
+</div>
+
+<div
+    id="drawerConfidenceLabel"
+    class="confidence-label">
+
+</div>
+
+</div>
+
+        <div
+    id="drawerRecommendation"
+    class="drawer-recommendation">
+
+    🟢 STRONG BUY
+
+</div>
+
+</section>
+
+        <section class="drawer-metrics">
+
+            <h3 class="drawer-section-title">
+
+        💰 Investment Snapshot
+
+    </h3>
+
+    <div class="drawer-metric">
+
+        <label>💰 Purchase Price</label>
+
+        <strong id="drawerPrice">
+
+            $0
+
+        </strong>
+
+    </div>
+
+    <div class="drawer-metric">
+
+        <label>📈 Cap Rate</label>
+
+        <strong id="drawerCapRate">
+
+            0%
+
+        </strong>
+
+    </div>
+
+    <div class="drawer-metric">
+
+        <label>💵 Potential CF</label>
+
+        <strong id="drawerCashFlow">
+
+            $0/mo
+
+        </strong>
+
+    </div>
+
+</section>
+
+        <hr>
+
+        <section class="drawer-analysis">
+
+    <h3>🧠 AI Investment Analysis</h3>
+
+    <div id="drawerAnalysis">
+
+    </div>
+
+</section>
+
+        <footer class="drawer-footer">
+
+    <button
+        class="btn-primary"
+        id="analyzeDealBtn">
+
+        🧠 Analyze Further
+
+    </button>
+
+    <button
+        class="btn-secondary"
+        id="saveDealBtn">
+
+        ⭐ Save Deal
+
+    </button>
+
+</footer>
+
+</div>
+
+
+</aside>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 

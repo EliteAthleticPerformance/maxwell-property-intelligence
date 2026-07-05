@@ -45,15 +45,16 @@ scannerDeals: 0,
 deals: [
 
 {
-    icon: "🏠",
-    type: "Duplex",
-    city: "Kansas City, MO",
-    price: 248000,
-    capRate: 8.9,
-    cashFlow: 612,
-    confidence: 96,
+    icon:"🏠",
+    image:"../../images/properties/duplex.jpg",
+    type:"Duplex",
+    city:"Kansas City, MO",
+    price:248000,
+    capRate:8.9,
+    cashFlow:612,
+    confidence:96,
 
-    statuses: [
+    statuses:[
         "PRICE DROP",
         "HIGH CONFIDENCE",
         "OFF MARKET"
@@ -61,15 +62,16 @@ deals: [
 },
 
 {
-    icon: "🏢",
-    type: "12-Unit Apartment",
-    city: "Independence, MO",
-    price: 1185000,
-    capRate: 9.6,
-    cashFlow: 4285,
-    confidence: 94,
+    icon:"🏢",
+    image:"../../images/properties/apartment.jpg",
+    type:"12-Unit Apartment",
+    city:"Independence, MO",
+    price:1185000,
+    capRate:9.6,
+    cashFlow:4285,
+    confidence:94,
 
-    statuses: [
+    statuses:[
         "DISTRESSED",
         "OFF MARKET",
         "PRICE DROP"
@@ -77,15 +79,16 @@ deals: [
 },
 
 {
-    icon: "🏪",
-    type: "Retail Strip Center",
-    city: "Lee's Summit, MO",
-    price: 1825000,
-    capRate: 8.1,
-    cashFlow: 6420,
-    confidence: 91,
+    icon:"🏪",
+    image:"../../images/properties/retail.jpg",
+    type:"Retail Strip Center",
+    city:"Lee's Summit, MO",
+    price:1825000,
+    capRate:8.1,
+    cashFlow:6420,
+    confidence:91,
 
-    statuses: [
+    statuses:[
         "OWNER FINANCING",
         "PRICE DROP",
         "OFF MARKET"
@@ -93,15 +96,16 @@ deals: [
 },
 
 {
-    icon: "🏠",
-    type: "Single Family Rental",
-    city: "Overland Park, KS",
-    price: 329900,
-    capRate: 7.8,
-    cashFlow: 515,
-    confidence: 88,
+    icon:"🏠",
+    image:"../../images/properties/sfr.jpg",
+    type:"Single Family Rental",
+    city:"Overland Park, KS",
+    price:329900,
+    capRate:7.8,
+    cashFlow:515,
+    confidence:88,
 
-    statuses: [
+    statuses:[
         "HIGH CONFIDENCE",
         "PRICE DROP",
         "OFF MARKET"
@@ -109,15 +113,16 @@ deals: [
 },
 
 {
-    icon: "🚗",
-    type: "Car Wash",
-    city: "Belton, MO",
-    price: 975000,
-    capRate: 10.4,
-    cashFlow: 8120,
-    confidence: 95,
+    icon:"🚗",
+    image:"../../images/properties/carwash.jpg",
+    type:"Car Wash",
+    city:"Belton, MO",
+    price:975000,
+    capRate:10.4,
+    cashFlow:8120,
+    confidence:95,
 
-    statuses: [
+    statuses:[
         "OWNER FINANCING",
         "PRICE DROP",
         "DISTRESSED"
@@ -125,15 +130,16 @@ deals: [
 },
 
 {
-    icon: "🧺",
-    type: "Laundromat",
-    city: "Grandview, MO",
-    price: 425000,
-    capRate: 11.3,
-    cashFlow: 3875,
-    confidence: 93,
+    icon:"🧺",
+    image:"../../images/properties/laundromat.jpg",
+    type:"Laundromat",
+    city:"Grandview, MO",
+    price:425000,
+    capRate:11.3,
+    cashFlow:3875,
+    confidence:93,
 
-    statuses: [
+    statuses:[
         "OWNER FINANCING",
         "DISTRESSED",
         "PRICE DROP"
@@ -141,15 +147,16 @@ deals: [
 },
 
 {
-    icon: "🏢",
-    type: "Self Storage",
-    city: "Blue Springs, MO",
-    price: 2150000,
-    capRate: 8.7,
-    cashFlow: 11920,
-    confidence: 97,
+    icon:"🏢",
+    image:"../../images/properties/storage.jpg",
+    type:"Self Storage",
+    city:"Blue Springs, MO",
+    price:2150000,
+    capRate:8.7,
+    cashFlow:11920,
+    confidence:97,
 
-    statuses: [
+    statuses:[
         "DISTRESSED",
         "PRICE DROP",
         "OFF MARKET",
@@ -158,15 +165,16 @@ deals: [
 },
 
 {
-    icon: "🏕",
-    type: "RV Park",
-    city: "Branson, MO",
-    price: 3890000,
-    capRate: 9.5,
-    cashFlow: 23650,
-    confidence: 92,
+    icon:"🏕",
+    image:"../../images/properties/rvpark.jpg",
+    type:"RV Park",
+    city:"Branson, MO",
+    price:3890000,
+    capRate:9.5,
+    cashFlow:23650,
+    confidence:92,
 
-    statuses: [
+    statuses:[
         "OFF MARKET",
         "OWNER FINANCING",
         "PRICE DROP"
@@ -174,15 +182,16 @@ deals: [
 },
 
 {
-    icon: "🏭",
-    type: "Industrial Warehouse",
-    city: "Olathe, KS",
-    price: 2875000,
-    capRate: 8.2,
-    cashFlow: 14780,
-    confidence: 90,
+    icon:"🏭",
+    image:"../../images/properties/warehouse.jpg",
+    type:"Industrial Warehouse",
+    city:"Olathe, KS",
+    price:2875000,
+    capRate:8.2,
+    cashFlow:14780,
+    confidence:90,
 
-    statuses: [
+    statuses:[
         "OFF MARKET",
         "PRICE DROP",
         "HIGH CONFIDENCE"
@@ -190,15 +199,16 @@ deals: [
 },
 
 {
-    icon: "🏘",
-    type: "Mobile Home Park",
-    city: "Sedalia, MO",
-    price: 1495000,
-    capRate: 10.7,
-    cashFlow: 10320,
-    confidence: 96,
+    icon:"🏘",
+    image:"../../images/properties/mobilepark.jpg",
+    type:"Mobile Home Park",
+    city:"Sedalia, MO",
+    price:1495000,
+    capRate:10.7,
+    cashFlow:10320,
+    confidence:96,
 
-    statuses: [
+    statuses:[
         "DISTRESSED",
         "OWNER FINANCING",
         "HIGH CONFIDENCE"
@@ -206,15 +216,16 @@ deals: [
 },
 
 {
-    icon: "❄️",
-    type: "Ice Machine Route",
-    city: "Kansas City Metro",
-    price: 268000,
-    capRate: 14.1,
-    cashFlow: 4560,
-    confidence: 89,
+    icon:"❄️",
+    image:"../../images/properties/icemachine.jpg",
+    type:"Ice Machine Route",
+    city:"Kansas City Metro",
+    price:268000,
+    capRate:14.1,
+    cashFlow:4560,
+    confidence:89,
 
-    statuses: [
+    statuses:[
         "HIGH CONFIDENCE",
         "OWNER FINANCING",
         "PRICE DROP"
@@ -222,15 +233,16 @@ deals: [
 },
 
 {
-    icon: "📜",
-    type: "Tax Lien Portfolio",
-    city: "Cass County, MO",
-    price: 96500,
-    capRate: 18.8,
-    cashFlow: 1740,
-    confidence: 98,
+    icon:"📜",
+    image:"../../images/properties/taxlien.jpg",
+    type:"Tax Lien Portfolio",
+    city:"Cass County, MO",
+    price:96500,
+    capRate:18.8,
+    cashFlow:1740,
+    confidence:98,
 
-    statuses: [
+    statuses:[
         "DISTRESSED",
         "HIGH CONFIDENCE",
         "OFF MARKET"
@@ -418,20 +430,60 @@ trends: {
 
 
     // ------------------------------------
-    // Initialize Dashboard
-    // ------------------------------------
+// Initialize Dashboard
+// ------------------------------------
 
-    init() {
+init() {
 
     console.log("MPI Dashboard Loaded");
 
     this.attachEvents();
 
-this.renderDeals();
+    this.renderDeals();
 
-this.refreshDashboard(this.period);
+    this.refreshDashboard(this.period);
 
-this.startScanner();
+    this.startScanner();
+
+    // =====================================
+// Deal Drawer Controls
+// =====================================
+
+const closeDrawer = () => {
+
+    document
+        .getElementById("dealDrawer")
+        .classList.remove("open");
+
+    document
+        .getElementById("drawerOverlay")
+        .classList.remove("show");
+
+};
+
+// Close Button
+
+document
+    .getElementById("closeDrawer")
+    .addEventListener("click", closeDrawer);
+
+// Click Outside Drawer
+
+document
+    .getElementById("drawerOverlay")
+    .addEventListener("click", closeDrawer);
+
+// Escape Key
+
+document.addEventListener("keydown", (e) => {
+
+    if (e.key === "Escape") {
+
+        closeDrawer();
+
+    }
+
+});
 
 },
 
@@ -494,9 +546,11 @@ createDealCard(deal) {
 
     return `
 
-        <article class="deal-card">
+    <article
+        class="deal-card"
+        onclick="Dashboard.openDeal('${deal.type}')">
 
-            <div class="deal-header">
+        <div class="deal-header">
 
                 <h3>
 
@@ -551,6 +605,12 @@ createDealCard(deal) {
     </div>
 
 </div>
+
+ <div class="deal-footer">
+
+        AI Analysis →
+
+    </div>
 
         </article>
 
@@ -1044,12 +1104,393 @@ pulseCard(cardId){
 
 openDeal(dealType){
 
-    console.log("Opening:", dealType);
+    const deal = this.deals.find(d => d.type === dealType);
+
+    if(!deal) return;
+
+    document.getElementById("drawerIcon").textContent =
+    deal.icon;
+
+document.getElementById("drawerProperty").textContent =
+    deal.type;
+
+    document.getElementById("drawerCity").textContent =
+        deal.city;
+
+// ========================================
+// Property Photo
+// ========================================
+
+const img =
+    document.getElementById("drawerImage");
+
+img.src = deal.image;
+
+img.alt = deal.type;
+
+img.onerror = function(){
+
+    console.error(
+        "Unable to load image:",
+        deal.image
+    );
+
+    this.src =
+        "../../images/properties/no-image.jpg";
+
+};        
+
+    document.getElementById("drawerScore").textContent =
+        deal.confidence + "%";
+
+        // ========================================
+// Calculate AI Confidence Stars
+// ========================================
+
+const score = deal.confidence;
+
+let stars = "";
+let confidenceLabel = "";
+
+if (score >= 96) {
+
+    stars = "★★★★★";
+    confidenceLabel = "ELITE CONFIDENCE";
+
+} else if (score >= 90) {
+
+    stars = "★★★★☆";
+    confidenceLabel = "VERY HIGH CONFIDENCE";
+
+} else if (score >= 80) {
+
+    stars = "★★★☆☆";
+    confidenceLabel = "HIGH CONFIDENCE";
+
+} else if (score >= 70) {
+
+    stars = "★★☆☆☆";
+    confidenceLabel = "MODERATE CONFIDENCE";
+
+} else {
+
+    stars = "★☆☆☆☆";
+    confidenceLabel = "SPECULATIVE";
+
+}
+
+document.getElementById("drawerStars").textContent = stars;
+document.getElementById("drawerConfidenceLabel").textContent = confidenceLabel;
+
+    const recommendation =
+    this.getRecommendation(deal);
+
+    const recommendationIcon =
+
+    recommendation.text.includes("STRONG")
+        ? "🟢"
+
+    : recommendation.text.includes("WATCH")
+        ? "🟡"
+
+    : "🔴";
+
+const badge =
+    document.getElementById(
+        "drawerRecommendation"
+    );
+
+badge.textContent =
+    recommendation.text;
+
+badge.className =
+    "drawer-recommendation " +
+    recommendation.className;
+
+    document.getElementById("drawerPrice").textContent =
+        "$" + deal.price.toLocaleString();
+
+    document.getElementById("drawerCapRate").textContent =
+        deal.capRate + "%";
+
+    document.getElementById("drawerCashFlow").textContent =
+        "$" + deal.cashFlow.toLocaleString() + "/mo";
+
+    // ========================================
+// Build Dynamic AI Analysis
+// ========================================
+
+const analysis = [];
+
+// ----------------------------------------
+// Cap Rate
+// ----------------------------------------
+
+if (deal.capRate >= 12) {
+
+    analysis.push(
+        "This cap rate ranks among MPI's strongest investment opportunities."
+    );
+
+} else if (deal.capRate >= 10) {
+
+    analysis.push(
+        "Above-average cap rate provides excellent long-term income potential."
+    );
+
+} else if (deal.capRate >= 8) {
+
+    analysis.push(
+        "Cap rate supports a balanced combination of income and appreciation."
+    );
+
+} else {
+
+    analysis.push(
+        "Lower cap rate may indicate a premium location with stronger appreciation potential."
+    );
+
+}
+
+// ----------------------------------------
+// Cash Flow
+// ----------------------------------------
+
+if (deal.cashFlow >= 15000) {
+
+    analysis.push(
+        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} places this property among MPI's highest income-producing opportunities.`
+    );
+
+} else if (deal.cashFlow >= 10000) {
+
+    analysis.push(
+        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} provides exceptional recurring income.`
+    );
+
+} else if (deal.cashFlow >= 5000) {
+
+    analysis.push(
+        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} offers strong income with long-term upside.`
+    );
+
+} else {
+
+    analysis.push(
+        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} remains positive while allowing room for value-add improvements.`
+    );
+
+}
+
+// ----------------------------------------
+// AI Confidence
+// ----------------------------------------
+
+if (deal.confidence >= 98) {
+
+    analysis.push(
+        `MPI AI assigned a ${deal.confidence}% confidence score after evaluating valuation, market trends, appreciation forecasts, and comparable sales.`
+    );
+
+} else if (deal.confidence >= 95) {
+
+    analysis.push(
+        `MPI AI assigned a ${deal.confidence}% confidence score, indicating a highly attractive investment opportunity.`
+    );
+
+} else if (deal.confidence >= 90) {
+
+    analysis.push(
+        `MPI AI assigned a ${deal.confidence}% confidence score, suggesting strong investment fundamentals with moderate risk.`
+    );
+
+} else {
+
+    analysis.push(
+        `MPI AI assigned a ${deal.confidence}% confidence score and recommends additional due diligence before acquisition.`
+    );
+
+}
+
+// ----------------------------------------
+// Recommendation
+// ----------------------------------------
+
+switch(recommendation.className){
+
+    case "recommendation-strong-buy":
+
+        analysis.push(
+            "MPI AI recommends immediate acquisition based on strong investment fundamentals."
+        );
+
+        break;
+
+    case "recommendation-watch-list":
+
+        analysis.push(
+            "Property shows promising metrics but should be monitored for improved pricing or additional market data."
+        );
+
+        break;
+
+    default:
+
+        analysis.push(
+            "Current investment risk exceeds MPI's preferred acquisition criteria."
+        );
+
+}
+
+document.getElementById("drawerAnalysis").innerHTML = `
+
+<div class="analysis-card">
+
+    <div class="analysis-icon">
+
+        📈
+
+    </div>
+
+    <div>
+
+        <strong>Cap Rate</strong>
+
+        <p>
+
+            ${analysis[0]}
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="analysis-card">
+
+    <div class="analysis-icon">
+
+        💰
+
+    </div>
+
+    <div>
+
+        <strong>Cash Flow</strong>
+
+        <p>
+
+            ${analysis[1]}
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="analysis-card">
+
+    <div class="analysis-icon">
+
+        🤖
+
+    </div>
+
+    <div>
+
+        <strong>AI Confidence</strong>
+
+        <p>
+
+            ${analysis[2]}
+
+        </p>
+
+    </div>
+
+</div>
+
+<div class="analysis-card">
+
+    <div class="analysis-icon">
+
+    ${recommendationIcon}
+
+</div>
+
+    <div>
+
+        <strong>Recommendation</strong>
+
+        <p>
+
+            ${analysis[3]}
+
+        </p>
+
+    </div>
+
+</div>
+
+`;
+
+    document
+    .getElementById("drawerOverlay")
+    .classList.add("show");
+
+document
+    .getElementById("dealDrawer")
+    .classList.add("open");
+
+},
+
+// ========================================
+// AI Recommendation
+// ========================================
+
+getRecommendation(deal){
+
+    const score = deal.confidence;
+    const cap = deal.capRate;
+
+    if(score >= 95 && cap >= 8){
+
+        return{
+
+            text:"🟢 STRONG BUY",
+
+            className:"recommendation-strong-buy"
+
+        };
+
+    }
+
+    if(score >= 85){
+
+        return{
+
+            text:"🟡 WATCH LIST",
+
+            className:"recommendation-watch-list"
+
+        };
+
+    }
+
+    return{
+
+        text:"🔴 HIGH RISK",
+
+        className:"recommendation-high-risk"
+
+    };
 
 },
 
 
 };
+
+
 
 
 // ========================================

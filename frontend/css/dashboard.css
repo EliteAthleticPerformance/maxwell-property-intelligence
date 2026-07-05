@@ -569,6 +569,16 @@
 
     }
 
+@media (max-width:600px){
+
+   .drawer-footer{
+
+        flex-direction:column;
+
+    }
+
+}
+
     .scanner-layout{
 
         flex-direction:column;
@@ -628,5 +638,671 @@
     position:relative;
 
     height:280px;
+
+}
+
+
+/* ==========================================
+   DRAWER OVERLAY
+========================================== */
+
+.drawer-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    background: rgba(15,23,42,.35);
+backdrop-filter: blur(4px);
+-webkit-backdrop-filter: blur(4px);
+
+    opacity:0;
+
+    visibility:hidden;
+
+    transition:all .3s ease;
+
+    z-index:4999;
+
+}
+
+.drawer-overlay.show{
+
+    opacity:1;
+
+    visibility:visible;
+
+}
+
+
+/* ==========================================
+   AI DEAL DRAWER
+========================================== */
+
+.deal-drawer{
+
+    position:fixed;
+
+    top:0;
+
+    right:-7000px;
+
+    width:680px;
+
+    height:100vh;
+
+    background:#fff;
+
+    border-left:1px solid var(--border);
+
+    box-shadow:-12px 0 40px rgba(0,0,0,.18);
+
+    z-index:5000;
+
+    overflow-y:auto;
+
+    transition:right .35s ease;
+
+}
+
+/* Drawer Open */
+
+.deal-drawer.open{
+
+    right:0;
+
+}
+
+/* ==========================================
+   Drawer Header
+========================================== */
+
+.drawer-header{
+
+    padding:32px;
+
+    border-bottom:1px solid var(--border);
+
+    background:linear-gradient(
+        180deg,
+        #ffffff,
+        #f8fafc
+    );
+
+    position:relative;
+
+}
+
+.drawer-header h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:16px 0 6px;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+}
+
+.drawer-header p{
+
+    color:var(--text-secondary);
+
+    font-size:15px;
+
+}
+
+/* Close Button */
+
+.drawer-close{
+
+    position:absolute;
+
+    top:20px;
+
+    right:20px;
+
+    width:42px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#f8fafc;
+
+    color:#64748b;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+.drawer-close:hover{
+
+    background:#e2e8f0;
+
+    color:#111827;
+
+    transform:rotate(90deg);
+
+}
+
+/* ==========================================
+   Property Photo
+========================================== */
+
+.drawer-photo{
+
+    width:100%;
+
+    height:300px;
+
+    overflow:hidden;
+
+    border-bottom:1px solid var(--border);
+
+    background:#f8fafc;
+
+}
+
+.drawer-photo img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:transform .4s ease;
+
+}
+
+.drawer-photo:hover img{
+
+    transform:scale(1.03);
+
+}
+
+
+/* Body */
+
+.drawer-body{
+
+    padding:34px;
+
+}
+
+/* ==========================================
+   AI Score Card
+========================================== */
+
+.drawer-score{
+
+    background:linear-gradient(
+        135deg,
+        #ecfdf5,
+        #dcfce7
+    );
+
+    border:1px solid #bbf7d0;
+
+    border-radius:16px;
+
+    padding:28px;
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+    box-shadow:0 8px 18px rgba(34,197,94,.08);
+
+}
+
+.drawer-score span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.drawer-score strong{
+
+    display:block;
+
+    margin-top:10px;
+
+    font-size:48px;
+
+    font-weight:800;
+
+    color:#16a34a;
+
+}
+
+/* ==========================================
+   AI Confidence Stars
+========================================== */
+
+.drawer-stars{
+
+    margin-top:14px;
+
+    font-size:28px;
+
+    letter-spacing:4px;
+
+    color:#fbbf24;
+
+    font-weight:700;
+
+}
+
+.confidence-label{
+
+    margin-top:8px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:#64748b;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+}
+
+/* ==========================================
+   Recommendation Badge
+========================================== */
+
+.drawer-recommendation{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin:18px 0 28px;
+
+    padding:16px 18px;
+
+    border-radius:14px;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    letter-spacing:.6px;
+
+    text-transform:uppercase;
+
+    transition:all .3s ease;
+
+}
+
+/* Strong Buy */
+
+.recommendation-strong-buy{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border:1px solid #bbf7d0;
+
+}
+
+/* Watch List */
+
+.recommendation-watch-list{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+    border:1px solid #fde68a;
+
+}
+
+/* High Risk */
+
+.recommendation-high-risk{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+    border:1px solid #fecaca;
+
+}
+
+/* ==========================================
+   Metric Cards
+========================================== */
+
+.drawer-metrics{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,minmax(0,1fr));
+
+    gap:12px;
+
+    margin-top:24px;
+
+}
+
+.drawer-metric{
+
+    padding:14px 16px;
+
+    background:#fff;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    transition:all .25s ease;
+
+}
+
+.drawer-metric:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 24px rgba(0,0,0,.08);
+
+}
+
+.drawer-metric label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--text-secondary);
+
+    font-size:11px;
+
+    font-weight:600;
+
+    white-space:nowrap;
+
+}
+
+.drawer-metric strong{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+}
+
+/* ==========================================
+   AI Analysis
+========================================== */
+
+.drawer-analysis{
+
+    margin-top:36px;
+
+}
+
+.drawer-analysis h3{
+
+    margin-bottom:18px;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.drawer-analysis ul{
+
+    margin:0;
+
+    padding-left:22px;
+
+}
+
+.drawer-analysis li{
+
+    margin-bottom:14px;
+
+    color:#475569;
+
+    line-height:1.7;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   AI Analysis Cards
+========================================== */
+
+.analysis-card{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:16px;
+
+    margin-bottom:16px;
+
+    padding:18px;
+
+    background:#ffffff;
+
+    border:1px solid var(--border);
+
+    border-radius:14px;
+
+    transition:.25s;
+
+}
+
+.analysis-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 24px rgba(0,0,0,.08);
+
+}
+
+.analysis-icon{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:#eff6ff;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+}
+
+.analysis-card strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    font-size:16px;
+
+}
+
+.analysis-card p{
+
+    color:var(--text-secondary);
+
+    line-height:1.6;
+
+    margin:0;
+
+}
+
+
+/* ==========================================
+   Drawer Action Buttons
+========================================== */
+
+.drawer-footer{
+
+    display:flex;
+
+    gap:14px;
+
+    margin-top:34px;
+
+}
+
+.drawer-footer button{
+
+    flex:1;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:
+
+        transform .25s ease,
+
+        box-shadow .25s ease,
+
+        background .25s ease;
+
+}
+
+/* Primary */
+
+.btn-primary{
+
+    background:linear-gradient(
+
+        135deg,
+
+        #2563eb,
+
+        #1d4ed8
+
+    );
+
+    color:#fff;
+
+    box-shadow:
+
+        0 8px 18px rgba(37,99,235,.25);
+
+}
+
+.btn-primary:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 12px 26px rgba(37,99,235,.35);
+
+}
+
+/* Secondary */
+
+.btn-secondary{
+
+    background:#f8fafc;
+
+    color:#1e293b;
+
+    border:1px solid var(--border);
+
+}
+
+.btn-secondary:hover{
+
+    transform:translateY(-2px);
+
+    background:#eef2f7;
+
+    box-shadow:
+
+        0 10px 20px rgba(0,0,0,.08);
+
+}
+
+.drawer-footer button:active{
+
+    transform:scale(.98);
+
+}
+
+.drawer-recommendation{
+
+    animation:fadeBadge .4s ease;
+
+}
+
+@keyframes fadeBadge{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(-10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
 
 }
