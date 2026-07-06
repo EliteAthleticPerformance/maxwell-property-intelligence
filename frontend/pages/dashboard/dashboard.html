@@ -557,7 +557,7 @@
 
             </section>
 
-        </section>
+            </section>
 
                
     </main>
@@ -662,23 +662,143 @@
 
 </section>
 
-        <section class="drawer-metrics">
+<section class="property-details">
 
-            <h3 class="drawer-section-title">
+    <div class="property-detail">
 
-        💰 Investment Snapshot
+        <span>🏷</span>
+
+        <div>
+
+            <label>Asset Class</label>
+
+            <strong id="drawerAssetClass"></strong>
+
+        </div>
+
+    </div>
+
+    <div class="property-detail">
+
+        <span>📐</span>
+
+        <div>
+
+            <label>Building Size</label>
+
+            <strong id="drawerSize"></strong>
+
+        </div>
+
+    </div>
+
+    <div class="property-detail">
+
+        <span>🏗</span>
+
+        <div>
+
+            <label>Year Built</label>
+
+            <strong id="drawerYear"></strong>
+
+        </div>
+
+    </div>
+
+    <div class="property-detail">
+
+        <span>📦</span>
+
+        <div>
+
+            <label>Units</label>
+
+            <strong id="drawerUnits"></strong>
+
+        </div>
+
+    </div>
+
+    <div class="property-detail">
+
+        <span>📊</span>
+
+        <div>
+
+            <label>Occupancy</label>
+
+            <strong id="drawerOccupancy"></strong>
+
+        </div>
+
+    </div>
+
+    <div class="property-detail">
+
+        <span>💎</span>
+
+        <div>
+
+            <label>Estimated Value</label>
+
+            <strong id="drawerEstimatedValue"></strong>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     AI INVESTMENT THESIS
+========================================== -->
+
+<section class="drawer-thesis">
+
+    <h3 class="drawer-section-title">
+
+        🧠 AI Investment Thesis
 
     </h3>
+
+    <div class="thesis-card">
+
+        <p id="drawerThesis">
+
+            Waiting for AI analysis...
+
+        </p>
+
+    </div>
+
+</section>
+
+<!-- ==========================================
+     INVESTMENT SNAPSHOT
+========================================== -->
+
+<section class="drawer-metrics">
+
+    <h3 class="drawer-section-title">
+
+        💰 Financial Snapshot
+
+    </h3>
+
+    <div class="drawer-metrics-grid">
 
     <div class="drawer-metric">
 
         <label>💰 Purchase Price</label>
 
-        <strong id="drawerPrice">
+        <strong id="drawerPrice">$0</strong>
 
-            $0
+        <small id="drawerPriceNote">
 
-        </strong>
+            Current Asking Price
+
+        </small>
 
     </div>
 
@@ -686,33 +806,109 @@
 
         <label>📈 Cap Rate</label>
 
-        <strong id="drawerCapRate">
+        <strong id="drawerCapRate">0%</strong>
 
-            0%
+        <small id="drawerCapRateNote">
 
-        </strong>
+            Investment Return
+
+        </small>
 
     </div>
 
     <div class="drawer-metric">
 
-        <label>💵 Potential CF</label>
+        <label>💵 Potential Cash Flow</label>
 
-        <strong id="drawerCashFlow">
+        <strong id="drawerCashFlow">$0/mo</strong>
 
-            $0/mo
+        <small id="drawerCashFlowNote">
 
-        </strong>
+            Monthly Estimate
+
+        </small>
 
     </div>
 
+    <div class="drawer-metric">
+
+        <label>📊 Occupancy</label>
+
+        <strong id="drawerOccupancyMetric">0%</strong>
+
+        <small id="drawerOccupancyNote">
+
+            Current Occupancy
+
+        </small>
+
+    </div>
+
+    <div class="drawer-metric">
+
+        <label>🏢 NOI</label>
+
+        <strong id="drawerNOI">$0</strong>
+
+        <small id="drawerNOINote">
+
+            Annual Net Income
+
+        </small>
+
+    </div>
+
+    <div class="drawer-metric">
+
+        <label>📐 Price / SF</label>
+
+        <strong id="drawerPriceSF">$0</strong>
+
+        <small id="drawerPriceSFNote">
+
+            Purchase Cost
+
+        </small>
+
+    </div>
+
+    <div class="drawer-metric">
+
+        <label>💸 Cash-on-Cash</label>
+
+        <strong id="drawerCoC">0%</strong>
+
+        <small id="drawerCoCNote">
+
+            Investor Return
+
+        </small>
+
+    </div>
+
+    <div class="drawer-metric">
+
+        <label>💎 AI Equity Opportunity</label>
+
+        <strong id="drawerGap">0%</strong>
+
+        <small id="drawerGapNote">
+
+            Estimated Upside
+
+        </small>
+
+    </div>
+
+</div>
+
 </section>
 
-        <hr>
+        
 
         <section class="drawer-analysis">
 
-    <h3>🧠 AI Investment Analysis</h3>
+    <h3>🧠 Investment Thesis</h3>
 
     <div id="drawerAnalysis">
 
@@ -720,13 +916,19 @@
 
 </section>
 
-        <footer class="drawer-footer">
+        <!-- ==========================================
+     DRAWER ACTIONS
+========================================== -->
+
+<footer class="drawer-actions">
 
     <button
         class="btn-primary"
         id="analyzeDealBtn">
 
-        🧠 Analyze Further
+        <span class="btn-icon">🧠</span>
+
+        <span>AI Analysis</span>
 
     </button>
 
@@ -734,7 +936,29 @@
         class="btn-secondary"
         id="saveDealBtn">
 
-        ⭐ Save Deal
+        <span class="btn-icon">⭐</span>
+
+        <span>Save Deal</span>
+
+    </button>
+
+    <button
+        class="btn-outline"
+        id="underwriteDealBtn">
+
+        <span class="btn-icon">📊</span>
+
+        <span>Underwrite Deal</span>
+
+    </button>
+
+    <button
+        class="btn-outline"
+        id="exportReportBtn">
+
+        <span class="btn-icon">📄</span>
+
+        <span>Export Report</span>
 
     </button>
 

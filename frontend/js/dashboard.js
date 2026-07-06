@@ -44,14 +44,38 @@ scannerDeals: 0,
 
 deals: [
 
-{
+
+    {
     icon:"🏠",
+
     image:"../../images/properties/duplex.jpg",
+
     type:"Duplex",
+
     city:"Kansas City, MO",
+
+    assetClass:"Residential",
+
+    buildingSize:"2,980 SF",
+
+    yearBuilt:1998,
+
+    units:"2 Units",
+
+    occupancy:"100%",
+
+    // Investment Metrics
+    noi:7344,
+    pricePerSqFt:83.22,
+    cashOnCash:11.8,
+    estimatedValue:274000,
+
     price:248000,
+
     capRate:8.9,
+
     cashFlow:612,
+
     confidence:96,
 
     statuses:[
@@ -64,11 +88,33 @@ deals: [
 {
     icon:"🏢",
     image:"../../images/properties/apartment.jpg",
+
     type:"12-Unit Apartment",
+
     city:"Independence, MO",
+
+    assetClass:"Multifamily",
+
+    buildingSize:"11,400 SF",
+
+    yearBuilt:1987,
+
+    units:"12 Units",
+
+    occupancy:"92%",
+
+    // Investment Metrics
+    noi:51420,
+    pricePerSqFt:103.95,
+    cashOnCash:12.4,
+    estimatedValue:1295000,
+
     price:1185000,
+
     capRate:9.6,
+
     cashFlow:4285,
+
     confidence:94,
 
     statuses:[
@@ -81,11 +127,33 @@ deals: [
 {
     icon:"🏪",
     image:"../../images/properties/retail.jpg",
+
     type:"Retail Strip Center",
+
     city:"Lee's Summit, MO",
+
+    assetClass:"Retail",
+
+    buildingSize:"18,600 SF",
+
+    yearBuilt:2003,
+
+    units:"8 Suites",
+
+    occupancy:"96%",
+
+    // Investment Metrics
+    noi:77040,
+    pricePerSqFt:98.12,
+    cashOnCash:10.9,
+    estimatedValue:1965000,
+
     price:1825000,
+
     capRate:8.1,
+
     cashFlow:6420,
+
     confidence:91,
 
     statuses:[
@@ -98,11 +166,33 @@ deals: [
 {
     icon:"🏠",
     image:"../../images/properties/sfr.jpg",
+
     type:"Single Family Rental",
+
     city:"Overland Park, KS",
+
+    assetClass:"Residential",
+
+    buildingSize:"2,150 SF",
+
+    yearBuilt:2006,
+
+    units:"1 Home",
+
+    occupancy:"100%",
+
+    // Investment Metrics
+    noi:6180,
+    pricePerSqFt:153.44,
+    cashOnCash:8.6,
+    estimatedValue:347500,
+
     price:329900,
+
     capRate:7.8,
+
     cashFlow:515,
+
     confidence:88,
 
     statuses:[
@@ -115,11 +205,33 @@ deals: [
 {
     icon:"🚗",
     image:"../../images/properties/carwash.jpg",
+
     type:"Car Wash",
+
     city:"Belton, MO",
+
+    assetClass:"Business",
+
+    buildingSize:"5,900 SF",
+
+    yearBuilt:2018,
+
+    units:"6 Wash Bays",
+
+    occupancy:"N/A",
+
+    // Investment Metrics
+    noi:97440,
+    pricePerSqFt:165.25,
+    cashOnCash:15.2,
+    estimatedValue:1095000,
+
     price:975000,
+
     capRate:10.4,
+
     cashFlow:8120,
+
     confidence:95,
 
     statuses:[
@@ -132,11 +244,33 @@ deals: [
 {
     icon:"🧺",
     image:"../../images/properties/laundromat.jpg",
+
     type:"Laundromat",
+
     city:"Grandview, MO",
+
+    assetClass:"Business",
+
+    buildingSize:"4,250 SF",
+
+    yearBuilt:1999,
+
+    units:"82 Machines",
+
+    occupancy:"N/A",
+
+    // Investment Metrics
+    noi:46500,
+    pricePerSqFt:100.00,
+    cashOnCash:14.1,
+    estimatedValue:469000,
+
     price:425000,
+
     capRate:11.3,
+
     cashFlow:3875,
+
     confidence:93,
 
     statuses:[
@@ -149,29 +283,72 @@ deals: [
 {
     icon:"🏢",
     image:"../../images/properties/storage.jpg",
+
     type:"Self Storage",
+
     city:"Blue Springs, MO",
+
+    assetClass:"Commercial",
+
+    buildingSize:"82,000 SF",
+
+    yearBuilt:2004,
+
+    units:"610 Units",
+
+    occupancy:"94%",
+
+    // Investment Metrics
+    noi:143040,
+    pricePerSqFt:26.22,
+    cashOnCash:13.6,
+    estimatedValue:2395000,
+
     price:2150000,
+
     capRate:8.7,
+
     cashFlow:11920,
+
     confidence:97,
 
     statuses:[
+        "OWNER FINANCING",
         "DISTRESSED",
-        "PRICE DROP",
-        "OFF MARKET",
-        "HIGH CONFIDENCE"
+        "PRICE DROP"
     ]
 },
 
 {
     icon:"🏕",
     image:"../../images/properties/rvpark.jpg",
+
     type:"RV Park",
+
     city:"Branson, MO",
+
+    assetClass:"Hospitality",
+
+    buildingSize:"31 Acres",
+
+    yearBuilt:1995,
+
+    units:"118 Sites",
+
+    occupancy:"89%",
+
+    // Investment Metrics
+    noi:283800,
+    pricePerSqFt:125484.00,
+    cashOnCash:11.8,
+    estimatedValue:4250000,
+
     price:3890000,
+
     capRate:9.5,
+
     cashFlow:23650,
+
     confidence:92,
 
     statuses:[
@@ -184,11 +361,33 @@ deals: [
 {
     icon:"🏭",
     image:"../../images/properties/warehouse.jpg",
+
     type:"Industrial Warehouse",
+
     city:"Olathe, KS",
+
+    assetClass:"Industrial",
+
+    buildingSize:"48,500 SF",
+
+    yearBuilt:2011,
+
+    units:"1 Building",
+
+    occupancy:"100%",
+
+    // Investment Metrics
+    noi:177360,
+    pricePerSqFt:59.28,
+    cashOnCash:11.2,
+    estimatedValue:3125000,
+
     price:2875000,
+
     capRate:8.2,
+
     cashFlow:14780,
+
     confidence:90,
 
     statuses:[
@@ -201,11 +400,33 @@ deals: [
 {
     icon:"🏘",
     image:"../../images/properties/mobilepark.jpg",
+
     type:"Mobile Home Park",
+
     city:"Sedalia, MO",
+
+    assetClass:"Residential",
+
+    buildingSize:"27 Acres",
+
+    yearBuilt:1982,
+
+    units:"84 Pads",
+
+    occupancy:"95%",
+
+    // Investment Metrics
+    noi:123840,
+    pricePerSqFt:55370.37,
+    cashOnCash:13.4,
+    estimatedValue:1680000,
+
     price:1495000,
+
     capRate:10.7,
+
     cashFlow:10320,
+
     confidence:96,
 
     statuses:[
@@ -218,11 +439,33 @@ deals: [
 {
     icon:"❄️",
     image:"../../images/properties/icemachine.jpg",
+
     type:"Ice Machine Route",
+
     city:"Kansas City Metro",
+
+    assetClass:"Business",
+
+    buildingSize:"Route-Based",
+
+    yearBuilt:2021,
+
+    units:"18 Machines",
+
+    occupancy:"N/A",
+
+    // Investment Metrics
+    noi:54720,
+    pricePerSqFt:0,
+    cashOnCash:16.5,
+    estimatedValue:312000,
+
     price:268000,
+
     capRate:14.1,
+
     cashFlow:4560,
+
     confidence:89,
 
     statuses:[
@@ -235,11 +478,33 @@ deals: [
 {
     icon:"📜",
     image:"../../images/properties/taxlien.jpg",
+
     type:"Tax Lien Portfolio",
+
     city:"Cass County, MO",
+
+    assetClass:"Investment Portfolio",
+
+    buildingSize:"127 Liens",
+
+    yearBuilt:2026,
+
+    units:"127 Certificates",
+
+    occupancy:"N/A",
+
+    // Investment Metrics
+    noi:20880,
+    pricePerSqFt:0,
+    cashOnCash:19.8,
+    estimatedValue:114000,
+
     price:96500,
+
     capRate:18.8,
+
     cashFlow:1740,
+
     confidence:98,
 
     statuses:[
@@ -1187,14 +1452,14 @@ document.getElementById("drawerConfidenceLabel").textContent = confidenceLabel;
 
     const recommendationIcon =
 
-    recommendation.text.includes("STRONG")
+    recommendation.className === "recommendation-strong-buy"
         ? "🟢"
 
-    : recommendation.text.includes("WATCH")
+    : recommendation.className === "recommendation-watch-list"
         ? "🟡"
 
     : "🔴";
-
+    
 const badge =
     document.getElementById(
         "drawerRecommendation"
@@ -1207,14 +1472,384 @@ badge.className =
     "drawer-recommendation " +
     recommendation.className;
 
-    document.getElementById("drawerPrice").textContent =
-        "$" + deal.price.toLocaleString();
+    
 
-    document.getElementById("drawerCapRate").textContent =
-        deal.capRate + "%";
+document.getElementById("drawerAssetClass").textContent =
+    deal.assetClass;
 
-    document.getElementById("drawerCashFlow").textContent =
-        "$" + deal.cashFlow.toLocaleString() + "/mo";
+document.getElementById("drawerSize").textContent =
+    deal.buildingSize;
+
+document.getElementById("drawerYear").textContent =
+    deal.yearBuilt;
+
+document.getElementById("drawerUnits").textContent =
+    deal.units;
+
+document.getElementById("drawerOccupancy").textContent =
+    deal.occupancy || "N/A"; 
+   
+document.getElementById("drawerOccupancyMetric").textContent =
+    deal.occupancy || "N/A";
+    
+document.getElementById("drawerEstimatedValue").textContent =
+    "$" + deal.estimatedValue.toLocaleString();    
+
+document.getElementById("drawerPrice").textContent =
+    "$" + deal.price.toLocaleString();
+
+document.getElementById("drawerCapRate").textContent =
+    deal.capRate + "%";
+
+document.getElementById("drawerCashFlow").textContent =
+    "$" + deal.cashFlow.toLocaleString() + "/mo";
+
+document.getElementById("drawerNOI").textContent =
+    deal.noi
+        ? "$" + deal.noi.toLocaleString()
+        : "N/A";
+
+document.getElementById("drawerPriceSF").textContent =
+    deal.pricePerSqFt
+        ? "$" + deal.pricePerSqFt.toFixed(2)
+        : "N/A";
+
+document.getElementById("drawerCoC").textContent =
+    deal.cashOnCash
+        ? deal.cashOnCash + "%"
+        : "N/A";
+
+// ========================================
+// AI Equity Opportunity
+// ========================================
+
+const valueGap =
+    this.calculateValueGap(deal);
+
+const equity =
+    deal.estimatedValue - deal.price;
+
+const gap =
+    document.getElementById("drawerGap");
+
+gap.innerHTML = `
+
+<div>
+
+    <strong>
+
+        ${equity >= 0 ? "+" : "-"}
+
+        $${Math.abs(equity).toLocaleString()}
+
+    </strong>
+
+    <small>
+
+        (${valueGap >= 0 ? "+" : ""}${valueGap}%)
+
+    </small>
+
+</div>
+
+`;
+
+gap.className = "";
+
+if (valueGap >= 10){
+
+    gap.classList.add("metric-good");
+
+}
+else if (valueGap >= 0){
+
+    gap.classList.add("metric-warning");
+
+}
+else{
+
+    gap.classList.add("metric-danger");
+
+}
+
+// ========================================
+// Dynamic Financial Snapshot Insights
+// ========================================
+
+// Purchase Price
+
+document.getElementById("drawerPriceNote").textContent =
+    "Current Asking Price";
+
+// ----------------------------------------
+// Cap Rate
+// ----------------------------------------
+
+const capRateNote =
+    document.getElementById("drawerCapRateNote");
+
+if (deal.capRate >= 10){
+
+    capRateNote.textContent =
+        "Excellent Return";
+
+}
+else if (deal.capRate >= 8){
+
+    capRateNote.textContent =
+        "Strong Return";
+
+}
+else{
+
+    capRateNote.textContent =
+        "Moderate Return";
+
+}
+
+// ----------------------------------------
+// Cash Flow
+// ----------------------------------------
+
+const cashFlowNote =
+    document.getElementById("drawerCashFlowNote");
+
+if (deal.cashFlow >= 10000){
+
+    cashFlowNote.textContent =
+        "Exceptional Monthly Income";
+
+}
+else if (deal.cashFlow >= 5000){
+
+    cashFlowNote.textContent =
+        "Strong Monthly Income";
+
+}
+else{
+
+    cashFlowNote.textContent =
+        "Positive Monthly Income";
+
+}
+
+// ----------------------------------------
+// Occupancy
+// ----------------------------------------
+
+const occupancyNote =
+    document.getElementById("drawerOccupancyNote");
+
+if (deal.occupancy === "N/A"){
+
+    occupancyNote.textContent =
+        "Business Asset";
+
+}
+else{
+
+    occupancyNote.textContent =
+        "Current Occupancy";
+
+}
+
+// ----------------------------------------
+// NOI
+// ----------------------------------------
+
+const noiNote =
+    document.getElementById("drawerNOINote");
+
+if (deal.noi >= 150000){
+
+    noiNote.textContent =
+        "Excellent Annual NOI";
+
+}
+else if (deal.noi >= 75000){
+
+    noiNote.textContent =
+        "Healthy Annual NOI";
+
+}
+else{
+
+    noiNote.textContent =
+        "Positive Annual NOI";
+
+}
+
+// ----------------------------------------
+// Price / SF
+// ----------------------------------------
+
+const priceSFNote =
+    document.getElementById("drawerPriceSFNote");
+
+if (deal.pricePerSqFt === 0){
+
+    priceSFNote.textContent =
+        "Route / Portfolio Asset";
+
+}
+else if (deal.pricePerSqFt < 75){
+
+    priceSFNote.textContent =
+        "Excellent Value";
+
+}
+else if (deal.pricePerSqFt < 125){
+
+    priceSFNote.textContent =
+        "Competitive Pricing";
+
+}
+else{
+
+    priceSFNote.textContent =
+        "Premium Asset";
+
+}
+
+// ----------------------------------------
+// Cash-on-Cash
+// ----------------------------------------
+
+const cocNote =
+    document.getElementById("drawerCoCNote");
+
+if (deal.cashOnCash >= 15){
+
+    cocNote.textContent =
+        "Outstanding Return";
+
+}
+else if (deal.cashOnCash >= 10){
+
+    cocNote.textContent =
+        "Above Target";
+
+}
+else{
+
+    cocNote.textContent =
+        "Moderate Return";
+
+}
+
+// ----------------------------------------
+// AI Equity Opportunity
+// ----------------------------------------
+
+const gapNote =
+    document.getElementById("drawerGapNote");
+
+if (valueGap >= 10){
+
+    gapNote.textContent =
+        "Excellent Upside";
+
+}
+else if (valueGap >= 0){
+
+    gapNote.textContent =
+        "Positive Opportunity";
+
+}
+else{
+
+    gapNote.textContent =
+        "Priced Above AI Estimate";
+
+}
+
+
+// ========================================
+// AI Investment Thesis
+// ========================================
+
+let thesis = "";
+
+// Recommendation
+
+if(recommendation.className === "recommendation-strong-buy"){
+
+    thesis +=
+        `MPI identifies this ${deal.type.toLowerCase()} as a strong acquisition opportunity. `;
+
+}
+else if(recommendation.className === "recommendation-watch-list"){
+
+    thesis +=
+        `MPI recommends placing this ${deal.type.toLowerCase()} on the watch list for additional review. `;
+
+}
+else{
+
+    thesis +=
+        `MPI recommends additional due diligence before pursuing this opportunity. `;
+
+}
+
+// Occupancy
+
+if(deal.occupancy !== "N/A"){
+
+    thesis +=
+        `Current occupancy of ${deal.occupancy} demonstrates `;
+
+    thesis +=
+        deal.occupancy >= "95%"
+            ? "excellent operational stability. "
+            : "consistent operational performance. ";
+
+}
+
+// Cash Flow
+
+if(deal.cashFlow >= 10000){
+
+    thesis +=
+        `Projected monthly cash flow of $${deal.cashFlow.toLocaleString()} provides exceptional recurring income. `;
+
+}
+else if(deal.cashFlow >= 5000){
+
+    thesis +=
+        `Projected monthly cash flow of $${deal.cashFlow.toLocaleString()} supports strong recurring income. `;
+
+}
+else{
+
+    thesis +=
+        `Positive monthly cash flow provides additional upside potential. `;
+
+}
+
+// Value Gap
+
+if(valueGap >= 10){
+
+    thesis +=
+        `MPI estimates meaningful upside between the asking price and intrinsic value, creating an attractive equity opportunity.`;
+
+}
+else if(valueGap >= 0){
+
+    thesis +=
+        `The property appears to be fairly valued with modest appreciation potential.`;
+
+}
+else{
+
+    thesis +=
+        `The asking price exceeds MPI's current valuation estimate, suggesting additional negotiation may be beneficial.`;
+
+}
+
+document.getElementById("drawerThesis").textContent =
+    thesis;
+
 
     // ========================================
 // Build Dynamic AI Analysis
@@ -1487,8 +2122,29 @@ getRecommendation(deal){
 
 },
 
+// ========================================
+// Calculate AI Value Gap
+// ========================================
 
-};
+calculateValueGap(deal){
+
+    if(
+        !deal.price ||
+        !deal.estimatedValue
+    ){
+        return 0;
+    }
+
+    return Math.round(
+
+        (
+            (deal.estimatedValue - deal.price)
+            / deal.price
+        ) * 100
+
+    );
+
+},
 
 
 
