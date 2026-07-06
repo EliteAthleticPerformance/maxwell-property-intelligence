@@ -7,5 +7,5 @@
 @import url("cards.css");
 @import url("panels.css");
 @import url("widgets.css");
-@import url("animations.css");
+ url("animations.css");
 @import url("responsive.css");

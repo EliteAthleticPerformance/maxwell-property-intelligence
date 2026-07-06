@@ -1364,7 +1364,7 @@ pulseCard(cardId){
 },
 
 // ========================================
-// Open Deal (Placeholder)
+// Open Deal Drawer
 // ========================================
 
 openDeal(dealType){
@@ -1372,6 +1372,10 @@ openDeal(dealType){
     const deal = this.deals.find(d => d.type === dealType);
 
     if(!deal) return;
+
+// ========================================
+// 1. Header Information
+// ========================================
 
     document.getElementById("drawerIcon").textContent =
     deal.icon;
@@ -1383,7 +1387,7 @@ document.getElementById("drawerProperty").textContent =
         deal.city;
 
 // ========================================
-// Property Photo
+// 2. Property Photo
 // ========================================
 
 const img =
@@ -1408,8 +1412,8 @@ img.onerror = function(){
     document.getElementById("drawerScore").textContent =
         deal.confidence + "%";
 
-        // ========================================
-// Calculate AI Confidence Stars
+// ========================================
+// 3. AI Investment Score
 // ========================================
 
 const score = deal.confidence;
@@ -1447,6 +1451,11 @@ if (score >= 96) {
 document.getElementById("drawerStars").textContent = stars;
 document.getElementById("drawerConfidenceLabel").textContent = confidenceLabel;
 
+
+// ========================================
+// 4. Recommendation
+// ========================================
+
     const recommendation =
     this.getRecommendation(deal);
 
@@ -1472,7 +1481,9 @@ badge.className =
     "drawer-recommendation " +
     recommendation.className;
 
-    
+// ========================================
+// 5. Property Details
+// ========================================    
 
 document.getElementById("drawerAssetClass").textContent =
     deal.assetClass;
@@ -1495,14 +1506,18 @@ document.getElementById("drawerOccupancyMetric").textContent =
 document.getElementById("drawerEstimatedValue").textContent =
     "$" + deal.estimatedValue.toLocaleString();    
 
+// ========================================
+// 6. Financial Snapshot
+// ========================================
+
 document.getElementById("drawerPrice").textContent =
-    "$" + deal.price.toLocaleString();
+   this.formatCurrency(deal.price);
 
 document.getElementById("drawerCapRate").textContent =
-    deal.capRate + "%";
+    this.formatPercent(deal.capRate);
 
 document.getElementById("drawerCashFlow").textContent =
-    "$" + deal.cashFlow.toLocaleString() + "/mo";
+    this.formatMonthly(deal.cashFlow);
 
 document.getElementById("drawerNOI").textContent =
     deal.noi
@@ -1519,8 +1534,11 @@ document.getElementById("drawerCoC").textContent =
         ? deal.cashOnCash + "%"
         : "N/A";
 
+
+        
+
 // ========================================
-// AI Equity Opportunity
+// 7. AI Equity Opportunity
 // ========================================
 
 const valueGap =
@@ -1573,17 +1591,11 @@ else{
 }
 
 // ========================================
-// Dynamic Financial Snapshot Insights
+// 8. Dynamic Snapshot Insights
 // ========================================
-
-// Purchase Price
 
 document.getElementById("drawerPriceNote").textContent =
     "Current Asking Price";
-
-// ----------------------------------------
-// Cap Rate
-// ----------------------------------------
 
 const capRateNote =
     document.getElementById("drawerCapRateNote");
@@ -1765,7 +1777,7 @@ else{
 
 
 // ========================================
-// AI Investment Thesis
+// 9. AI Investment Thesis
 // ========================================
 
 let thesis = "";
@@ -1798,8 +1810,10 @@ if(deal.occupancy !== "N/A"){
     thesis +=
         `Current occupancy of ${deal.occupancy} demonstrates `;
 
+    const occupancy =
+    parseInt(deal.occupancy);
     thesis +=
-        deal.occupancy >= "95%"
+        occupancy >= 95
             ? "excellent operational stability. "
             : "consistent operational performance. ";
 
@@ -1851,8 +1865,8 @@ document.getElementById("drawerThesis").textContent =
     thesis;
 
 
-    // ========================================
-// Build Dynamic AI Analysis
+// ========================================
+// 10. AI Investment Analysis
 // ========================================
 
 const analysis = [];
@@ -1979,7 +1993,7 @@ switch(recommendation.className){
 
 document.getElementById("drawerAnalysis").innerHTML = `
 
-<div class="analysis-card">
+<div class="drawer-card analysis-card">
 
     <div class="analysis-icon">
 
@@ -2001,7 +2015,7 @@ document.getElementById("drawerAnalysis").innerHTML = `
 
 </div>
 
-<div class="analysis-card">
+<div class="drawer-card analysis-card">
 
     <div class="analysis-icon">
 
@@ -2023,7 +2037,7 @@ document.getElementById("drawerAnalysis").innerHTML = `
 
 </div>
 
-<div class="analysis-card">
+<div class="drawer-card analysis-card">
 
     <div class="analysis-icon">
 
@@ -2045,7 +2059,7 @@ document.getElementById("drawerAnalysis").innerHTML = `
 
 </div>
 
-<div class="analysis-card">
+<div class="drawer-card analysis-card">
 
     <div class="analysis-icon">
 
@@ -2068,6 +2082,10 @@ document.getElementById("drawerAnalysis").innerHTML = `
 </div>
 
 `;
+
+// ========================================
+// 11. Display Drawer
+// ========================================
 
     document
     .getElementById("drawerOverlay")
@@ -2122,6 +2140,24 @@ getRecommendation(deal){
 
 },
 
+formatCurrency(value) {
+
+    return "$" + Number(value).toLocaleString();
+
+},
+
+formatPercent(value) {
+
+    return value + "%";
+
+},
+
+formatMonthly(value) {
+
+    return "$" + Number(value).toLocaleString() + "/mo";
+
+},
+
 // ========================================
 // Calculate AI Value Gap
 // ========================================
@@ -2146,7 +2182,7 @@ calculateValueGap(deal){
 
 },
 
-
+};
 
 
 // ========================================
@@ -2158,3 +2194,4 @@ document.addEventListener("DOMContentLoaded", () => {
     Dashboard.init();
 
 });
+
