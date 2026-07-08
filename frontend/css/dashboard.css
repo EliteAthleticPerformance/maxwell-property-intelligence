@@ -971,6 +971,8 @@ backdrop-filter: blur(4px);
 
 }
 
+
+
 /* ==========================================
    BUTTON LAYOUT
 ========================================== */
@@ -1385,6 +1387,301 @@ backdrop-filter: blur(4px);
     line-height:1.7;
 
     font-size:15px;
+
+}
+
+/* ==========================================
+   🛡️ AI Risk Intelligence
+========================================== */
+
+.drawer-risk{
+
+    margin:36px 0;
+
+}
+
+.risk-card{
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:16px;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+}
+
+.risk-icon{
+
+    width:46px;
+
+    height:46px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:12px;
+
+    background:#f8fafc;
+
+    font-size:24px;
+
+    flex-shrink:0;
+
+}
+
+.risk-card strong{
+
+    display:block;
+
+    margin-bottom:4px;
+
+}
+
+/* ==========================================
+   RISK KPI LAYOUT
+========================================== */
+
+.risk-title{
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:var(--text-primary);
+
+}
+
+.risk-score{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:8px 0 2px;
+
+}
+
+.risk-icon-small{
+
+    font-size:18px;
+
+}
+
+.risk-level{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+
+}
+
+.risk-status{
+
+    margin-bottom:10px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:var(--text-secondary);
+
+}
+
+.risk-score .risk-low{
+
+    color:#16a34a;
+
+}
+
+.risk-score .risk-moderate{
+
+    color:#d97706;
+
+}
+
+.risk-score .risk-high{
+
+    color:#dc2626;
+
+}
+
+/* ==========================================
+   RISK BADGES
+========================================== */
+
+.risk-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin:8px 0;
+
+    padding:6px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+    text-transform:uppercase;
+
+}
+
+.risk-badge.risk-low{
+
+    background:#dcfce7;
+
+    color:#15803d;
+
+}
+
+.risk-badge.risk-moderate{
+
+    background:#fef3c7;
+
+    color:#b45309;
+
+}
+
+.risk-badge.risk-high{
+
+    background:#fee2e2;
+
+    color:#b91c1c;
+
+}
+
+.risk-card p{
+
+    margin-top:6px;
+
+    color:var(--text-secondary);
+
+    line-height:1.6;
+}
+
+.risk-low{
+
+    color:#16a34a;
+
+}
+
+.risk-moderate{
+
+    color:#d97706;
+
+}
+
+.risk-high{
+
+    color:#dc2626;
+
+}
+
+/* ==========================================
+   OVERALL RISK SUMMARY
+========================================== */
+
+.risk-summary{
+
+    padding:24px;
+
+    margin-bottom:22px;
+
+}
+
+.risk-summary small{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:var(--text-secondary);
+
+    text-transform:uppercase;
+
+    letter-spacing:.6px;
+
+    font-size:11px;
+
+    font-weight:600;
+
+}
+
+.risk-summary h2{
+
+    margin:6px 0;
+
+    font-size:30px;
+
+    font-weight:800;
+
+}
+
+.risk-summary-title{
+
+    margin-bottom:16px;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    color:var(--text-secondary);
+
+}
+
+.risk-summary p{
+
+    line-height:1.7;
+
+}
+
+.risk-summary ul{
+
+    margin:18px 0 0;
+
+    padding-left:18px;
+
+}
+
+.risk-summary li{
+
+    margin-bottom:8px;
+
+}
+
+.risk-summary strong{
+
+    font-weight:700;
 
 }
 
@@ -1819,6 +2116,80 @@ backdrop-filter: blur(4px);
         transform:none;
 
     }
+
+}
+
+/* ==========================================
+   THESIS RISK SUMMARY
+========================================== */
+
+.thesis-risk-summary{
+
+    margin-top:20px;
+
+    padding:18px;
+
+    border-left:5px solid var(--primary-blue);
+
+    background:#eff6ff;
+
+    border-radius:14px;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+    color:var(--text-primary);
+
+}
+
+.thesis-risk-summary strong{
+
+    display:block;
+
+    margin-bottom:8px;
+
+}
+
+/* ==========================================
+   AI RISK REASONING
+========================================== */
+
+.risk-reason{
+
+    margin-top:14px;
+
+    padding-top:12px;
+
+    border-top:1px solid var(--border);
+
+}
+
+.risk-reason strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:.5px;
+
+    color:var(--text-secondary);
+
+}
+
+.risk-reason span{
+
+    display:block;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    color:var(--text-primary);
 
 }
 
