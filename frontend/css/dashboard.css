@@ -2085,6 +2085,28 @@ backdrop-filter: blur(4px);
 
 }
 
+/* ========================================
+   Market Narrative
+======================================== */
+
+.market-narrative{
+
+    background:#ffffff;
+
+    border-left:5px solid #2563eb;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    margin-bottom:24px;
+
+    line-height:1.8;
+
+    color:#475569;
+
+}
+
 /* ==========================================
    PROPERTY DETAILS
 ========================================== */

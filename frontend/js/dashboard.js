@@ -1776,10 +1776,15 @@ gap.className =
 // 9. AI Investment Thesis
 // ========================================
 
+// document.getElementById(
+//    "drawerRiskNarrative"
+// ).innerHTML =
+//    recommendation.memo.riskNarrative;
+
 document.getElementById(
-    "drawerThesis"
+    "drawerMarketNarrative"
 ).innerHTML =
-    recommendation.memo.thesis;
+    recommendation.memo.marketNarrative;
 
 document.getElementById(
     "drawerStrategy"

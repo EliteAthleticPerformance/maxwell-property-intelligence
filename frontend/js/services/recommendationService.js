@@ -366,39 +366,65 @@ buildMemo(
 
     return{
 
-        thesis:
-            this.buildThesis(
-                deal,
-                valuation,
-                underwriting,
-                confidence,
-                recommendation
-            ),
+    executiveSummary:
+        this.buildExecutiveSummary(
+            deal,
+            valuation,
+            underwriting,
+            confidence,
+            recommendation
+        ),
 
-        acquisitionStrategy:
-            this.buildStrategy(
-                recommendation
-            ),
+    riskNarrative:
+        this.buildRiskNarrative(
+            underwriting
+        ),
 
-        strengths:
-            this.buildStrengths(
-                deal,
-                valuation,
-                underwriting,
-                confidence
-            ),
+    marketNarrative:
+    this.buildMarketNarrative(
+        deal,
+        underwriting
+    ),
 
-        concerns:
-            this.buildConcerns(
-                deal,
-                underwriting
-            )
+    // valuationNarrative:
+    //     this.buildValuationNarrative(
+    //         valuation
+    //     ),
 
-    };
+    // cashFlowNarrative:
+    //     this.buildCashFlowNarrative(
+    //         deal
+    //     ),
+
+    // recommendationNarrative:
+    //     this.buildRecommendationNarrative(
+    //         recommendation
+    //     ),
+
+    acquisitionStrategy:
+        this.buildStrategy(
+            recommendation
+        ),
+
+    strengths:
+        this.buildStrengths(
+            deal,
+            valuation,
+            underwriting,
+            confidence
+        ),
+
+    concerns:
+        this.buildConcerns(
+            deal,
+            underwriting
+        )
+
+};
 
 }
 
-buildThesis(
+buildExecutiveSummary(
     deal,
     valuation,
     underwriting,
@@ -434,6 +460,137 @@ Based on current valuation, market conditions, and underwriting assumptions, MPI
     : "requires additional due diligence before acquisition."}</strong>
 
 `;
+}
+
+// ========================================
+// Risk Narrative
+// ========================================
+
+buildRiskNarrative(
+    underwriting
+){
+
+    const risk =
+        underwriting.overallRisk;
+
+    if(risk.className === "risk-low"){
+
+        return `
+
+MPI identifies below-average investment risk
+based on favorable market fundamentals,
+balanced financing assumptions,
+and healthy operating performance.
+
+Current underwriting indicates limited downside
+exposure while supporting long-term capital
+preservation and stable income generation.
+
+`;
+
+    }
+
+    if(risk.className === "risk-moderate"){
+
+        return `
+
+MPI identifies moderate investment risk.
+
+While the property demonstrates favorable
+investment characteristics,
+certain underwriting assumptions should
+continue to be monitored throughout the
+due diligence process.
+
+`;
+
+    }
+
+    return `
+
+MPI identifies elevated investment risk.
+
+Additional underwriting,
+property inspection,
+and financial verification
+are recommended before acquisition.
+
+`;
+
+}
+
+// ========================================
+// Market Narrative
+// ========================================
+
+buildMarketNarrative(
+    deal,
+    underwriting
+){
+
+    const market =
+        underwriting.market.market;
+
+    if(!market){
+
+        return `
+
+MPI was unable to retrieve localized market
+intelligence for this opportunity.
+
+Additional market research is recommended
+during due diligence.
+
+`;
+
+    }
+
+    const inventory =
+        market.inventoryMonths;
+
+    const rentGrowth =
+        market.rentGrowth;
+
+    const vacancy =
+        market.vacancyRate;
+
+    const appreciation =
+        market.appreciation;
+
+    const employment =
+        market.employmentGrowth;
+
+    return `
+
+The
+<strong>${deal.city}</strong>
+market continues to demonstrate favorable
+investment characteristics.
+
+Current inventory remains at
+<strong>${inventory} months</strong>,
+supporting pricing stability and continued
+buyer demand.
+
+Annual rent growth of
+<strong>${rentGrowth}%</strong>
+and projected appreciation of
+<strong>${appreciation}%</strong>
+suggest healthy long-term income and equity
+growth potential.
+
+Vacancy remains at
+<strong>${vacancy}%</strong>,
+while employment growth of
+<strong>${employment}%</strong>
+supports continued rental demand.
+
+Overall, MPI considers current market
+conditions favorable for long-term real
+estate investment.
+
+`;
+
 }
 
 // ========================================
