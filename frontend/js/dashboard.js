@@ -76,18 +76,13 @@ deals: [
 
     cashFlow:612,
 
-    confidence:96,
-
     statuses:[
         "PRICE DROP",
         "HIGH CONFIDENCE",
         "OFF MARKET"
     ],
 
-    marketRisk:"Low",
-vacancyRisk:"Moderate",
-conditionRisk:"Low",
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -120,18 +115,13 @@ financingRisk:"Moderate"
 
     cashFlow:4285,
 
-    confidence:94,
-
     statuses:[
         "DISTRESSED",
         "OFF MARKET",
         "PRICE DROP"
     ],
 
-    marketRisk:"Moderate",
-vacancyRisk:"Low",
-conditionRisk:"Moderate",
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -164,21 +154,13 @@ financingRisk:"Moderate"
 
     cashFlow:6420,
 
-    confidence:91,
-
     statuses:[
         "OWNER FINANCING",
         "PRICE DROP",
         "OFF MARKET"
     ],
 
-    marketRisk:"Low",
-
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -211,21 +193,13 @@ financingRisk:"Moderate"
 
     cashFlow:515,
 
-    confidence:88,
-
     statuses:[
         "HIGH CONFIDENCE",
         "PRICE DROP",
         "OFF MARKET"
     ],
 
-    marketRisk:"Low",
-
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -258,18 +232,13 @@ financingRisk:"Moderate"
 
     cashFlow:8120,
 
-    confidence:95,
-
     statuses:[
         "OWNER FINANCING",
         "PRICE DROP",
         "DISTRESSED"
     ],
 
-    marketRisk:"Moderate",
-vacancyRisk:"Minimal",
-conditionRisk:"Excellent",
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -302,21 +271,13 @@ financingRisk:"Moderate"
 
     cashFlow:3875,
 
-    confidence:93,
-
     statuses:[
         "OWNER FINANCING",
         "DISTRESSED",
         "PRICE DROP"
     ],
 
-    marketRisk:"Low",
-
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -349,18 +310,13 @@ financingRisk:"Moderate"
 
     cashFlow:11920,
 
-    confidence:97,
-
     statuses:[
         "OWNER FINANCING",
         "DISTRESSED",
         "PRICE DROP"
     ],
 
-    marketRisk:"Low",
-vacancyRisk:"Low",
-conditionRisk:"Low",
-financingRisk:"Low"
+    
 },
 
 {
@@ -393,21 +349,13 @@ financingRisk:"Low"
 
     cashFlow:23650,
 
-    confidence:92,
-
     statuses:[
         "OFF MARKET",
         "OWNER FINANCING",
         "PRICE DROP"
     ],
 
-    marketRisk:"Low",
-
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -440,21 +388,13 @@ financingRisk:"Moderate"
 
     cashFlow:14780,
 
-    confidence:90,
-
     statuses:[
         "OFF MARKET",
         "PRICE DROP",
         "HIGH CONFIDENCE"
     ],
 
-    marketRisk:"Low",
-
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -487,21 +427,13 @@ financingRisk:"Moderate"
 
     cashFlow:10320,
 
-    confidence:96,
-
     statuses:[
         "DISTRESSED",
         "OWNER FINANCING",
         "HIGH CONFIDENCE"
     ],
 
-marketRisk:"Low",
 
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
 
 },
 
@@ -535,21 +467,13 @@ financingRisk:"Moderate"
 
     cashFlow:4560,
 
-    confidence:89,
-
     statuses:[
         "HIGH CONFIDENCE",
         "OWNER FINANCING",
         "PRICE DROP"
     ],
 
-    marketRisk:"Low",
-
-vacancyRisk:"Low",
-
-conditionRisk:"Low",
-
-financingRisk:"Moderate"
+    
 },
 
 {
@@ -582,18 +506,13 @@ financingRisk:"Moderate"
 
     cashFlow:1740,
 
-    confidence:98,
-
     statuses:[
         "DISTRESSED",
         "HIGH CONFIDENCE",
         "OFF MARKET"
     ],
 
-    marketRisk:"Moderate",
-vacancyRisk:"N/A",
-conditionRisk:"N/A",
-financingRisk:"High"
+    
 }
 
 ],
@@ -891,6 +810,15 @@ refreshDashboard(period) {
 
 createDealCard(deal) {
 
+    deal.report ??=
+    reportService.generate(deal);
+
+const report =
+    deal.report;
+
+const confidence =
+    report.confidence;
+
     return `
 
     <article
@@ -913,7 +841,7 @@ createDealCard(deal) {
 
                 <span class="deal-confidence">
 
-                    ${deal.confidence}% AI
+                    ${confidence.score}% AI
 
                 </span>
 
@@ -993,7 +921,16 @@ renderDeals() {
 
     getDealStatus(deal){
 
-    if(deal.confidence >= 97){
+   deal.report ??=
+    reportService.generate(deal);
+
+const report =
+    deal.report;
+
+const confidence =
+    report.confidence;
+
+    if(confidence.score >= 97){
 
         return "HIGH CONFIDENCE";
 
@@ -1219,6 +1156,14 @@ item.innerHTML =
 
 createTimelineItem(deal, badge, time){
 
+    deal.report ??=
+    reportService.generate(deal);
+
+const report =
+    deal.report;
+
+const confidence =
+    report.confidence;
 
     const badgeClass = {
 
@@ -1285,7 +1230,7 @@ createTimelineItem(deal, badge, time){
 
             <span class="ai-pill">
 
-    ${deal.confidence}% AI
+    ${confidence.score}% AI
 
 </span>
 
@@ -1455,7 +1400,40 @@ openDeal(dealType){
 
     if(!deal) return;
 
+    // ========================================
+// Generate Complete AI Report
 // ========================================
+
+deal.report ??=
+    reportService.generate(deal);
+
+const report =
+    deal.report;
+
+const {
+
+    valuation,
+
+    underwriting,
+
+    confidence,
+
+    recommendation
+
+} = report;
+
+const {
+
+    metrics,
+
+    notes,
+
+    summary
+
+} = valuation;
+
+   
+    // ========================================
 // 1. Header Information
 // ========================================
 
@@ -1492,72 +1470,71 @@ img.onerror = function(){
 };        
 
     document.getElementById("drawerScore").textContent =
-        deal.confidence + "%";
+    confidence.score + "%";
+
+document.getElementById("drawerInvestmentScore").textContent =
+    recommendation.score + "/100";
+
+    document.getElementById(
+    "drawerAnalysis"
+).innerHTML =
+
+recommendation.analysis.map(item => `
+
+<div class="drawer-card analysis-card">
+
+    <div class="analysis-icon">
+
+        ${item.icon}
+
+    </div>
+
+    <div>
+
+        <strong>
+
+            ${item.title}
+
+        </strong>
+
+        <p>
+
+            ${item.text}
+
+        </p>
+
+    </div>
+
+</div>
+
+`).join("");
 
 // ========================================
 // 3. AI Investment Score
 // ========================================
 
-const score = deal.confidence;
 
-let stars = "";
-let confidenceLabel = "";
 
-if (score >= 96) {
+document.getElementById("drawerStars").textContent =
+    confidence.stars;
 
-    stars = "★★★★★";
-    confidenceLabel = "ELITE CONFIDENCE";
-
-} else if (score >= 90) {
-
-    stars = "★★★★☆";
-    confidenceLabel = "VERY HIGH CONFIDENCE";
-
-} else if (score >= 80) {
-
-    stars = "★★★☆☆";
-    confidenceLabel = "HIGH CONFIDENCE";
-
-} else if (score >= 70) {
-
-    stars = "★★☆☆☆";
-    confidenceLabel = "MODERATE CONFIDENCE";
-
-} else {
-
-    stars = "★☆☆☆☆";
-    confidenceLabel = "SPECULATIVE";
-
-}
-
-document.getElementById("drawerStars").textContent = stars;
-document.getElementById("drawerConfidenceLabel").textContent = confidenceLabel;
+document.getElementById("drawerConfidenceLabel").textContent =
+    confidence.label;
 
 
 // ========================================
 // 4. Recommendation
 // ========================================
 
-    const recommendation =
-    this.getRecommendation(deal);
-
-    const recommendationIcon =
-
-    recommendation.className === "recommendation-strong-buy"
-        ? "🟢"
-
-    : recommendation.className === "recommendation-watch-list"
-        ? "🟡"
-
-    : "🔴";
-    
 const badge =
     document.getElementById(
         "drawerRecommendation"
     );
 
 badge.textContent =
-    recommendation.text;
+    recommendation.icon +
+    " " +
+    recommendation.level;
 
 badge.className =
     "drawer-recommendation " +
@@ -1586,7 +1563,7 @@ document.getElementById("drawerOccupancyMetric").textContent =
     deal.occupancy || "N/A";
     
 document.getElementById("drawerEstimatedValue").textContent =
-    "$" + deal.estimatedValue.toLocaleString();    
+    this.formatCurrency(metrics.aiValue);   
 
 // ========================================
 // 6. Financial Snapshot
@@ -1625,7 +1602,7 @@ document.getElementById("drawerCoC").textContent =
 
 
 const overallRisk =
-    this.calculateOverallRisk(deal);
+    recommendation.overallRisk;
 
 document.getElementById(
     "drawerRiskSummary"
@@ -1657,107 +1634,40 @@ document.getElementById(
 
 <ul>
 
-    <li>
+${overallRisk.summary.map(item => `
 
-        📈 Market:
-        <strong class="${this.getRiskColor(deal.marketRisk)}">
+<li>
 
-            ${deal.marketRisk}
+    ${item.icon}
 
-        </strong>
+    ${item.title}:
 
-    </li>
+    <strong class="${item.className}">
 
-    <li>
+        ${item.level}
 
-        🏢 Vacancy:
-        <strong class="${this.getRiskColor(deal.vacancyRisk)}">
+    </strong>
 
-            ${deal.vacancyRisk}
+</li>
 
-        </strong>
-
-    </li>
-
-    <li>
-
-        🔧 Condition:
-        <strong class="${this.getRiskColor(deal.conditionRisk)}">
-
-            ${deal.conditionRisk}
-
-        </strong>
-
-    </li>
-
-    <li>
-
-        🏦 Financing:
-        <strong class="${this.getRiskColor(deal.financingRisk)}">
-
-            ${deal.financingRisk}
-
-        </strong>
-
-    </li>
+`).join("")}
 
 </ul>
 
 `;
 
-const risks = [
-
-    {
-
-        icon:"📈",
-
-        title:"Market Risk",
-
-        level:deal.marketRisk || "Moderate"
-
-    },
-
-    {
-
-        icon:"🏢",
-
-        title:"Vacancy Risk",
-
-        level:deal.vacancyRisk || "Moderate"
-
-    },
-
-    {
-
-        icon:"🔧",
-
-        title:"Property Condition",
-
-        level:deal.conditionRisk || "Moderate"
-
-    },
-
-    {
-
-        icon:"🏦",
-
-        title:"Financing Risk",
-
-        level:deal.financingRisk || "Moderate"
-
-    }
-
-];
+const cards =
+    underwriting.cards;
 
 document.getElementById("drawerRisk").innerHTML =
 
-risks.map(r => `
+cards.map(card => `
 
 <div class="drawer-card risk-card">
 
     <div class="risk-icon">
 
-        ${r.icon}
+        ${card.icon}
 
     </div>
 
@@ -1765,58 +1675,43 @@ risks.map(r => `
 
         <div class="risk-title">
 
-    ${r.title}
+            ${card.title}
 
-</div>
+        </div>
 
-<div class="risk-score">
+        <div class="risk-score">
 
-    <span class="risk-icon-small">
+            <span class="${card.className}">
 
-        ${this.getRiskIcon(r.level)}
+                ${card.badge}
 
-    </span>
+            </span>
 
-    <span class="risk-level ${this.getRiskColor(r.level)}">
+        </div>
 
-    ${this.getRiskIcon(r.level)}
-    ${this.getRiskBadge(r.title, r.level)}
+        <div class="risk-status">
 
-</span>
+            ${card.status}
 
-</div>
+        </div>
 
-<div class="risk-status">
+        <p>
 
-    ${this.getRiskStatus(r.level)}
+            ${card.description}
 
-</div>
+        </p>
 
-<p>
+        <div class="risk-reason">
 
-    ${this.getRiskDescription(
-        r.title,
-        r.level,
-        deal
-    )}
+            <strong>Reason</strong>
 
-</p>
+            <span>
 
-<div class="risk-reason">
+                ${card.reason}
 
-    <strong>Reason</strong>
+            </span>
 
-    <span>
-
-        ${this.getRiskReason(
-            r.title,
-            r.level,
-            deal
-        )}
-
-    </span>
-
-</div>
+        </div>
 
     </div>
 
@@ -1824,25 +1719,32 @@ risks.map(r => `
 
 `).join("");
 
+
+
 // ========================================
 // Render Market Intelligence
 // ========================================
 
-this.renderMarketIntelligence(deal);
+this.renderMarketIntelligence(
+    underwriting.market
+);
         
 
 // ========================================
 // 7. AI Equity Opportunity
 // ========================================
 
-const valueGap =
-    this.calculateValueGap(deal);
-
-const equity =
-    deal.estimatedValue - deal.price;
-
 const gap =
     document.getElementById("drawerGap");
+
+const equity =
+    metrics.equity;
+
+const valueGap =
+    metrics.valueGap;
+
+const strategy =
+    recommendation.memo.acquisitionStrategy;    
 
 gap.innerHTML = `
 
@@ -1866,529 +1768,98 @@ gap.innerHTML = `
 
 `;
 
-gap.className = "";
-
-if (valueGap >= 10){
-
-    gap.classList.add("metric-good");
-
-}
-else if (valueGap >= 0){
-
-    gap.classList.add("metric-warning");
-
-}
-else{
-
-    gap.classList.add("metric-danger");
-
-}
-
-// ========================================
-// 8. Dynamic Snapshot Insights
-// ========================================
-
-document.getElementById("drawerPriceNote").textContent =
-    "Current Asking Price";
-
-const capRateNote =
-    document.getElementById("drawerCapRateNote");
-
-if (deal.capRate >= 10){
-
-    capRateNote.textContent =
-        "Excellent Return";
-
-}
-else if (deal.capRate >= 8){
-
-    capRateNote.textContent =
-        "Strong Return";
-
-}
-else{
-
-    capRateNote.textContent =
-        "Moderate Return";
-
-}
-
-// ----------------------------------------
-// Cash Flow
-// ----------------------------------------
-
-const cashFlowNote =
-    document.getElementById("drawerCashFlowNote");
-
-if (deal.cashFlow >= 10000){
-
-    cashFlowNote.textContent =
-        "Exceptional Monthly Income";
-
-}
-else if (deal.cashFlow >= 5000){
-
-    cashFlowNote.textContent =
-        "Strong Monthly Income";
-
-}
-else{
-
-    cashFlowNote.textContent =
-        "Positive Monthly Income";
-
-}
-
-// ----------------------------------------
-// Occupancy
-// ----------------------------------------
-
-const occupancyNote =
-    document.getElementById("drawerOccupancyNote");
-
-if (deal.occupancy === "N/A"){
-
-    occupancyNote.textContent =
-        "Business Asset";
-
-}
-else{
-
-    occupancyNote.textContent =
-        "Current Occupancy";
-
-}
-
-// ----------------------------------------
-// NOI
-// ----------------------------------------
-
-const noiNote =
-    document.getElementById("drawerNOINote");
-
-if (deal.noi >= 150000){
-
-    noiNote.textContent =
-        "Excellent Annual NOI";
-
-}
-else if (deal.noi >= 75000){
-
-    noiNote.textContent =
-        "Healthy Annual NOI";
-
-}
-else{
-
-    noiNote.textContent =
-        "Positive Annual NOI";
-
-}
-
-// ----------------------------------------
-// Price / SF
-// ----------------------------------------
-
-const priceSFNote =
-    document.getElementById("drawerPriceSFNote");
-
-if (deal.pricePerSqFt === 0){
-
-    priceSFNote.textContent =
-        "Route / Portfolio Asset";
-
-}
-else if (deal.pricePerSqFt < 75){
-
-    priceSFNote.textContent =
-        "Excellent Value";
-
-}
-else if (deal.pricePerSqFt < 125){
-
-    priceSFNote.textContent =
-        "Competitive Pricing";
-
-}
-else{
-
-    priceSFNote.textContent =
-        "Premium Asset";
-
-}
-
-// ----------------------------------------
-// Cash-on-Cash
-// ----------------------------------------
-
-const cocNote =
-    document.getElementById("drawerCoCNote");
-
-if (deal.cashOnCash >= 15){
-
-    cocNote.textContent =
-        "Outstanding Return";
-
-}
-else if (deal.cashOnCash >= 10){
-
-    cocNote.textContent =
-        "Above Target";
-
-}
-else{
-
-    cocNote.textContent =
-        "Moderate Return";
-
-}
-
-// ----------------------------------------
-// AI Equity Opportunity
-// ----------------------------------------
-
-const gapNote =
-    document.getElementById("drawerGapNote");
-
-if (valueGap >= 10){
-
-    gapNote.textContent =
-        "Excellent Upside";
-
-}
-else if (valueGap >= 0){
-
-    gapNote.textContent =
-        "Positive Opportunity";
-
-}
-else{
-
-    gapNote.textContent =
-        "Priced Above AI Estimate";
-
-}
+gap.className =
+    metrics.color;
 
 
 // ========================================
 // 9. AI Investment Thesis
 // ========================================
 
-let thesis = `
+document.getElementById(
+    "drawerThesis"
+).innerHTML =
+    recommendation.memo.thesis;
 
-<div class="drawer-card thesis-card">
+document.getElementById(
+    "drawerStrategy"
+).innerHTML = `
 
-<h3>🤖 MPI Investment Thesis</h3>
+<div class="strategy-card">
 
-<p>
+    <div class="strategy-header">
 
-MPI AI evaluated this opportunity using
-valuation, income potential,
-market intelligence,
-property condition,
-vacancy exposure,
-and financing assumptions.
+        <span class="strategy-icon">
+            ${strategy.icon}
+        </span>
 
-</p>
+        <div>
 
-<p>
+            <h3>
+                ${strategy.title}
+            </h3>
 
-The current underwriting projects
-<strong>$${deal.cashFlow.toLocaleString()}</strong>
-in monthly cash flow,
-a
-<strong>${deal.capRate}% cap rate</strong>,
-and an AI confidence score of
-<strong>${deal.confidence}%</strong>.
+            <span class="${strategy.className}">
+                ${recommendation.level}
+            </span>
 
-</p>
+        </div>
+
+    </div>
+
+    <p class="strategy-description">
+
+        ${strategy.description}
+
+    </p>
 
 </div>
 
 `;
+    
+document.getElementById(
+    "drawerStrengths"
+).innerHTML =
+    recommendation.memo.strengths
+        .map(item => `
 
-// ========================================
-// Connect Thesis + Risk Intelligence
-// ========================================
+<li class="strength-item">
 
-if(overallRisk.className === "risk-low"){
+    <span class="strength-icon">
+        ✅
+    </span>
 
-    thesis += `
+    <span class="strength-text">
+        ${item}
+    </span>
 
-<br><br>
+</li>
 
-<div class="thesis-risk-summary">
+`)
+        .join("");
 
-🛡️ <strong>Overall investment risk remains LOW.</strong>
+document.getElementById(
+    "drawerConcerns"
+).innerHTML =
+    recommendation.memo.concerns
+        .map(item => `
 
-Favorable market conditions, stable operations,
-and limited financing exposure support long-term
-cash flow and appreciation potential.
+<li class="concern-item">
 
-</div>
+    <span class="concern-icon">
+        ⚠️
+    </span>
 
-`;
+    <span class="concern-text">
+        ${item}
+    </span>
 
-}
-else if(overallRisk.className === "risk-moderate"){
+</li>
 
-    thesis += `
+`)
+        .join("");        
 
-<br><br>
 
-<div class="thesis-risk-summary">
-
-🛡️ <strong>Overall investment risk is MODERATE.</strong>
-
-MPI recommends routine due diligence while the
-investment continues to demonstrate attractive
-long-term fundamentals.
-
-</div>
-
-`;
-
-}
-else{
-
-    thesis += `
-
-<br><br>
-
-<div class="thesis-risk-summary">
-
-🛡️ <strong>Overall investment risk is HIGH.</strong>
-
-Additional underwriting and financial review
-are recommended before proceeding with acquisition.
-
-</div>
-
-`;
-
-}
-
-document.getElementById("drawerThesis").innerHTML =
-    thesis;
-
-
-// ========================================
-// 10. AI Investment Analysis
-// ========================================
-
-const analysis = [];
-
-// ----------------------------------------
-// Cap Rate
-// ----------------------------------------
-
-if (deal.capRate >= 12) {
-
-    analysis.push(
-        "This cap rate ranks among MPI's strongest investment opportunities."
-    );
-
-} else if (deal.capRate >= 10) {
-
-    analysis.push(
-        "Above-average cap rate provides excellent long-term income potential."
-    );
-
-} else if (deal.capRate >= 8) {
-
-    analysis.push(
-        "Cap rate supports a balanced combination of income and appreciation."
-    );
-
-} else {
-
-    analysis.push(
-        "Lower cap rate may indicate a premium location with stronger appreciation potential."
-    );
-
-}
-
-// ----------------------------------------
-// Cash Flow
-// ----------------------------------------
-
-if (deal.cashFlow >= 15000) {
-
-    analysis.push(
-        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} places this property among MPI's highest income-producing opportunities.`
-    );
-
-} else if (deal.cashFlow >= 10000) {
-
-    analysis.push(
-        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} provides exceptional recurring income.`
-    );
-
-} else if (deal.cashFlow >= 5000) {
-
-    analysis.push(
-        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} offers strong income with long-term upside.`
-    );
-
-} else {
-
-    analysis.push(
-        `Estimated monthly cash flow of $${deal.cashFlow.toLocaleString()} remains positive while allowing room for value-add improvements.`
-    );
-
-}
-
-// ----------------------------------------
-// AI Confidence
-// ----------------------------------------
-
-if (deal.confidence >= 98) {
-
-    analysis.push(
-        `MPI AI assigned a ${deal.confidence}% confidence score after evaluating valuation, market trends, appreciation forecasts, and comparable sales.`
-    );
-
-} else if (deal.confidence >= 95) {
-
-    analysis.push(
-        `MPI AI assigned a ${deal.confidence}% confidence score, indicating a highly attractive investment opportunity.`
-    );
-
-} else if (deal.confidence >= 90) {
-
-    analysis.push(
-        `MPI AI assigned a ${deal.confidence}% confidence score, suggesting strong investment fundamentals with moderate risk.`
-    );
-
-} else {
-
-    analysis.push(
-        `MPI AI assigned a ${deal.confidence}% confidence score and recommends additional due diligence before acquisition.`
-    );
-
-}
-
-// ----------------------------------------
-// Recommendation
-// ----------------------------------------
-
-switch(recommendation.className){
-
-    case "recommendation-strong-buy":
-
-        analysis.push(
-            "MPI AI recommends immediate acquisition based on strong investment fundamentals."
-        );
-
-        break;
-
-    case "recommendation-watch-list":
-
-        analysis.push(
-            "Property shows promising metrics but should be monitored for improved pricing or additional market data."
-        );
-
-        break;
-
-    default:
-
-        analysis.push(
-            "Current investment risk exceeds MPI's preferred acquisition criteria."
-        );
-
-}
-
-document.getElementById("drawerAnalysis").innerHTML = `
-
-<div class="drawer-card analysis-card">
-
-    <div class="analysis-icon">
-
-        📈
-
-    </div>
-
-    <div>
-
-        <strong>Cap Rate</strong>
-
-        <p>
-
-            ${analysis[0]}
-
-        </p>
-
-    </div>
-
-</div>
-
-<div class="drawer-card analysis-card">
-
-    <div class="analysis-icon">
-
-        💰
-
-    </div>
-
-    <div>
-
-        <strong>Cash Flow</strong>
-
-        <p>
-
-            ${analysis[1]}
-
-        </p>
-
-    </div>
-
-</div>
-
-<div class="drawer-card analysis-card">
-
-    <div class="analysis-icon">
-
-        🤖
-
-    </div>
-
-    <div>
-
-        <strong>AI Confidence</strong>
-
-        <p>
-
-            ${analysis[2]}
-
-        </p>
-
-    </div>
-
-</div>
-
-<div class="drawer-card analysis-card">
-
-    <div class="analysis-icon">
-
-    ${recommendationIcon}
-
-</div>
-
-    <div>
-
-        <strong>Recommendation</strong>
-
-        <p>
-
-            ${analysis[3]}
-
-        </p>
-
-    </div>
-
-</div>
-
-`;
 
 // ========================================
 // 11. Display Drawer
@@ -2408,45 +1879,6 @@ document
 // AI Recommendation
 // ========================================
 
-getRecommendation(deal){
-
-    const score = deal.confidence;
-    const cap = deal.capRate;
-
-    if(score >= 95 && cap >= 8){
-
-        return{
-
-            text:"🟢 STRONG BUY",
-
-            className:"recommendation-strong-buy"
-
-        };
-
-    }
-
-    if(score >= 85){
-
-        return{
-
-            text:"🟡 WATCH LIST",
-
-            className:"recommendation-watch-list"
-
-        };
-
-    }
-
-    return{
-
-        text:"🔴 HIGH RISK",
-
-        className:"recommendation-high-risk"
-
-    };
-
-},
-
 formatCurrency(value) {
 
     return "$" + Number(value).toLocaleString();
@@ -2465,599 +1897,124 @@ formatMonthly(value) {
 
 },
 
-// ========================================
-// Risk Icons
-// ========================================
-
-getRiskIcon(level){
-
-    switch(level){
-
-        case "Low":
-
-            return "🟢";
-
-        case "Moderate":
-
-            return "🟠";
-
-        case "High":
-
-            return "🔴";
-
-        case "Minimal":
-
-            return "🟢";
-
-        case "Excellent":
-
-            return "🟢";
-
-        default:
-
-            return "⚪";
-
-    }
-
-},
-
-getRiskColor(level){
-
-    switch(level){
-
-        case "Low":
-        case "Minimal":
-        case "Excellent":
-
-            return "risk-low";
-
-        case "Moderate":
-
-            return "risk-moderate";
-
-        case "High":
-
-            return "risk-high";
-
-        default:
-
-            return "";
-
-    }
-
-},
-
-// ========================================
-// Risk Badge Label
-// ========================================
-
-getRiskBadge(type, level){
-
-    switch(type){
-
-        case "Market Risk":
-
-            switch(level){
-
-                case "Low":
-                    return "LOW MARKET RISK";
-
-                case "Moderate":
-                    return "MODERATE MARKET RISK";
-
-                case "High":
-                    return "HIGH MARKET RISK";
-
-            }
-
-            break;
-
-        case "Vacancy Risk":
-
-            switch(level){
-
-                case "Low":
-                case "Minimal":
-                    return "LOW VACANCY RISK";
-
-                case "Moderate":
-                    return "MODERATE VACANCY RISK";
-
-                case "High":
-                    return "HIGH VACANCY RISK";
-
-            }
-
-            break;
-
-        case "Property Condition":
-
-            switch(level){
-
-                case "Excellent":
-                    return "EXCELLENT CONDITION";
-
-                case "Low":
-                    return "LOW PROPERTY RISK";
-
-                case "Moderate":
-                    return "MODERATE PROPERTY RISK";
-
-                case "High":
-                    return "HIGH PROPERTY RISK";
-
-            }
-
-            break;
-
-        case "Financing Risk":
-
-            switch(level){
-
-                case "Low":
-                    return "LOW FINANCING RISK";
-
-                case "Moderate":
-                    return "MODERATE FINANCING RISK";
-
-                case "High":
-                    return "HIGH FINANCING RISK";
-
-            }
-
-            break;
-
-    }
-
-    return level.toUpperCase();
-
-},
-
-// ========================================
-// Risk Description
-// ========================================
-
-getRiskDescription(type, level, deal){
-
-    // ------------------------------------
-    // Vacancy Risk
-    // ------------------------------------
-
-    if(type === "Vacancy Risk"){
-
-        if(deal.assetClass === "Investment Portfolio"){
-
-            return "Vacancy exposure does not apply to tax lien portfolios.";
-
-        }
-
-        if(deal.assetClass === "Business"){
-
-            return "Revenue depends primarily on business operations rather than tenant occupancy.";
-
-        }
-
-    }
-
-    
-
-    // ------------------------------------
-    // Financing Risk
-    // ------------------------------------
-
-    if(type === "Financing Risk"){
-
-        if(level === "High"){
-
-            return "Financing structure should receive additional scrutiny before acquisition.";
-
-        }
-
-        if(level === "Moderate"){
-
-            return "Standard commercial financing review is recommended.";
-
-        }
-
-        return "Financing conditions appear favorable.";
-
-    }
-
-    // ------------------------------------
-// Market Risk
-// ------------------------------------
-
-if(type === "Market Risk"){
-
-    const intelligence = this.analyzeMarket(deal);
-
-    return intelligence.reason;
-
-}
-
-    // ------------------------------------
-    // Default Descriptions
-    // ------------------------------------
-
-    switch(level){
-
-        case "Low":
-
-            return "Current indicators suggest limited investment risk.";
-
-        case "Moderate":
-
-            return "Routine monitoring and due diligence are recommended.";
-
-        case "High":
-
-            return "Elevated investment risk warrants additional analysis.";
-
-        case "Excellent":
-
-            return "Property condition appears to be above average.";
-
-        case "Minimal":
-
-            return "Operational exposure is expected to remain low.";
-
-        default:
-
-            return "Additional due diligence is recommended.";
-
-    }
-
-},
-
-// ========================================
-// MARKET INTELLIGENCE ENGINE
-// ========================================
-
-marketData: {
-
-    "Kansas City, MO": {
-        inventoryMonths: 2.1,
-        rentGrowth: 5.2,
-        vacancyRate: 4.1,
-        appreciation: 6.4,
-        interestRate: 6.75,
-        employmentGrowth: 2.3
-    },
-
-    "Independence, MO": {
-        inventoryMonths: 2.7,
-        rentGrowth: 4.3,
-        vacancyRate: 5.0,
-        appreciation: 5.7,
-        interestRate: 6.75,
-        employmentGrowth: 1.9
-    },
-
-    "Lee's Summit, MO": {
-        inventoryMonths: 1.8,
-        rentGrowth: 5.8,
-        vacancyRate: 3.2,
-        appreciation: 7.1,
-        interestRate: 6.75,
-        employmentGrowth: 2.8
-    }
-
-},
-
-// ========================================
-// MARKET INTELLIGENCE ENGINE
-// ========================================
-
-analyzeMarket(deal){
-
-    const market = this.marketData[deal.city];
-
-    if(!market){
-
-        return {
-
-            level: deal.marketRisk || "Moderate",
-
-            score: 50,
-
-            market: null,
-
-            reason:
-                "Market intelligence is not yet available for this location."
-
-        };
-
-    }
-
-    let score = 0;
-
-    if(market.inventoryMonths < 3)
-        score -= 10;
-
-    if(market.rentGrowth > 5)
-        score -= 8;
-
-    if(market.vacancyRate > 8)
-        score += 15;
-
-    if(market.appreciation > 6)
-        score -= 5;
-
-    if(market.interestRate > 7)
-        score += 6;
-
-   let level = "Moderate";
-
-if(score <= -10)
-    level = "Low";
-
-if(score >= 10)
-    level = "High";
-
-
-// ------------------------------------
-// Build AI Market Highlights
-// ------------------------------------
-
-const highlights = [];
-
-if(market.inventoryMonths < 3){
-
-    highlights.push(
-        `🟢 Inventory: ${market.inventoryMonths} Months (Seller's Market)`
-    );
-
-}
-else{
-
-    highlights.push(
-        `🟡 Inventory: ${market.inventoryMonths} Months`
-    );
-
-}
-
-if(market.rentGrowth >= 5){
-
-    highlights.push(
-        `🟢 Rent Growth: +${market.rentGrowth}%`
-    );
-
-}
-else{
-
-    highlights.push(
-        `🟡 Rent Growth: ${market.rentGrowth}%`
-    );
-
-}
-
-if(market.vacancyRate < 5){
-
-    highlights.push(
-        `🟢 Vacancy: ${market.vacancyRate}%`
-    );
-
-}
-else{
-
-    highlights.push(
-        `🟡 Vacancy: ${market.vacancyRate}%`
-    );
-
-}
-
-if(market.appreciation >= 6){
-
-    highlights.push(
-        `🟢 Appreciation: +${market.appreciation}%`
-    );
-
-}
-else{
-
-    highlights.push(
-        `🟡 Appreciation: ${market.appreciation}%`
-    );
-
-}
-
-if(market.employmentGrowth >= 2){
-
-    highlights.push(
-        `🟢 Employment Growth: +${market.employmentGrowth}%`
-    );
-
-}
-else{
-
-    highlights.push(
-        `🟡 Employment Growth: ${market.employmentGrowth}%`
-    );
-
-}
-
-if(market.interestRate <= 7){
-
-    highlights.push(
-        `🟢 Interest Rate: ${market.interestRate}%`
-    );
-
-}
-else{
-
-    highlights.push(
-        `🟠 Interest Rate: ${market.interestRate}%`
-    );
-
-}
-
-
-// ------------------------------------
-// Generate MPI Market Outlook
-// ------------------------------------
-
-let reason = "";
-
-if(level === "Low"){
-
-    reason = `
-
-<strong>MPI Market Outlook</strong><br><br>
-
-${deal.city} continues to demonstrate favorable investment conditions supported by the following key indicators:
-
-<ul class="market-highlights">
-
-${highlights
-    .map(item => `<li>${item}</li>`)
-    .join("")}
-
-</ul>
-
-MPI's market intelligence engine projects stable income generation,
-continued appreciation potential, and limited downside risk based on
-current local market fundamentals.
-
-`;
-
-}
-
-else if(level === "Moderate"){
-
-    reason = `
-
-<strong>MPI Market Outlook</strong><br><br>
-
-${deal.city} continues to demonstrate generally stable market conditions.
-
-MPI recommends continued monitoring of inventory trends,
-rental growth, financing conditions, and local economic activity
-before finalizing acquisition decisions.
-
-`;
-
-}
-
-else{
-
-    reason = `
-
-<strong>MPI Market Outlook</strong><br><br>
-
-Current market indicators suggest elevated investment risk within
-${deal.city}.
-
-MPI recommends additional underwriting, updated comparable sales,
-and verification of market trends before proceeding with acquisition.
-
-`;
-
-}
-
-
-// ------------------------------------
-// Return Market Intelligence
-// ------------------------------------
-
-return {
-
-    level,
-
-    score,
-
-    market,
-
-    reason
-
-};
-
-},
-
-// ========================================
-// AI Risk Reasoning
-// ========================================
-
-getRiskReason(type, level, deal){
-
-    switch(type){
-
-        case "Market Risk": {
-
-            const intelligence = this.analyzeMarket(deal);
-
-            return intelligence.reason;
-
-        }
-
-        case "Vacancy Risk":
-
-            if(deal.occupancy === "N/A"){
-
-                return "Revenue depends primarily on business operations rather than leased occupancy.";
-
-            }
-
-            return `Current occupancy of ${deal.occupancy} supports projected income assumptions.`;
-
-        case "Property Condition":
-
-            if(level === "Excellent"){
-
-                return `Built in ${deal.yearBuilt}, the property appears to require limited near-term capital improvements.`;
-
-            }
-
-            return "Physical condition should be verified during due diligence.";
-
-        case "Financing Risk":
-
-            if(level === "Low"){
-
-                return "Current acquisition metrics support favorable financing assumptions.";
-
-            }
-
-            if(level === "Moderate"){
-
-                return "Current interest rates may modestly reduce projected returns.";
-
-            }
-
-            return "Financing assumptions require additional underwriting before acquisition.";
-
-    }
-
-    return "";
-
-},
 
 // ========================================
 // Render Market Intelligence
 // ========================================
 
-renderMarketIntelligence(deal){
-
-    const intelligence = this.analyzeMarket(deal);
+renderMarketIntelligence(market){
 
     const container =
-        document.getElementById("drawerMarketData");
+        document.getElementById(
+            "drawerMarketData"
+        );
 
     if(!container) return;
 
-    if(!intelligence.market){
+    if(!market.market){
 
         container.innerHTML = `
-
 <div class="drawer-card">
 
     <strong>Market Intelligence</strong>
 
     <p>
 
-        Market intelligence is not yet available
-        for this location.
+        Market intelligence is unavailable.
 
     </p>
+
+</div>
+`;
+
+container.innerHTML = `
+
+<div class="market-intelligence-card">
+
+    <div class="market-heading">
+
+        📈 Market Intelligence
+
+    </div>
+
+    <div class="market-subtitle">
+
+        MPI Market Outlook
+
+    </div>
+
+    <div class="market-narrative">
+
+        ${market.outlook}
+
+    </div>
+
+    <div class="market-grid">
+
+        <div class="market-stat">
+
+            <label>Inventory</label>
+
+            <strong>${market.inventoryMonths} Months</strong>
+
+        </div>
+
+        <div class="market-stat">
+
+            <label>Rent Growth</label>
+
+            <strong>${market.rentGrowth}%</strong>
+
+        </div>
+
+        <div class="market-stat">
+
+            <label>Vacancy</label>
+
+            <strong>${market.vacancyRate}%</strong>
+
+        </div>
+
+        <div class="market-stat">
+
+            <label>Appreciation</label>
+
+            <strong>${market.appreciation}%</strong>
+
+        </div>
+
+        <div class="market-stat">
+
+            <label>Employment Growth</label>
+
+            <strong>${market.employmentGrowth}%</strong>
+
+        </div>
+
+        <div class="market-stat">
+
+            <label>Interest Rate</label>
+
+            <strong>${market.interestRate}%</strong>
+
+        </div>
+
+    </div>
+
+    <div class="market-outlook">
+
+        <strong>Investment Outlook</strong>
+
+        <p>
+
+            MPI projects stable income potential,
+            continued appreciation,
+            and manageable downside exposure
+            under current market conditions.
+
+        </p>
+
+    </div>
 
 </div>
 
@@ -3067,265 +2024,40 @@ renderMarketIntelligence(deal){
 
     }
 
-    const m = intelligence.market;
+    const m =
+        market.market;
 
     container.innerHTML = `
 
-<div class="drawer-card drawer-metric">
+<div class="drawer-card">
 
-    <label>📦 Inventory</label>
+    <h3>📈 Market Intelligence</h3>
 
-    <strong>${m.inventoryMonths} Months</strong>
+    <p>
+        ${market.reason}
+    </p>
 
-    <small>
+    <ul>
 
-        ${m.inventoryMonths < 3
-            ? "Seller's Market"
-            : "Balanced Inventory"}
+        <li>Inventory: ${m.inventoryMonths} months</li>
 
-    </small>
+        <li>Rent Growth: ${m.rentGrowth}%</li>
 
-</div>
+        <li>Vacancy: ${m.vacancyRate}%</li>
 
-<div class="drawer-card drawer-metric">
+        <li>Appreciation: ${m.appreciation}%</li>
 
-    <label>📈 Rent Growth</label>
+        <li>Employment Growth: ${m.employmentGrowth}%</li>
 
-    <strong>${m.rentGrowth}%</strong>
-
-    <small>
-
-        ${m.rentGrowth >= 5
-            ? "Above Average"
-            : "Stable Growth"}
-
-    </small>
-
-</div>
-
-<div class="drawer-card drawer-metric">
-
-    <label>🏢 Vacancy Rate</label>
-
-    <strong>${m.vacancyRate}%</strong>
-
-    <small>
-
-        ${m.vacancyRate < 5
-            ? "Healthy Market"
-            : "Monitor"}
-
-    </small>
-
-</div>
-
-<div class="drawer-card drawer-metric">
-
-    <label>📈 Appreciation</label>
-
-    <strong>${m.appreciation}%</strong>
-
-    <small>
-
-        ${m.appreciation >= 6
-            ? "Strong Appreciation"
-            : "Steady Growth"}
-
-    </small>
-
-</div>
-
-<div class="drawer-card drawer-metric">
-
-    <label>💼 Employment</label>
-
-    <strong>+${m.employmentGrowth}%</strong>
-
-    <small>
-
-        Positive Growth
-
-    </small>
-
-</div>
-
-<div class="drawer-card drawer-metric">
-
-    <label>🏦 Interest Rate</label>
-
-    <strong>${m.interestRate}%</strong>
-
-    <small>
-
-        Current Market
-
-    </small>
+    </ul>
 
 </div>
 
 `;
 
-},
-
-// ========================================
-// Risk Status
-// ========================================
-
-getRiskStatus(level){
-
-    switch(level){
-
-        case "Low":
-
-            return "Very Stable";
-
-        case "Minimal":
-
-            return "Minimal Exposure";
-
-        case "Excellent":
-
-            return "Excellent Condition";
-
-        case "Moderate":
-
-            return "Monitor";
-
-        case "High":
-
-            return "Needs Attention";
-
-        default:
-
-            return "";
-
-    }
-
-},
-
-// ========================================
-// Calculate Overall Risk
-// ========================================
-
-calculateOverallRisk(deal){
-
-    const levels = [
-
-        deal.marketRisk,
-        deal.vacancyRisk,
-        deal.conditionRisk,
-        deal.financingRisk
-
-    ];
-
-    let score = 0;
-
-    levels.forEach(level => {
-
-        switch(level){
-
-            case "Low":
-            case "Minimal":
-            case "Excellent":
-
-                score += 1;
-                break;
-
-            case "Moderate":
-
-                score += 2;
-                break;
-
-            case "High":
-
-                score += 3;
-                break;
-
-            default:
-
-                score += 2;
-
-        }
-
-    });
-
-    const average = score / levels.length;
-
-    if(average <= 1.5){
-
-        return{
-
-            label:"🟢 LOW RISK",
-
-            subtitle:"Excellent Risk Profile",
-
-                description:
-    "MPI projects limited downside exposure based on current market conditions, property fundamentals, and financing assumptions.",
-
-            className:"risk-low"
-
-        };
-
-    }
-
-    if(average <= 2.25){
-
-        return{
-
-            label:"🟠 MODERATE RISK",
-
-            subtitle:"Balanced Risk Profile",
-
-            description:
-                "MPI projects balanced investment risk. Property fundamentals remain favorable, although several factors should be verified during underwriting.",
-
-            className:"risk-moderate"
-
-        };
-
-    }
-
-    return{
-
-        label:"🔴 HIGH RISK",
-
-        subtitle:"Elevated Risk Profile",
-
-        description:
-            "MPI projects elevated downside exposure due to multiple investment risk factors. Additional underwriting is recommended before acquisition.",
-
-        className:"risk-high"
-
-    };
-
-},
-
-// ========================================
-// Calculate AI Value Gap
-// ========================================
-
-calculateValueGap(deal){
-
-    if(
-        !deal.price ||
-        !deal.estimatedValue
-    ){
-        return 0;
-    }
-
-    return Math.round(
-
-        (
-            (deal.estimatedValue - deal.price)
-            / deal.price
-        ) * 100
-
-    );
-
-},
+}
 
 };
-
 
 // ========================================
 // Start Dashboard

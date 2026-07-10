@@ -624,41 +624,65 @@
 
 <section class="drawer-summary">
 
-        <div class="drawer-score">
+    <div class="score-grid">
 
-    <span>
+        <!-- AI Confidence -->
 
-        AI Investment Score
+        <div class="score-card">
 
-    </span>
+            <small>
 
-    <strong id="drawerScore">
+                AI Confidence
 
-        97%
+            </small>
 
-    </strong>
+            <h2 id="drawerScore">
+
+                97%
+
+            </h2>
+
+            <div
+                id="drawerStars"
+                class="drawer-stars">
+
+            </div>
+
+            <div
+                id="drawerConfidenceLabel"
+                class="confidence-label">
+
+            </div>
+
+        </div>
+
+        <!-- Investment Score -->
+
+        <div class="score-card">
+
+            <small>
+
+                Investment Score
+
+            </small>
+
+            <h2 id="drawerInvestmentScore">
+
+                94 / 100
+
+            </h2>
+
+        </div>
+
+    </div>
 
     <div
-    id="drawerStars"
-    class="drawer-stars">
+        id="drawerRecommendation"
+        class="drawer-recommendation">
 
-</div>
+        🟢 STRONG BUY
 
-<div
-    id="drawerConfidenceLabel"
-    class="confidence-label">
-
-</div>
-
-</div>
-
-        <div
-    id="drawerRecommendation"
-    class="drawer-recommendation">
-
-    🟢 STRONG BUY
-
-</div>
+    </div>
 
 </section>
 
@@ -773,6 +797,30 @@
     </div>
 
 </section>
+
+<div class="drawer-card">
+
+    <h3>Acquisition Strategy</h3>
+
+    <p id="drawerStrategy"></p>
+
+</div>
+
+<div class="drawer-card">
+
+    <h3>Key Strengths</h3>
+
+    <ul id="drawerStrengths"></ul>
+
+</div>
+
+<div class="drawer-card">
+
+    <h3>Key Concerns</h3>
+
+    <ul id="drawerConcerns"></ul>
+
+</div>
 
 <!-- ==========================================
      INVESTMENT SNAPSHOT
@@ -940,13 +988,13 @@
 
     <h3 class="drawer-section-title">
 
-        🌎 Market Intelligence Summary
+        🌎 Market Intelligence
 
     </h3>
 
     <div
         id="drawerMarketData"
-        class="drawer-metrics-grid">
+        class="market-intelligence-card">
 
     </div>
 
@@ -1030,9 +1078,16 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    <script src="../../js/charts/portfolio-chart.js"></script>
+<script src="../../js/charts/portfolio-chart.js"></script>
 
-    <script src="../../js/dashboard.js"></script>
+<script src="../../js/services/marketService.js"></script>
+<script src="../../js/services/underwritingService.js"></script>
+<script src="../../js/services/valuationService.js"></script>
+<script src="../../js/services/confidenceService.js"></script>
+<script src="../../js/services/recommendationService.js"></script>
+<script src="../../js/services/reportService.js"></script>
+
+<script src="../../js/dashboard.js"></script>
 
 </body>
 

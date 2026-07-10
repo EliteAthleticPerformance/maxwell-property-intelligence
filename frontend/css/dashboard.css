@@ -1938,32 +1938,150 @@ backdrop-filter: blur(4px);
 
 }
 
-/* ==========================================
-   DRAWER CARD (Base Component)
-========================================== */
+/* ========================================
+   Investment Thesis Lists
+======================================== */
 
-.drawer-card{
+#drawerStrengths,
+#drawerConcerns{
 
-    background:#ffffff;
+    list-style:none;
 
-    border:1px solid var(--border);
+    margin:20px 0 0;
 
-    border-radius:16px;
-
-    transition:
-        transform .25s ease,
-        border-color .25s ease,
-        box-shadow .25s ease;
+    padding:0;
 
 }
 
-.drawer-card:hover{
+.strength-item{
 
-    transform:translateY(-3px);
+    display:flex;
 
-    border-color:rgba(37,99,235,.20);
+    align-items:center;
 
-    box-shadow:0 12px 24px rgba(0,0,0,.08);
+    gap:14px;
+
+    padding:14px 18px;
+
+    margin-bottom:12px;
+
+    border-radius:12px;
+
+    background:#f0fdf4;
+
+    border:1px solid #bbf7d0;
+
+}
+
+.strength-icon{
+
+    font-size:20px;
+
+    flex-shrink:0;
+
+}
+
+.strength-text{
+
+    color:#166534;
+
+    font-weight:600;
+
+}
+
+.concern-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:14px 18px;
+
+    margin-bottom:12px;
+
+    border-radius:12px;
+
+    background:#fff7ed;
+
+    border:1px solid #fed7aa;
+
+}
+
+.concern-icon{
+
+    font-size:20px;
+
+    flex-shrink:0;
+
+}
+
+.concern-text{
+
+    color:#9a3412;
+
+    font-weight:600;
+
+}
+
+/* ========================================
+   Acquisition Strategy
+======================================== */
+
+.strategy-card{
+
+    background:#ffffff;
+
+    border:1px solid #dbe7ff;
+
+    border-left:5px solid #2563eb;
+
+    border-radius:14px;
+
+    padding:22px;
+
+    margin:18px 0;
+
+}
+
+.strategy-header{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    margin-bottom:14px;
+
+}
+
+.strategy-icon{
+
+    font-size:34px;
+
+    line-height:1;
+
+}
+
+.strategy-header h3{
+
+    margin:0;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.strategy-description{
+
+    margin-top:14px;
+
+    color:#4b5563;
+
+    line-height:1.7;
 
 }
 
@@ -2190,6 +2308,146 @@ backdrop-filter: blur(4px);
     line-height:1.6;
 
     color:var(--text-primary);
+
+}
+
+.market-intelligence-card{
+
+    width:100%;
+
+    background:#ffffff;
+
+    border:1px solid #dbe7ff;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    margin-top:18px;
+
+    box-sizing:border-box;
+
+}
+
+.market-heading{
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+}
+
+.market-subtitle{
+
+    color:#64748b;
+
+    margin-bottom:24px;
+
+}
+
+.market-narrative{
+
+    line-height:1.8;
+
+    color:#374151;
+
+    margin-bottom:28px;
+
+}
+
+.market-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:16px;
+
+    margin:24px 0;
+
+}
+
+.market-stat{
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+    padding:18px;
+
+}
+
+.market-stat label{
+
+    display:block;
+
+    font-size:12px;
+
+    color:#64748b;
+
+    text-transform:uppercase;
+
+    margin-bottom:8px;
+
+}
+
+.market-stat strong{
+
+    font-size:22px;
+
+    color:#0f172a;
+
+}
+
+.market-outlook{
+
+    margin-top:30px;
+
+    padding-top:24px;
+
+    border-top:1px solid #e5e7eb;
+
+    line-height:1.8;
+
+}
+
+.score-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:16px;
+
+    margin-bottom:20px;
+
+}
+
+.score-card{
+
+    background:#fff;
+
+    border:1px solid #e5e7eb;
+
+    border-radius:12px;
+
+    padding:18px;
+
+    text-align:center;
+
+}
+
+.score-card h2{
+
+    margin:8px 0;
+
+    font-size:32px;
+
+    font-weight:700;
 
 }
 
