@@ -478,22 +478,42 @@ const recommendation = {
             )
         );
 
+
+//----------------------------------
+// Explainable Score Details
+//----------------------------------
+
+const details =
+    this.buildScoreDetails(
+        deal,
+        valuation,
+        underwriting,
+        confidence,
+        contributions
+    );
+
     //----------------------------------
     // Score Breakdown
     //----------------------------------
 
-    return {
+    //----------------------------------
+// Score Breakdown
+//----------------------------------
 
-        rawScore:
-            Number(
-                rawScore.toFixed(1)
-            ),
+return {
 
-        finalScore,
+    rawScore:
+        Number(
+            rawScore.toFixed(1)
+        ),
 
-        contributions
+    finalScore,
 
-    };
+    contributions,
+
+    details
+
+};
 
 }
 
@@ -542,6 +562,49 @@ getAssetBenchmark(deal){
     //----------------------------------
 
     return benchmarks.Default;
+
+}
+
+// ========================================
+// Get Asset Benchmark Name
+// ========================================
+
+getAssetBenchmarkName(deal){
+
+    const benchmarks =
+        RecommendationService.BENCHMARKS;
+
+    //----------------------------------
+    // Specific Asset Type
+    //----------------------------------
+
+    if(
+        deal.type &&
+        benchmarks[deal.type]
+    ){
+
+        return deal.type;
+
+    }
+
+    //----------------------------------
+    // General Asset Class
+    //----------------------------------
+
+    if(
+        deal.assetClass &&
+        benchmarks[deal.assetClass]
+    ){
+
+        return deal.assetClass;
+
+    }
+
+    //----------------------------------
+    // Default Benchmark
+    //----------------------------------
+
+    return "Default";
 
 }
 
@@ -609,6 +672,275 @@ calculateCashFlowScore(deal){
     return W.cashFlow * .25;
 
 }   
+
+// ========================================
+// Build Score Details
+// AI Explainability
+// ========================================
+
+buildScoreDetails(
+    deal,
+    valuation,
+    underwriting,
+    confidence,
+    contributions
+){
+
+    const W =
+        RecommendationService.WEIGHTS;
+
+    const valueGap =
+        valuation.metrics.valueGap;
+
+    const market =
+        underwriting.market.market;
+
+    const risk =
+        underwriting.overallRisk;
+
+    const benchmark =
+        this.getAssetBenchmark(deal);
+
+    const benchmarkName =
+        this.getAssetBenchmarkName(deal);
+
+    const cashFlow =
+        Number(deal.cashFlow) || 0;
+
+    //----------------------------------
+    // Confidence Rating
+    //----------------------------------
+
+    const confidenceRating =
+        confidence.score >= 96
+            ? "Elite Confidence"
+            : confidence.score >= 90
+                ? "Very High Confidence"
+                : confidence.score >= 80
+                    ? "High Confidence"
+                    : confidence.score >= 70
+                        ? "Moderate Confidence"
+                        : "Speculative";
+
+    //----------------------------------
+    // Equity Rating
+    //----------------------------------
+
+    const equityRating =
+        valueGap >= 20
+            ? "Exceptional"
+            : valueGap >= 10
+                ? "Strong"
+                : valueGap >= 5
+                    ? "Positive"
+                    : valueGap >= 0
+                        ? "Fair Value"
+                        : "Limited";
+
+    //----------------------------------
+    // Cash Flow Rating
+    //----------------------------------
+
+    const cashFlowRating =
+        cashFlow >=
+        benchmark.cashFlow.excellent
+            ? "Excellent"
+            : cashFlow >=
+              benchmark.cashFlow.strong
+                ? "Strong"
+                : cashFlow >=
+                  benchmark.cashFlow.positive
+                    ? "Positive"
+                    : "Weak";
+
+    //----------------------------------
+    // Appreciation Rating
+    //----------------------------------
+
+    const appreciation =
+        market
+            ? market.appreciation
+            : null;
+
+    const appreciationRating =
+        appreciation === null
+            ? "Unavailable"
+            : appreciation >= 7
+                ? "Strong"
+                : appreciation >= 5
+                    ? "Positive"
+                    : "Limited";
+
+    //----------------------------------
+    // Cap Rate Rating
+    //----------------------------------
+
+    const capRateRating =
+        deal.capRate >= 10
+            ? "Excellent"
+            : deal.capRate >= 8
+                ? "Strong"
+                : "Moderate";
+
+    //----------------------------------
+    // Risk Rating
+    //----------------------------------
+
+    const riskRating =
+        risk.level
+            ? `${risk.level} Risk`
+            : "Risk Unavailable";
+
+    //----------------------------------
+    // Score Details
+    //----------------------------------
+
+    return {
+
+        confidence: {
+
+            label:
+                "AI Confidence",
+
+            points:
+                contributions.confidence,
+
+            maxPoints:
+                W.confidence,
+
+            value:
+                confidence.score,
+
+            rating:
+                confidenceRating,
+
+            reason:
+                `${confidence.score}% AI Confidence contributes ${contributions.confidence} of ${W.confidence} available Investment Score points.`
+
+        },
+
+        equity: {
+
+            label:
+                "Equity Opportunity",
+
+            points:
+                contributions.equity,
+
+            maxPoints:
+                W.equity,
+
+            value:
+                valueGap,
+
+            rating:
+                equityRating,
+
+            reason:
+                `A ${valueGap}% valuation advantage is rated ${equityRating.toLowerCase()} by MPI.`
+
+        },
+
+        cashFlow: {
+
+            label:
+                "Cash Flow",
+
+            points:
+                contributions.cashFlow,
+
+            maxPoints:
+                W.cashFlow,
+
+            value:
+                cashFlow,
+
+            rating:
+                cashFlowRating,
+
+            benchmark:
+                benchmarkName,
+
+            reason:
+                `$${cashFlow.toLocaleString()} monthly cash flow meets MPI's ${cashFlowRating} ${benchmarkName} benchmark.`
+
+        },
+
+        appreciation: {
+
+            label:
+                "Appreciation",
+
+            points:
+                contributions.appreciation,
+
+            maxPoints:
+                W.appreciation,
+
+            value:
+                appreciation,
+
+            rating:
+                appreciationRating,
+
+            reason:
+                appreciation === null
+                    ? "Market appreciation data is currently unavailable."
+                    : `${appreciation}% projected market appreciation is rated ${appreciationRating.toLowerCase()} by MPI.`
+
+        },
+
+        capRate: {
+
+            label:
+                "Cap Rate",
+
+            points:
+                contributions.capRate,
+
+            maxPoints:
+                W.capRate,
+
+            value:
+                deal.capRate,
+
+            rating:
+                capRateRating,
+
+            reason:
+                `A ${deal.capRate}% cap rate indicates a ${capRateRating.toLowerCase()} projected return profile.`
+
+        },
+
+        risk: {
+
+            label:
+                "Risk",
+
+            points:
+                contributions.risk,
+
+            maxPoints:
+                W.risk,
+
+            value:
+                risk.level,
+
+            rating:
+                riskRating,
+
+            reason:
+                risk.level === "Low"
+                    ? "Low overall investment risk earns the maximum risk contribution."
+                    : risk.level === "Moderate"
+                        ? "Moderate overall investment risk receives a partial risk contribution."
+                        : "High overall investment risk receives no additional risk contribution."
+
+        }
+
+    };
+
+}
 
     buildAnalysis(
     deal,
