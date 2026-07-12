@@ -232,15 +232,18 @@ static BENCHMARKS = {
     confidence
 ){
 
-    const score =
-        this.calculateScore(
-            deal,
-            valuation,
-            underwriting,
-            confidence
-        );
+    const scoreBreakdown =
+    this.calculateScore(
+        deal,
+        valuation,
+        underwriting,
+        confidence
+    );
 
-    const recommendation = {
+const score =
+    scoreBreakdown.finalScore;
+
+const recommendation = {
 
     score,
 
@@ -262,6 +265,8 @@ static BENCHMARKS = {
     return {
 
         ...recommendation,
+
+        scoreBreakdown,
 
         confidence:
             confidence.score,
@@ -306,13 +311,31 @@ static BENCHMARKS = {
     const W =
         RecommendationService.WEIGHTS;
 
-    let score = 0;
+    //----------------------------------
+    // Score Contributions
+    //----------------------------------
+
+    const contributions = {
+
+        confidence: 0,
+
+        equity: 0,
+
+        cashFlow: 0,
+
+        appreciation: 0,
+
+        capRate: 0,
+
+        risk: 0
+
+    };
 
     //----------------------------------
     // AI Confidence (40)
     //----------------------------------
 
-    score +=
+    contributions.confidence =
         confidence.score *
         (W.confidence / 100);
 
@@ -320,34 +343,30 @@ static BENCHMARKS = {
     // Equity Opportunity (20)
     //----------------------------------
 
-    if(
-        valuation.metrics.valueGap >= 20
-    ){
+    const valueGap =
+        valuation.metrics.valueGap;
 
-        score += W.equity;
+    if(valueGap >= 20){
+
+        contributions.equity =
+            W.equity;
 
     }
-    else if(
-        valuation.metrics.valueGap >= 10
-    ){
+    else if(valueGap >= 10){
 
-        score +=
+        contributions.equity =
             W.equity * .75;
 
     }
-    else if(
-        valuation.metrics.valueGap >= 5
-    ){
+    else if(valueGap >= 5){
 
-        score +=
+        contributions.equity =
             W.equity * .50;
 
     }
-    else if(
-        valuation.metrics.valueGap >= 0
-    ){
+    else if(valueGap >= 0){
 
-        score +=
+        contributions.equity =
             W.equity * .25;
 
     }
@@ -357,7 +376,7 @@ static BENCHMARKS = {
     // Asset-Class Aware
     //----------------------------------
 
-    score +=
+    contributions.cashFlow =
         this.calculateCashFlowScore(
             deal
         );
@@ -371,11 +390,9 @@ static BENCHMARKS = {
 
     if(market){
 
-        if(
-            market.appreciation >= 7
-        ){
+        if(market.appreciation >= 7){
 
-            score +=
+            contributions.appreciation =
                 W.appreciation;
 
         }
@@ -383,7 +400,7 @@ static BENCHMARKS = {
             market.appreciation >= 5
         ){
 
-            score +=
+            contributions.appreciation =
                 W.appreciation * .50;
 
         }
@@ -396,19 +413,19 @@ static BENCHMARKS = {
 
     if(deal.capRate >= 10){
 
-        score +=
+        contributions.capRate =
             W.capRate;
 
     }
     else if(deal.capRate >= 8){
 
-        score +=
+        contributions.capRate =
             W.capRate * .70;
 
     }
     else{
 
-        score +=
+        contributions.capRate =
             W.capRate * .40;
 
     }
@@ -422,7 +439,7 @@ static BENCHMARKS = {
 
     if(risk.level === "Low"){
 
-        score +=
+        contributions.risk =
             W.risk;
 
     }
@@ -430,22 +447,53 @@ static BENCHMARKS = {
         risk.level === "Moderate"
     ){
 
-        score +=
+        contributions.risk =
             W.risk * .53;
 
     }
 
     //----------------------------------
+    // Raw Score
+    //----------------------------------
+
+    const rawScore =
+        Object.values(
+            contributions
+        ).reduce(
+            (total, value) =>
+                total + value,
+            0
+        );
+
+    //----------------------------------
     // Final Score
     //----------------------------------
 
-    return Math.max(
-        0,
-        Math.min(
-            Math.round(score),
-            100
-        )
-    );
+    const finalScore =
+        Math.max(
+            0,
+            Math.min(
+                Math.round(rawScore),
+                100
+            )
+        );
+
+    //----------------------------------
+    // Score Breakdown
+    //----------------------------------
+
+    return {
+
+        rawScore:
+            Number(
+                rawScore.toFixed(1)
+            ),
+
+        finalScore,
+
+        contributions
+
+    };
 
 }
 
