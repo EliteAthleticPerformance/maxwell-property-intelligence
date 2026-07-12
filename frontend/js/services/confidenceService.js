@@ -5,91 +5,255 @@
 
 class ConfidenceService {
 
-    calculate(deal, underwriting){
+    static WEIGHTS = {
 
-    let score = 100;
+        market: 0.30,
 
-    // Risk Adjustments
-    score -= underwriting.market.score * 0.30;
-    score -= underwriting.vacancy.score * 0.25;
-    score -= underwriting.condition.score * 0.20;
-    score -= underwriting.financing.score * 0.15;
+        vacancy: 0.25,
 
-    // Investment Bonuses
-    if(deal.capRate >= 10) score += 5;
-    if(deal.cashFlow >= 5000) score += 5;
+        condition: 0.20,
 
-    // Clamp Score
-    score = Math.max(
-        0,
-        Math.min(99, Math.round(score))
-    );
-
-    // Star Rating
-    const starCount =
-        score >= 96 ? 5 :
-        score >= 90 ? 4 :
-        score >= 80 ? 3 :
-        score >= 70 ? 2 : 1;
-
-    const stars =
-        "★★★★★".substring(0, starCount) +
-        "☆☆☆☆☆".substring(0, 5 - starCount);
-
-    // Confidence Label
-    const label =
-        score >= 96 ? "ELITE CONFIDENCE" :
-        score >= 90 ? "VERY HIGH CONFIDENCE" :
-        score >= 80 ? "HIGH CONFIDENCE" :
-        score >= 70 ? "MODERATE CONFIDENCE" :
-                      "SPECULATIVE";
-
-    return {
-
-        score,
-
-        starCount,
-
-        stars,
-
-        label,
-
-        className:
-        this.getClassName(score)
+        financing: 0.15
 
     };
 
-}
+    static BONUSES = {
 
-getClassName(score){
+        strongCapRate: 5,
 
-    if(score >= 96){
+        strongCashFlow: 5
 
-        return "confidence-elite";
+    };
+
+    static THRESHOLDS = {
+
+        capRate: 10,
+
+        cashFlow: 5000,
+
+        elite: 96,
+
+        veryHigh: 90,
+
+        high: 80,
+
+        moderate: 70
+
+    };
+
+    calculate(
+        deal,
+        underwriting
+    ){
+
+        let score = 100;
+
+        const W =
+            ConfidenceService.WEIGHTS;
+
+        const B =
+            ConfidenceService.BONUSES;
+
+        const T =
+            ConfidenceService.THRESHOLDS;
+
+        //----------------------------------
+        // Risk Adjustments
+        //----------------------------------
+
+        score -=
+            underwriting.market.score *
+            W.market;
+
+        score -=
+            underwriting.vacancy.score *
+            W.vacancy;
+
+        score -=
+            underwriting.condition.score *
+            W.condition;
+
+        score -=
+            underwriting.financing.score *
+            W.financing;
+
+        //----------------------------------
+        // Investment Bonuses
+        //----------------------------------
+
+        if(deal.capRate >= T.capRate){
+
+            score +=
+                B.strongCapRate;
+
+        }
+
+        if(deal.cashFlow >= T.cashFlow){
+
+            score +=
+                B.strongCashFlow;
+
+        }
+
+        //----------------------------------
+        // Clamp Score
+        //----------------------------------
+
+        score = Math.max(
+            0,
+            Math.min(
+                99,
+                Math.round(score)
+            )
+        );
+
+        //----------------------------------
+        // Star Rating
+        //----------------------------------
+
+        const starCount =
+            this.getStarCount(score);
+
+        const stars =
+            "★★★★★".substring(
+                0,
+                starCount
+            ) +
+            "☆☆☆☆☆".substring(
+                0,
+                5 - starCount
+            );
+
+        //----------------------------------
+        // Confidence Label
+        //----------------------------------
+
+        const label =
+            this.getLabel(score);
+
+        //----------------------------------
+        // Final Confidence Analysis
+        //----------------------------------
+
+        return {
+
+            score,
+
+            starCount,
+
+            stars,
+
+            label,
+
+            className:
+                this.getClassName(score)
+
+        };
 
     }
 
-    if(score >= 90){
+    // ========================================
+    // Star Rating
+    // ========================================
 
-        return "confidence-high";
+    getStarCount(score){
+
+        const T =
+            ConfidenceService.THRESHOLDS;
+
+        if(score >= T.elite){
+            return 5;
+        }
+
+        if(score >= T.veryHigh){
+            return 4;
+        }
+
+        if(score >= T.high){
+            return 3;
+        }
+
+        if(score >= T.moderate){
+            return 2;
+        }
+
+        return 1;
 
     }
 
-    if(score >= 80){
+    // ========================================
+    // Confidence Label
+    // ========================================
 
-        return "confidence-good";
+    getLabel(score){
+
+        const T =
+            ConfidenceService.THRESHOLDS;
+
+        if(score >= T.elite){
+
+            return "ELITE CONFIDENCE";
+
+        }
+
+        if(score >= T.veryHigh){
+
+            return "VERY HIGH CONFIDENCE";
+
+        }
+
+        if(score >= T.high){
+
+            return "HIGH CONFIDENCE";
+
+        }
+
+        if(score >= T.moderate){
+
+            return "MODERATE CONFIDENCE";
+
+        }
+
+        return "SPECULATIVE";
 
     }
 
-    if(score >= 70){
+    // ========================================
+    // Confidence Class
+    // ========================================
 
-        return "confidence-moderate";
+    getClassName(score){
+
+        const T =
+            ConfidenceService.THRESHOLDS;
+
+        if(score >= T.elite){
+
+            return "confidence-elite";
+
+        }
+
+        if(score >= T.veryHigh){
+
+            return "confidence-high";
+
+        }
+
+        if(score >= T.high){
+
+            return "confidence-good";
+
+        }
+
+        if(score >= T.moderate){
+
+            return "confidence-moderate";
+
+        }
+
+        return "confidence-low";
 
     }
-
-    return "confidence-low";
-
-}
 
 }
 

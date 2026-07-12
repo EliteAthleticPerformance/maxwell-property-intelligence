@@ -5,13 +5,42 @@
 
 class UnderwritingService {
 
+    static THRESHOLDS = {
+
+    occupancy: {
+
+        low: 95,
+
+        moderate: 90
+
+    },
+
+    capRate: {
+
+        excellent: 10,
+
+        good: 8
+
+    },
+
+    age: {
+
+        new: 15,
+
+        modern: 30
+
+    }
+
+};
+
+
     constructor(marketService){
 
         this.marketService = marketService;
 
     }
 
-    analyzeDeal(deal){
+    analyze(deal){
 
     const market =
         this.analyzeMarketRisk(deal);
@@ -43,7 +72,7 @@ const overallRisk =
 underwriting.overallRisk =
     overallRisk;
 
-underwriting.cards =
+underwriting.riskCards =
     this.buildRiskCards(
         underwriting
     );
@@ -297,6 +326,7 @@ calculateOverallRisk(underwriting){
         0
     ) / scores.length;
 
+let level;
 let className;
 let label;
 let subtitle;
@@ -304,6 +334,7 @@ let description;
 
 if(score <= 10){
 
+    level = "Low";
     className = "risk-low";
     label = "🟢 LOW RISK";
     subtitle = "Excellent Risk Profile";
@@ -313,6 +344,7 @@ if(score <= 10){
 }
 else if(score <= 20){
 
+    level = "Moderate";
     className = "risk-moderate";
     label = "🟡 MODERATE RISK";
     subtitle = "Balanced Risk Profile";
@@ -322,6 +354,7 @@ else if(score <= 20){
 }
 else{
 
+    level = "High";
     className = "risk-high";
     label = "🔴 HIGH RISK";
     subtitle = "Elevated Investment Risk";
@@ -334,6 +367,8 @@ return {
 
     score: Math.round(score),
 
+    level,
+    
     className,
 
     label,
@@ -434,9 +469,11 @@ analyzeMarketRisk(deal){
 
         level: "Moderate",
 
-        score: 50,
+        score: 15,
 
         market: null,
+
+        contributions: [],
 
         highlights: [],
 
@@ -447,11 +484,21 @@ analyzeMarketRisk(deal){
 
 }
 
-        const score =
-    this.calculateMarketScore(market);
+const marketScore =
+    this.calculateMarketScore(
+        market
+    );
+
+const score =
+    marketScore.score;
+
+const contributions =
+    marketScore.contributions;
 
 const level =
-    this.determineMarketRiskLevel(score);
+    this.determineMarketRiskLevel(
+        score
+    );
 
 const highlights =
     this.buildMarketHighlights(market);
@@ -484,6 +531,8 @@ return {
 
     market,
 
+    contributions,
+
     highlights,
 
     reason
@@ -496,22 +545,130 @@ calculateMarketScore(market){
 
     let score = 0;
 
-    if(market.inventoryMonths < 3)
+    const contributions = [];
+
+    //----------------------------------
+    // Inventory
+    //----------------------------------
+
+    if(market.inventoryMonths < 3){
+
         score -= 10;
 
-    if(market.rentGrowth > 5)
+        contributions.push({
+
+            metric: "Inventory",
+
+            impact: -10,
+
+            value: market.inventoryMonths,
+
+            reason:
+                "Low housing inventory supports pricing stability."
+
+        });
+
+    }
+
+    //----------------------------------
+    // Rent Growth
+    //----------------------------------
+
+    if(market.rentGrowth > 5){
+
         score -= 8;
 
-    if(market.vacancyRate > 8)
+        contributions.push({
+
+            metric: "Rent Growth",
+
+            impact: -8,
+
+            value: market.rentGrowth,
+
+            reason:
+                "Strong rent growth supports future income potential."
+
+        });
+
+    }
+
+    //----------------------------------
+    // Vacancy
+    //----------------------------------
+
+    if(market.vacancyRate > 8){
+
         score += 15;
 
-    if(market.appreciation > 6)
+        contributions.push({
+
+            metric: "Vacancy",
+
+            impact: 15,
+
+            value: market.vacancyRate,
+
+            reason:
+                "Elevated vacancy may increase income volatility."
+
+        });
+
+    }
+
+    //----------------------------------
+    // Appreciation
+    //----------------------------------
+
+    if(market.appreciation > 6){
+
         score -= 5;
 
-    if(market.interestRate > 7)
+        contributions.push({
+
+            metric: "Appreciation",
+
+            impact: -5,
+
+            value: market.appreciation,
+
+            reason:
+                "Strong appreciation supports long-term equity growth."
+
+        });
+
+    }
+
+    //----------------------------------
+    // Interest Rates
+    //----------------------------------
+
+    if(market.interestRate > 7){
+
         score += 6;
 
-    return score;
+        contributions.push({
+
+            metric: "Interest Rate",
+
+            impact: 6,
+
+            value: market.interestRate,
+
+            reason:
+                "Elevated interest rates may reduce investment spread."
+
+        });
+
+    }
+
+    return {
+
+        score,
+
+        contributions
+
+    };
 
 }
 
@@ -627,159 +784,169 @@ buildMarketHighlights(market){
 
 analyzeVacancyRisk(deal){
 
-        if(deal.occupancy === "N/A"){
-
-            return {
-
-                level:"Minimal",
-
-                score:0,
-
-                reason:
-                    "Revenue depends primarily on business operations."
-
-            };
-
-        }
-
-        const occupancy =
-            parseFloat(deal.occupancy);
-
-        if(occupancy >= 95){
-
-            return {
-
-                level:"Low",
-
-                score:5,
-
-                reason:
-                    "Occupancy supports stable income."
-
-            };
-
-        }
-
-        if(occupancy >= 90){
-
-            return {
-
-                level:"Moderate",
-
-                score:15,
-
-                reason:
-                    "Occupancy should be monitored."
-
-            };
-
-        }
+    if(deal.occupancy === "N/A"){
 
         return {
 
-            level:"High",
+            level:"Minimal",
 
-            score:30,
+            score:0,
 
             reason:
-                "Occupancy may impact projected cash flow."
+                "Revenue depends primarily on business operations."
 
         };
 
     }
 
-    analyzeConditionRisk(deal){
+    const occupancy =
+        parseFloat(deal.occupancy);
 
-        const age =
-            new Date().getFullYear() - deal.yearBuilt;
+    const thresholds =
+        UnderwritingService.THRESHOLDS.occupancy;
 
-        if(age <= 15){
+    if(occupancy >= thresholds.low){
 
-            return {
+        return {
 
-                level:"Excellent",
+            level:"Low",
 
-                score:5,
+            score:5,
 
-                reason:
-                    "Relatively new construction."
+            reason:
+                "Occupancy supports stable income."
 
-            };
+        };
 
-        }
+    }
 
-        if(age <= 30){
-
-            return {
-
-                level:"Low",
-
-                score:10,
-
-                reason:
-                    "Typical maintenance expected."
-
-            };
-
-        }
+    if(occupancy >= thresholds.moderate){
 
         return {
 
             level:"Moderate",
 
-            score:20,
+            score:15,
 
             reason:
-                "Older property should receive additional inspection."
+                "Occupancy should be monitored."
 
         };
 
     }
 
-    analyzeFinancingRisk(deal){
+    return {
 
-        if(deal.capRate >= 10){
+        level:"High",
 
-            return {
+        score:30,
 
-                level:"Low",
+        reason:
+            "Occupancy may impact projected cash flow."
 
-                score:5,
+    };
 
-                reason:
-                    "Cash flow comfortably supports financing."
+}
 
-            };
+    analyzeConditionRisk(deal){
 
-        }
+    const age =
+        new Date().getFullYear() -
+        deal.yearBuilt;
 
-        if(deal.capRate >= 8){
+    const thresholds =
+        UnderwritingService.THRESHOLDS.age;
 
-            return {
-
-                level:"Moderate",
-
-                score:15,
-
-                reason:
-                    "Current interest rates reduce investment spread."
-
-            };
-
-        }
+    if(age <= thresholds.new){
 
         return {
 
-            level:"High",
+            level:"Excellent",
 
-            score:30,
+            score:5,
 
             reason:
-                "Financing assumptions require additional review."
+                "Relatively new construction."
 
         };
 
     }
+
+    if(age <= thresholds.modern){
+
+        return {
+
+            level:"Low",
+
+            score:10,
+
+            reason:
+                "Typical maintenance expected."
+
+        };
+
+    }
+
+    return {
+
+        level:"Moderate",
+
+        score:20,
+
+        reason:
+            "Older property should receive additional inspection."
+
+    };
+
+}
+
+    analyzeFinancingRisk(deal){
+
+    const thresholds =
+        UnderwritingService.THRESHOLDS.capRate;
+
+    if(deal.capRate >= thresholds.excellent){
+
+        return {
+
+            level:"Low",
+
+            score:5,
+
+            reason:
+                "Cash flow comfortably supports financing."
+
+        };
+
+    }
+
+    if(deal.capRate >= thresholds.good){
+
+        return {
+
+            level:"Moderate",
+
+            score:15,
+
+            reason:
+                "Current interest rates reduce investment spread."
+
+        };
+
+    }
+
+    return {
+
+        level:"High",
+
+        score:30,
+
+        reason:
+            "Financing assumptions require additional review."
+
+    };
+
+}
 
 }
 

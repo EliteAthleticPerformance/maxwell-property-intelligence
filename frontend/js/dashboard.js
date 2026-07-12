@@ -1410,6 +1410,11 @@ deal.report ??=
 const report =
     deal.report;
 
+ console.log(
+        "REPORT PIPELINE TEST",
+        report
+    );
+
 const {
 
     valuation,
@@ -1656,8 +1661,13 @@ ${overallRisk.summary.map(item => `
 
 `;
 
+document.getElementById(
+    "drawerRiskNarrative"
+).textContent =
+    report.riskNarrative;
+
 const cards =
-    underwriting.cards;
+    underwriting.riskCards;
 
 document.getElementById("drawerRisk").innerHTML =
 

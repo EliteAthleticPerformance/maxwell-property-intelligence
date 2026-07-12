@@ -34,17 +34,19 @@ class ValuationService {
 
     equityPercent: valueGap,
 
-    discount: purchasePrice < aiValue,
+    isDiscount: purchasePrice < aiValue,
 
-    spread: aiValue - purchasePrice,
+    equitySpread: equity,
 
     label: this.getLabel(valueGap),
 
     color: this.getColor(valueGap),
 
-    recommendation: this.getRecommendation(valueGap),
+    valuationRecommendation:
+        this.getRecommendation(valueGap),
 
-    reason: this.getReason(valueGap)
+    reason:
+        this.getReason(valueGap)
 
 };
 

@@ -5,59 +5,63 @@
 
 class ReportService {
 
-    generate(deal){
+    generate(deal) {
 
-    const underwriting =
-        underwritingService.analyzeDeal(deal);
+        //----------------------------------
+        // Valuation
+        //----------------------------------
 
-    const valuation =
-        valuationService.analyze(deal);
+        const valuation =
+            valuationService.analyze(deal);
 
-    const confidence =
-        confidenceService.calculate(
+        //----------------------------------
+        // Underwriting
+        //----------------------------------
+
+        const underwriting =
+            underwritingService.analyze(deal);
+
+        //----------------------------------
+        // AI Confidence
+        //----------------------------------
+
+        const confidence =
+            confidenceService.calculate(
+                deal,
+                underwriting
+            );
+
+        //----------------------------------
+        // Investment Recommendation
+        //----------------------------------
+
+        const recommendation =
+            recommendationService.build(
+                deal,
+                valuation,
+                underwriting,
+                confidence
+            );
+
+        //----------------------------------
+        // Final Report
+        //----------------------------------
+
+        return {
+
             deal,
-            underwriting
-        );
 
-    const recommendation =
-        recommendationService.build(
-            deal,
             valuation,
+
             underwriting,
-            confidence
-        );
 
-    return {
+            confidence,
 
-        deal,
+            recommendation
 
-        valuation,
+        };
 
-        underwriting,
-
-        confidence,
-
-        recommendation,
-
-        executiveSummary:
-            this.buildExecutiveSummary(
-                recommendation
-            )
-
-    };
-
-}
-
-    buildExecutiveSummary(recommendation){
-
-    return `
-        MPI recommends this opportunity as a
-        ${recommendation.level}
-        investment with an Investment Score of
-        ${recommendation.score}/100.
-    `;
-
-}
+    }
 
 }
 

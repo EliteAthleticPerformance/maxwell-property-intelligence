@@ -1,18 +1,4 @@
 // ========================================
-// Load Market Data
-// Future:
-// 1. Cache
-// 2. API
-// 3. Database
-// 4. Demo Data (fallback)
-// ========================================
-
-// ========================================
-// Market Service
-// Maxwell Property Intelligence
-// ========================================
-
-// ========================================
 // Market Service
 // Maxwell Property Intelligence
 // ========================================
@@ -25,26 +11,26 @@ class MarketService {
 
     loadMarket(city){
 
-        // Exact city match
-        const cityMarket = this.getCityMarket(city);
-
-        if(cityMarket){
-            return cityMarket;
-        }
-
-        // State fallback
-        const stateMarket = this.getStateMarket(city);
-
-        if(stateMarket){
-            return stateMarket;
-        }
-
-        // Future:
-        // return this.getNationalMarket();
-
+    if(!city){
         return null;
-
     }
+
+    const cityMarket =
+        this.getCityMarket(city);
+
+    if(cityMarket){
+        return cityMarket;
+    }
+
+    const stateMarket =
+        this.getStateMarket(city);
+
+    if(stateMarket){
+        return stateMarket;
+    }
+
+    return null;
+}
 
     // ========================================
     // City Market Data
@@ -93,6 +79,7 @@ class MarketService {
 
     getStateMarket(city){
 
+              
         const states = {
 
             "MO": {
@@ -115,19 +102,27 @@ class MarketService {
 
         };
 
-        // Extract state abbreviation from "City, ST"
-        const parts = city.split(",");
+// Extract state abbreviation from "City, ST"
 
-        if(parts.length < 2){
-            return null;
-        }
+if(typeof city !== "string"){
+    return null;
+}
 
-        const state = parts[1].trim();
+const parts =
+    city.split(",");
 
-        return states[state] || null;
+if(parts.length < 2){
+    return null;
+}
+
+const state =
+    parts[1].trim();
+
+return states[state] || null;
 
     }
 
 }
 
-const marketService = new MarketService();
+const marketService =
+    new MarketService();

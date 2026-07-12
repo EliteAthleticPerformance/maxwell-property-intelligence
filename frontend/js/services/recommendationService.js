@@ -7,38 +7,19 @@ class RecommendationService {
 
      static WEIGHTS = {
 
-        confidence: 40,
+    confidence: 40,
 
-        equity: 20,
+    equity: 20,
 
-        cashFlow: 15,
+    cashFlow: 10,
 
-        appreciation: 10,
+    appreciation: 5,
 
-        capRate: 10,
+    capRate: 10,
 
-        risk: 15
-
-    };
-
-    static SCORING = {
-
-    confidence: {
-        weight: 40
-    },
-
-    equity: {
-        weight: 20,
-        thresholds: [
-            { min: 20, multiplier: 1.00 },
-            { min: 10, multiplier: 0.75 },
-            { min: 5,  multiplier: 0.50 },
-            { min: 0,  multiplier: 0.25 }
-        ]
-    }
+    risk: 15
 
 };
-
 
     build(
     deal,
@@ -55,8 +36,15 @@ class RecommendationService {
             confidence
         );
 
-    const recommendation =
-        this.getRecommendation(score);
+    const recommendation = {
+
+    score,
+
+    ...this.getRecommendation(
+        score
+    )
+
+};
 
     const memo =
     this.buildMemo(
@@ -68,8 +56,6 @@ class RecommendationService {
     );    
 
     return {
-
-        score,
 
         ...recommendation,
 
@@ -152,8 +138,8 @@ class RecommendationService {
     }
 
     //----------------------------------
-    // Cash Flow (15)
-    //----------------------------------
+// Cash Flow (10)
+//----------------------------------
 
     if(deal.cashFlow >= 10000){
 
@@ -172,8 +158,8 @@ class RecommendationService {
     }
 
     //----------------------------------
-    // Appreciation (10)
-    //----------------------------------
+// Appreciation (5)
+//----------------------------------
 
     const market =
         underwriting.market.market;
@@ -218,18 +204,18 @@ class RecommendationService {
     //----------------------------------
 
     const risk =
-        underwriting.overallRisk;
+    underwriting.overallRisk;
 
-    if(risk.className === "risk-low"){
+if(risk.level === "Low"){
 
-        score += W.risk;
+    score += W.risk;
 
-    }
-    else if(risk.className === "risk-moderate"){
+}
+else if(risk.level === "Moderate"){
 
-        score += W.risk * .53;
+    score += W.risk * .53;
 
-    }
+}
 
     return Math.max(
         0,
@@ -332,7 +318,7 @@ class RecommendationService {
 
         title:"AI Confidence",
 
-        text:`MPI AI assigned a ${confidence.score}% confidence score based on valuation, market trends, comparable sales, and underwriting.`
+        text:`MPI assigned a ${confidence.score}% confidence score based on current market data, property fundamentals, financing assumptions, and underwriting analysis.`
 
     });
 
@@ -473,7 +459,7 @@ buildRiskNarrative(
     const risk =
         underwriting.overallRisk;
 
-    if(risk.className === "risk-low"){
+    if(risk.level === "Low"){
 
         return `
 
@@ -490,7 +476,7 @@ preservation and stable income generation.
 
     }
 
-    if(risk.className === "risk-moderate"){
+    if(risk.level === "Moderate"){
 
         return `
 
@@ -726,15 +712,15 @@ buildStrengths(
     // Risk
 
     if(
-        underwriting.overallRisk.className ===
-        "risk-low"
-    ){
+    underwriting.overallRisk.level ===
+    "Low"
+){
 
-        strengths.push(
-            "Low overall underwriting risk"
-        );
+    strengths.push(
+        "Low overall underwriting risk"
+    );
 
-    }
+}
 
     // Market
 
@@ -892,14 +878,14 @@ getReasons(
 const overallRisk =
     underwriting.overallRisk;
 
-if(overallRisk.className === "risk-low"){
+if(overallRisk.level === "Low"){
 
     reasons.push(
         "Overall investment risk remains below MPI acquisition thresholds."
     );
 
 }
-else if(overallRisk.className === "risk-moderate"){
+else if(overallRisk.level === "Moderate"){
 
     reasons.push(
         "Overall investment risk appears manageable with routine due diligence."

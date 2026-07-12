@@ -1282,6 +1282,16 @@ backdrop-filter: blur(4px);
 
 }
 
+.drawer-section{
+
+    margin:40px 0;
+
+    padding-bottom:28px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
 .drawer-section-title{
 
     margin-bottom:18px;
