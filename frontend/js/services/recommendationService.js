@@ -21,6 +21,210 @@ class RecommendationService {
 
 };
 
+// ========================================
+// Asset Class Scoring Benchmarks
+// ========================================
+
+static BENCHMARKS = {
+
+    Residential: {
+
+        cashFlow: {
+
+            excellent: 1000,
+
+            strong: 500,
+
+            positive: 250
+
+        }
+
+    },
+
+    Multifamily: {
+
+        cashFlow: {
+
+            excellent: 5000,
+
+            strong: 3000,
+
+            positive: 1500
+
+        }
+
+    },
+
+    "Mobile Home Park": {
+
+        cashFlow: {
+
+            excellent: 15000,
+
+            strong: 10000,
+
+            positive: 5000
+
+        }
+
+    },
+
+    "Retail Strip Center": {
+
+        cashFlow: {
+
+            excellent: 10000,
+
+            strong: 6000,
+
+            positive: 3000
+
+        }
+
+    },
+
+    "Car Wash": {
+
+        cashFlow: {
+
+            excellent: 15000,
+
+            strong: 7500,
+
+            positive: 4000
+
+        }
+
+    },
+
+    Laundromat: {
+
+        cashFlow: {
+
+            excellent: 7500,
+
+            strong: 4000,
+
+            positive: 2000
+
+        }
+
+    },
+
+    "Self Storage": {
+
+        cashFlow: {
+
+            excellent: 12000,
+
+            strong: 7500,
+
+            positive: 4000
+
+        }
+
+    },
+
+    "RV Park": {
+
+        cashFlow: {
+
+            excellent: 20000,
+
+            strong: 12000,
+
+            positive: 6000
+
+        }
+
+    },
+
+    "Industrial Warehouse": {
+
+        cashFlow: {
+
+            excellent: 15000,
+
+            strong: 10000,
+
+            positive: 5000
+
+        }
+
+    },
+
+    "Ice Machine Route": {
+
+        cashFlow: {
+
+            excellent: 7500,
+
+            strong: 4500,
+
+            positive: 2500
+
+        }
+
+    },
+
+    "Tax Lien Portfolio": {
+
+        cashFlow: {
+
+            excellent: 5000,
+
+            strong: 2500,
+
+            positive: 1000
+
+        }
+
+    },
+
+    Business: {
+
+        cashFlow: {
+
+            excellent: 15000,
+
+            strong: 7500,
+
+            positive: 3000
+
+        }
+
+    },
+
+    "Route / Portfolio": {
+
+        cashFlow: {
+
+            excellent: 7500,
+
+            strong: 4000,
+
+            positive: 2000
+
+        }
+
+    },
+
+    Default: {
+
+        cashFlow: {
+
+            excellent: 10000,
+
+            strong: 5000,
+
+            positive: 1000
+
+        }
+
+    }
+
+};
+
     build(
     deal,
     valuation,
@@ -92,7 +296,7 @@ class RecommendationService {
 
 }
 
-    calculateScore(
+ calculateScore(
     deal,
     valuation,
     underwriting,
@@ -109,71 +313,78 @@ class RecommendationService {
     //----------------------------------
 
     score +=
-    confidence.score *
-    (W.confidence / 100);
+        confidence.score *
+        (W.confidence / 100);
 
     //----------------------------------
     // Equity Opportunity (20)
     //----------------------------------
 
-    if(valuation.metrics.valueGap >= 20){
+    if(
+        valuation.metrics.valueGap >= 20
+    ){
 
         score += W.equity;
 
     }
-    else if(valuation.metrics.valueGap >= 10){
+    else if(
+        valuation.metrics.valueGap >= 10
+    ){
 
-        score += W.equity * .75;
-
-    }
-    else if(valuation.metrics.valueGap >= 5){
-
-        score += W.equity * .50;
+        score +=
+            W.equity * .75;
 
     }
-    else if(valuation.metrics.valueGap >= 0){
+    else if(
+        valuation.metrics.valueGap >= 5
+    ){
 
-        score += W.equity * .25;
-
-    }
-
-    //----------------------------------
-// Cash Flow (10)
-//----------------------------------
-
-    if(deal.cashFlow >= 10000){
-
-        score += W.cashFlow;
+        score +=
+            W.equity * .50;
 
     }
-    else if(deal.cashFlow >= 5000){
+    else if(
+        valuation.metrics.valueGap >= 0
+    ){
 
-        score += W.cashFlow * .67;
-
-    }
-    else{
-
-        score += W.cashFlow * .33;
+        score +=
+            W.equity * .25;
 
     }
 
     //----------------------------------
-// Appreciation (5)
-//----------------------------------
+    // Cash Flow (10)
+    // Asset-Class Aware
+    //----------------------------------
+
+    score +=
+        this.calculateCashFlowScore(
+            deal
+        );
+
+    //----------------------------------
+    // Appreciation (5)
+    //----------------------------------
 
     const market =
         underwriting.market.market;
 
     if(market){
 
-        if(market.appreciation >= 7){
+        if(
+            market.appreciation >= 7
+        ){
 
-            score += W.appreciation;
+            score +=
+                W.appreciation;
 
         }
-        else if(market.appreciation >= 5){
+        else if(
+            market.appreciation >= 5
+        ){
 
-            score += W.appreciation * .50;
+            score +=
+                W.appreciation * .50;
 
         }
 
@@ -185,17 +396,20 @@ class RecommendationService {
 
     if(deal.capRate >= 10){
 
-        score += W.capRate;
+        score +=
+            W.capRate;
 
     }
     else if(deal.capRate >= 8){
 
-        score += W.capRate * .70;
+        score +=
+            W.capRate * .70;
 
     }
     else{
 
-        score += W.capRate * .40;
+        score +=
+            W.capRate * .40;
 
     }
 
@@ -204,18 +418,26 @@ class RecommendationService {
     //----------------------------------
 
     const risk =
-    underwriting.overallRisk;
+        underwriting.overallRisk;
 
-if(risk.level === "Low"){
+    if(risk.level === "Low"){
 
-    score += W.risk;
+        score +=
+            W.risk;
 
-}
-else if(risk.level === "Moderate"){
+    }
+    else if(
+        risk.level === "Moderate"
+    ){
 
-    score += W.risk * .53;
+        score +=
+            W.risk * .53;
 
-}
+    }
+
+    //----------------------------------
+    // Final Score
+    //----------------------------------
 
     return Math.max(
         0,
@@ -226,6 +448,119 @@ else if(risk.level === "Moderate"){
     );
 
 }
+
+
+// ========================================
+// Get Asset Benchmark
+// ========================================
+
+getAssetBenchmark(deal){
+
+    const benchmarks =
+        RecommendationService.BENCHMARKS;
+
+    //----------------------------------
+    // Specific Asset Type
+    //----------------------------------
+
+    if(
+        deal.type &&
+        benchmarks[deal.type]
+    ){
+
+        return benchmarks[
+            deal.type
+        ];
+
+    }
+
+    //----------------------------------
+    // General Asset Class
+    //----------------------------------
+
+    if(
+        deal.assetClass &&
+        benchmarks[deal.assetClass]
+    ){
+
+        return benchmarks[
+            deal.assetClass
+        ];
+
+    }
+
+    //----------------------------------
+    // Default Benchmark
+    //----------------------------------
+
+    return benchmarks.Default;
+
+}
+
+
+// ========================================
+// Calculate Cash Flow Score
+// ========================================
+
+calculateCashFlowScore(deal){
+
+    const W =
+        RecommendationService.WEIGHTS;
+
+    const benchmark =
+        this.getAssetBenchmark(
+            deal
+        );
+
+    const cashFlow =
+        Number(deal.cashFlow) || 0;
+
+    //----------------------------------
+    // Excellent Cash Flow
+    //----------------------------------
+
+    if(
+        cashFlow >=
+        benchmark.cashFlow.excellent
+    ){
+
+        return W.cashFlow;
+
+    }
+
+    //----------------------------------
+    // Strong Cash Flow
+    //----------------------------------
+
+    if(
+        cashFlow >=
+        benchmark.cashFlow.strong
+    ){
+
+        return W.cashFlow * .75;
+
+    }
+
+    //----------------------------------
+    // Positive Cash Flow
+    //----------------------------------
+
+    if(
+        cashFlow >=
+        benchmark.cashFlow.positive
+    ){
+
+        return W.cashFlow * .50;
+
+    }
+
+    //----------------------------------
+    // Weak Cash Flow
+    //----------------------------------
+
+    return W.cashFlow * .25;
+
+}   
 
     buildAnalysis(
     deal,
@@ -579,9 +914,6 @@ estate investment.
 
 }
 
-// ========================================
-// Acquisition Strategy
-// ========================================
 
 // ========================================
 // Acquisition Strategy
