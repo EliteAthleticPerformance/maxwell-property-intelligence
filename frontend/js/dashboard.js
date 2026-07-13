@@ -1436,196 +1436,334 @@ pulseCard(cardId){
 
 openDeal(dealType){
 
-    const deal = this.deals.find(d => d.type === dealType);
+    const deal =
+        this.deals.find(
+            d => d.type === dealType
+        );
 
     if(!deal) return;
 
     // ========================================
-// Generate Complete AI Report
-// ========================================
-
-deal.report ??=
-    reportService.generate(deal);
-
-const report =
-    deal.report;
-
- console.log(
-        "REPORT PIPELINE TEST",
-        report
-    );
-
-const {
-
-    valuation,
-
-    underwriting,
-
-    confidence,
-
-    recommendation
-
-} = report.analysis;
-
-const narrative =
-    report.narrative;
-
-const {
-
-    metrics,
-
-    notes,
-
-    summary
-
-} = valuation;
-
-   
+    // Generate Complete MPI Report
     // ========================================
-// 1. Header Information
-// ========================================
 
-    document.getElementById("drawerIcon").textContent =
-    deal.icon;
+    deal.report ??=
+        reportService.generate(
+            deal
+        );
 
-document.getElementById("drawerProperty").textContent =
-    deal.type;
+    const report =
+        deal.report;
 
-    document.getElementById("drawerCity").textContent =
+    const {
+
+        valuation,
+
+        underwriting,
+
+        confidence,
+
+        recommendation
+
+    } = report.analysis;
+
+    const narrative =
+        report.narrative;
+
+    const {
+
+        metrics
+
+    } = valuation;
+
+
+    // ========================================
+    // 1. Property Header
+    // ========================================
+
+    document.getElementById(
+        "drawerIcon"
+    ).textContent =
+        deal.icon;
+
+    document.getElementById(
+        "drawerProperty"
+    ).textContent =
+        deal.type;
+
+    document.getElementById(
+        "drawerCity"
+    ).textContent =
         deal.city;
 
-// ========================================
-// 2. Property Photo
-// ========================================
 
-const img =
-    document.getElementById("drawerImage");
+    // ========================================
+    // 2. Property Photo
+    // ========================================
 
-img.src = deal.image;
+    const img =
+        document.getElementById(
+            "drawerImage"
+        );
 
-img.alt = deal.type;
+    img.src =
+        deal.image;
 
-img.onerror = function(){
+    img.alt =
+        deal.type;
 
-    console.error(
-        "Unable to load image:",
-        deal.image
-    );
+    img.onerror = function(){
 
-    this.src =
-        "../../images/properties/no-image.jpg";
+        console.error(
+            "Unable to load image:",
+            deal.image
+        );
 
-};        
+        this.src =
+            "../../images/properties/no-image.jpg";
 
-    document.getElementById("drawerScore").textContent =
-    confidence.score + "%";
-
-document.getElementById("drawerInvestmentScore").textContent =
-    recommendation.score + "/100";
-
-this.renderScoreExplainability(
-    recommendation.scoreBreakdown
-);    
-
-    
-// ========================================
-// 3. AI Investment Score
-// ========================================
+    };
 
 
+    // ========================================
+    // 3. MPI Investment Opinion
+    // ========================================
 
-document.getElementById("drawerStars").textContent =
-    confidence.stars;
-
-document.getElementById("drawerConfidenceLabel").textContent =
-    confidence.label;
-
-
-// ========================================
-// 4. Recommendation
-// ========================================
-
-const badge =
     document.getElementById(
-        "drawerRecommendation"
+        "drawerScore"
+    ).textContent =
+        confidence.score + "%";
+
+    document.getElementById(
+        "drawerInvestmentScore"
+    ).textContent =
+        recommendation.score +
+        " / 100";
+
+    document.getElementById(
+        "drawerStars"
+    ).textContent =
+        confidence.stars;
+
+    document.getElementById(
+        "drawerConfidenceLabel"
+    ).textContent =
+        confidence.label;
+
+    const badge =
+        document.getElementById(
+            "drawerRecommendation"
+        );
+
+    badge.textContent =
+        recommendation.icon +
+        " " +
+        recommendation.level;
+
+    badge.className =
+        "drawer-recommendation " +
+        recommendation.className;
+
+    this.renderScoreExplainability(
+        recommendation.scoreBreakdown
     );
 
-badge.textContent =
-    recommendation.icon +
-    " " +
-    recommendation.level;
 
-badge.className =
-    "drawer-recommendation " +
-    recommendation.className;
+    // ========================================
+    // 4. Executive Investment Thesis
+    // ========================================
 
-// ========================================
-// 5. Property Details
-// ========================================    
+    document.getElementById(
+        "drawerNarrativeHeadline"
+    ).textContent =
+        narrative.headline;
 
-document.getElementById("drawerAssetClass").textContent =
-    deal.assetClass;
-
-document.getElementById("drawerSize").textContent =
-    deal.buildingSize;
-
-document.getElementById("drawerYear").textContent =
-    deal.yearBuilt;
-
-document.getElementById("drawerUnits").textContent =
-    deal.units;
-
-document.getElementById("drawerOccupancy").textContent =
-    deal.occupancy || "N/A"; 
-   
-document.getElementById("drawerOccupancyMetric").textContent =
-    deal.occupancy || "N/A";
-    
-document.getElementById("drawerEstimatedValue").textContent =
-    this.formatCurrency(metrics.aiValue);   
-
-// ========================================
-// 6. Financial Snapshot
-// ========================================
-
-document.getElementById("drawerPrice").textContent =
-   this.formatCurrency(deal.price);
-
-document.getElementById("drawerCapRate").textContent =
-    this.formatPercent(deal.capRate);
-
-document.getElementById("drawerCashFlow").textContent =
-    this.formatMonthly(deal.cashFlow);
-
-document.getElementById("drawerNOI").textContent =
-    deal.noi
-        ? "$" + deal.noi.toLocaleString()
-        : "N/A";
-
-document.getElementById("drawerPriceSF").textContent =
-    deal.pricePerSqFt
-        ? "$" + deal.pricePerSqFt.toFixed(2)
-        : "N/A";
-
-document.getElementById("drawerCoC").textContent =
-    deal.cashOnCash
-        ? deal.cashOnCash + "%"
-        : "N/A";
-
-/* ==========================================
-   AI RISK ASSESSMENT
-========================================== */
-// ========================================
-// Overall Risk Summary
-// ========================================
+    document.getElementById(
+        "drawerInvestmentThesis"
+    ).textContent =
+        narrative.investmentThesis;
 
 
-const overallRisk =
-    recommendation.overallRisk;
+    // ========================================
+    // 5. Property Profile
+    // ========================================
 
-document.getElementById(
-    "drawerRiskSummary"
-).innerHTML = `
+    document.getElementById(
+        "drawerAssetClass"
+    ).textContent =
+        deal.assetClass;
+
+    document.getElementById(
+        "drawerSize"
+    ).textContent =
+        deal.buildingSize;
+
+    document.getElementById(
+        "drawerYear"
+    ).textContent =
+        deal.yearBuilt;
+
+    document.getElementById(
+        "drawerUnits"
+    ).textContent =
+        deal.units;
+
+    document.getElementById(
+        "drawerOccupancy"
+    ).textContent =
+        deal.occupancy || "N/A";
+
+    document.getElementById(
+        "drawerEstimatedValue"
+    ).textContent =
+        this.formatCurrency(
+            metrics.aiValue
+        );
+
+
+    // ========================================
+    // 6. Valuation Analysis
+    // ========================================
+
+    document.getElementById(
+        "drawerValuationNarrative"
+    ).textContent =
+        narrative.valuationNarrative;
+
+    document.getElementById(
+        "drawerPrice"
+    ).textContent =
+        this.formatCurrency(
+            metrics.purchasePrice
+        );
+
+    document.getElementById(
+        "drawerValuationEstimatedValue"
+    ).textContent =
+        this.formatCurrency(
+            metrics.aiValue
+        );
+
+    const gap =
+        document.getElementById(
+            "drawerGap"
+        );
+
+    const equity =
+        metrics.equity;
+
+    const valueGap =
+        metrics.valueGap;
+
+    gap.innerHTML = `
+
+<div>
+
+    <strong>
+
+        ${equity >= 0 ? "+" : "-"}
+
+        $${Math.abs(
+            equity
+        ).toLocaleString()}
+
+    </strong>
+
+    <small>
+
+        (
+        ${valueGap >= 0 ? "+" : ""}
+        ${valueGap}%
+        )
+
+    </small>
+
+</div>
+
+    `;
+
+    gap.className =
+        metrics.color;
+
+
+    // ========================================
+    // 7. Operating Performance
+    // ========================================
+
+    document.getElementById(
+        "drawerOperatingNarrative"
+    ).textContent =
+        narrative.operatingNarrative;
+
+    document.getElementById(
+        "drawerCashFlow"
+    ).textContent =
+        this.formatMonthly(
+            deal.cashFlow
+        );
+
+    document.getElementById(
+        "drawerNOI"
+    ).textContent =
+        deal.noi
+            ? this.formatCurrency(
+                deal.noi
+            )
+            : "N/A";
+
+    document.getElementById(
+        "drawerCapRate"
+    ).textContent =
+        this.formatPercent(
+            deal.capRate
+        );
+
+    document.getElementById(
+        "drawerCoC"
+    ).textContent =
+        deal.cashOnCash
+            ? deal.cashOnCash + "%"
+            : "N/A";
+
+    document.getElementById(
+        "drawerPriceSF"
+    ).textContent =
+        deal.pricePerSqFt
+            ? "$" +
+              deal.pricePerSqFt
+                  .toFixed(2)
+            : "N/A";
+
+    document.getElementById(
+        "drawerOccupancyMetric"
+    ).textContent =
+        deal.occupancy || "N/A";
+
+
+    // ========================================
+    // 8. Market Conditions
+    // ========================================
+
+    document.getElementById(
+        "drawerMarketNarrative"
+    ).textContent =
+        narrative.marketNarrative;
+
+    this.renderMarketIntelligence(
+        underwriting.market
+    );
+
+
+    // ========================================
+    // 9. Risk Assessment
+    // ========================================
+
+    const overallRisk =
+        recommendation.overallRisk;
+
+    document.getElementById(
+        "drawerRiskSummary"
+    ).innerHTML = `
 
 <small>
 
@@ -1653,7 +1791,8 @@ document.getElementById(
 
 <ul>
 
-${overallRisk.summary.map(item => `
+${overallRisk.summary
+    .map(item => `
 
 <li>
 
@@ -1669,23 +1808,32 @@ ${overallRisk.summary.map(item => `
 
 </li>
 
-`).join("")}
+    `)
+    .join("")}
 
 </ul>
 
-`;
+    `;
 
-document.getElementById(
-    "drawerRiskNarrative"
-).textContent =
-    narrative.riskNarrative;
+    document.getElementById(
+        "drawerRiskNarrative"
+    ).textContent =
+        narrative.riskNarrative;
 
-const cards =
-    underwriting.riskCards;
 
-document.getElementById("drawerRisk").innerHTML =
+    // ========================================
+    // 10. Detailed Underwriting
+    // ========================================
 
-cards.map(card => `
+    const cards =
+        underwriting.riskCards;
+
+    document.getElementById(
+        "drawerRisk"
+    ).innerHTML =
+
+        cards
+            .map(card => `
 
 <div class="drawer-card risk-card">
 
@@ -1727,7 +1875,11 @@ cards.map(card => `
 
         <div class="risk-reason">
 
-            <strong>Reason</strong>
+            <strong>
+
+                Reason
+
+            </strong>
 
             <span>
 
@@ -1741,123 +1893,85 @@ cards.map(card => `
 
 </div>
 
-`).join("");
+            `)
+            .join("");
 
 
-// ========================================
-// Render Market Intelligence
-// ========================================
+    // ========================================
+    // 11. MPI Recommendation
+    // ========================================
 
-this.renderMarketIntelligence(
-    underwriting.market
-);
-        
-
-// ========================================
-// 7. AI Equity Opportunity
-// ========================================
-
-const gap =
-    document.getElementById("drawerGap");
-
-const equity =
-    metrics.equity;
-
-const valueGap =
-    metrics.valueGap;
-
-
-gap.innerHTML = `
-
-<div>
-
-    <strong>
-
-        ${equity >= 0 ? "+" : "-"}
-
-        $${Math.abs(equity).toLocaleString()}
-
-    </strong>
-
-    <small>
-
-        (${valueGap >= 0 ? "+" : ""}${valueGap}%)
-
-    </small>
-
-</div>
-
-`;
-
-gap.className =
-    metrics.color;
-
-
-// ========================================
-// 9. AI Investment Thesis
-// ========================================
-
-// document.getElementById(
-//    "drawerRiskNarrative"
-// ).innerHTML =
-//    recommendation.memo.riskNarrative;
-
-document.getElementById(
-    "drawerMarketNarrative"
-).textContent =
-    narrative.marketNarrative;
-
-document.getElementById(
-    "drawerConcerns"
-).innerHTML =
-    recommendation.memo.concerns
-        .map(item => `
-
-<li class="concern-item">
-
-    <span class="concern-icon">
-        ⚠️
-    </span>
-
-    <span class="concern-text">
-        ${item}
-    </span>
-
-</li>
-
-`)
-        .join("");        
-
-
-// ========================================
-// Reset Score Explainability
-// ========================================
-
-const scoreExplainability =
     document.getElementById(
-        "drawerScoreExplainability"
-    );
+        "drawerRecommendationAction"
+    ).textContent =
+        recommendation.action;
 
-if(scoreExplainability){
+    document.getElementById(
+    "drawerRecommendationScore"
+).textContent =
+    recommendation.score + " / 100";
 
-    scoreExplainability
-        .classList
-        .remove("open");
+document.getElementById(
+    "drawerRecommendationConfidence"
+).textContent =
+    confidence.score + "%";  
+    
+document.getElementById(
+    "drawerRecommendationIcon"
+).textContent =
+    recommendation.icon;    
 
-}
+    document.getElementById(
+        "drawerRecommendationNarrative"
+    ).textContent =
+        narrative.recommendationNarrative;
 
 
-// ========================================
-// 11. Display Drawer
-// ========================================
+    // ========================================
+    // 12. Investment Conclusion
+    // ========================================
+
+    document.getElementById(
+        "drawerInvestmentConclusion"
+    ).textContent =
+        narrative.conclusion;
+
+
+    // ========================================
+    // Reset Score Explainability
+    // ========================================
+
+    const scoreExplainability =
+        document.getElementById(
+            "drawerScoreExplainability"
+        );
+
+    if(scoreExplainability){
+
+        scoreExplainability
+            .classList
+            .remove("open");
+
+    }
+
+
+    // ========================================
+    // Display Drawer
+    // ========================================
 
     document
-    .getElementById("drawerOverlay")
-    .classList.add("show");
+        .getElementById(
+            "drawerOverlay"
+        )
+        .classList
+        .add("show");
 
-document
-    .getElementById("dealDrawer")
-    .classList.add("open");
+    document
+        .getElementById(
+            "dealDrawer"
+        )
+        .classList
+        .add("open");
 
 },
 

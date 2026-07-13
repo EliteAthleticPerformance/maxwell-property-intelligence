@@ -1407,31 +1407,20 @@ backdrop-filter: blur(4px);
 
 .drawer-recommendation{
 
-    display:flex;
-
-    justify-content:center;
-
+    display:inline-flex;
     align-items:center;
+    gap:12px;
 
-    gap:10px;
+    padding:18px 28px;
 
-    margin:18px 0 28px;
+    border-radius:16px;
 
-    padding:16px 18px;
-
-    border-radius:14px;
-
-    font-size:18px;
-
-    font-weight:800;
-
-    letter-spacing:.6px;
-
+    font-size:1.1rem;
+    font-weight:700;
+    letter-spacing:.08em;
     text-transform:uppercase;
 
-    transition:all .3s ease;
-
-    box-shadow:0 8px 18px rgba(0,0,0,.06);
+    margin:32px 0;
 
 }
 
@@ -1474,6 +1463,22 @@ backdrop-filter: blur(4px);
     color:#991b1b;
 
     border:1px solid #fecaca;
+
+}
+
+.report-headline{
+
+    margin:0 0 22px;
+
+    font-size:2rem;
+
+    font-weight:700;
+
+    line-height:1.3;
+
+    letter-spacing:-.025em;
+
+    color:#0f172a;
 
 }
 
@@ -1523,9 +1528,15 @@ backdrop-filter: blur(4px);
 
 .drawer-metric{
 
-    padding:18px;
+    padding:22px;
 
-    }
+    border:1px solid #e8edf4;
+
+    border-radius:14px;
+
+    background:white;
+
+}
 
 .drawer-metric small{
 
@@ -1543,19 +1554,13 @@ backdrop-filter: blur(4px);
 
 .drawer-metric label{
 
-    display:block;
+    font-size:.70rem;
 
-    font-size:11px;
-
-    font-weight:600;
+    letter-spacing:.14em;
 
     text-transform:uppercase;
 
-    letter-spacing:.5px;
-
-    color:var(--text-secondary);
-
-    margin-bottom:8px;
+    color:#64748b;
 
 }
 
@@ -1563,11 +1568,185 @@ backdrop-filter: blur(4px);
 
     display:block;
 
-    font-size:24px;
+    margin-top:8px;
+
+    font-size:2rem;
 
     font-weight:700;
 
-    color:var(--text-primary);
+}
+
+.recommendation-report-section{
+
+    background:#f8fafc;
+
+    border:1px solid #dbe7f3;
+
+    border-radius:18px;
+
+    padding:36px;
+
+    margin:56px 0;
+
+}
+
+.recommendation-action{
+
+    font-size:2.4rem;
+
+    font-weight:800;
+
+    margin:16px 0;
+
+}
+
+.report-conclusion{
+
+    font-size:1.2rem;
+
+    line-height:1.9;
+
+    font-weight:500;
+
+    color:#0f172a;
+
+}
+
+/* ==========================================
+   MPI Recommendation Callout
+========================================== */
+
+.recommendation-callout{
+
+    margin:70px 0;
+
+    padding:48px;
+
+    border-radius:24px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #f8fafc
+        );
+
+    border:1px solid #dbe7f3;
+
+    box-shadow:
+        0 14px 40px
+        rgba(15,23,42,.08);
+
+    text-align:center;
+
+}
+
+.callout-label{
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.22em;
+
+    color:#64748b;
+
+}
+
+.callout-icon{
+
+    font-size:42px;
+
+    margin:18px 0 8px;
+
+}
+
+.callout-action{
+
+    font-size:2.6rem;
+
+    font-weight:800;
+
+    line-height:1.15;
+
+    margin:12px 0 20px;
+
+    color:#0f172a;
+
+}
+
+.callout-text{
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+    color:#475569;
+
+}
+
+.callout-divider{
+
+    width:100px;
+
+    height:2px;
+
+    background:#dbe7f3;
+
+    margin:34px auto;
+
+}
+
+.callout-footer{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:48px;
+
+    flex-wrap:wrap;
+
+}
+
+.callout-score,
+.callout-confidence{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:6px;
+
+}
+
+.callout-score span,
+.callout-confidence span{
+
+    font-size:.70rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:#64748b;
+
+}
+
+.callout-score strong,
+.callout-confidence strong{
+
+    font-size:2rem;
+
+    font-weight:800;
+
+    color:#0f172a;
 
 }
 
@@ -2680,13 +2859,77 @@ backdrop-filter: blur(4px);
 
 .score-card h2{
 
-    margin:8px 0;
+    font-size:3rem;
 
-    font-size:32px;
+    font-weight:800;
 
-    font-weight:700;
+    margin-top:12px;
+    margin-bottom:10px;
+
+    line-height:1;
 
 }
+
+.score-card small{
+
+    font-size:.72rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.15em;
+
+    color:#64748b;
+
+}
+
+.drawer-report-section{
+
+    margin:64px 0;
+
+    padding-top:38px;
+
+    border-top:1px solid #e8edf4;
+
+}
+
+/* ==========================================
+   Institutional Report Section Labels
+========================================== */
+
+.report-section-label{
+
+    margin-bottom:18px;
+
+    font-size:.82rem;
+
+    font-weight:600;
+
+    line-height:1.2;
+
+    letter-spacing:.04em;
+
+    text-transform:none;
+
+    color:#64748b;
+
+}
+
+.report-narrative{
+
+    margin:0 0 30px;
+
+    max-width:760px;
+
+    font-size:1.05rem;
+
+    font-weight:400;
+
+    line-height:1.85;
+
+    color:#475569;
+
+}
+
 
 /* ========================================
    SCORE EXPLAINABILITY TOGGLE OVERRIDE

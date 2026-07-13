@@ -607,577 +607,603 @@
 
     </div>
 
-    <div class="drawer-body">
+   <div class="drawer-body">
 
     <!-- ==========================================
-     Property Photo
-========================================== -->
+         PROPERTY PHOTO
+    ========================================== -->
 
-<div class="drawer-photo">
+    <div class="drawer-photo">
 
-    <img
-        id="drawerImage"
-        src="https://placehold.co/800x500/e2e8f0/64748b?text=No+Image"
-        alt="Property Photo">
+        <img
+            id="drawerImage"
+            src="https://placehold.co/800x500/e2e8f0/64748b?text=No+Image"
+            alt="Property Photo">
 
-</div>
+    </div>
 
-<section class="drawer-summary">
 
-    <div class="score-grid">
+    <!-- ==========================================
+         MPI INVESTMENT OPINION
+    ========================================== -->
 
-        <!-- AI Confidence -->
+    <section class="drawer-investment-opinion">
 
-        <div class="score-card">
+        <div
+            id="drawerRecommendation"
+            class="drawer-recommendation">
 
-            <small>
+            MPI INVESTMENT OPINION
 
-                AI Confidence
+        </div>
 
-            </small>
+        <div class="score-grid">
 
-            <h2 id="drawerScore">
+            <div class="score-card">
 
-                97%
+                <small>
 
-            </h2>
+                    Investment Score
 
-            <div
-                id="drawerStars"
-                class="drawer-stars">
+                </small>
+
+                <h2 id="drawerInvestmentScore">
+
+                    0 / 100
+
+                </h2>
 
             </div>
 
-            <div
-                id="drawerConfidenceLabel"
-                class="confidence-label">
+            <div class="score-card">
+
+                <small>
+
+                    AI Confidence
+
+                </small>
+
+                <h2 id="drawerScore">
+
+                    0%
+
+                </h2>
+
+                <div
+                    id="drawerStars"
+                    class="drawer-stars">
+                </div>
+
+                <div
+                    id="drawerConfidenceLabel"
+                    class="confidence-label">
+                </div>
 
             </div>
 
         </div>
 
-<!-- Investment Score -->
+        <div
+            id="drawerScoreExplainability"
+            class="score-explainability">
 
-<div class="score-card">
+            <button
+                id="drawerScoreExplainabilityToggle"
+                class="score-explainability-toggle"
+                type="button">
 
-    <small>
+                <span>
 
-        Investment Score
+                    How MPI calculated this
 
-    </small>
+                </span>
 
-    <h2 id="drawerInvestmentScore">
+                <span class="score-explainability-arrow">
 
-        94 / 100
+                    ▾
 
-    </h2>
+                </span>
 
-</div>
+            </button>
 
-</div>
-
-
-<!-- ==========================================
-     MPI SCORE EXPLAINABILITY
-========================================== -->
-
-<div
-    id="drawerScoreExplainability"
-    class="score-explainability"
->
-
-    <button
-        id="drawerScoreExplainabilityToggle"
-        class="score-explainability-toggle"
-        type="button"
-    >
-
-        <span>
-            How MPI calculated this
-        </span>
-
-        <span class="score-explainability-arrow">
-
-            ▾
-
-        </span>
-
-    </button>
-
-    <div
-        id="drawerScoreExplainabilityContent"
-        class="score-explainability-content"
-    >
-    </div>
-
-</div>
-
-
-<div
-    id="drawerRecommendation"
-    class="drawer-recommendation">
-
-    🟢 STRONG BUY
-
-</div>
-
-</section>
-
-<section class="property-details">
-
-    <div class="drawer-card property-detail">
-
-        <span>🏷</span>
-
-        <div>
-
-            <label>Asset Class</label>
-
-            <strong id="drawerAssetClass"></strong>
+            <div
+                id="drawerScoreExplainabilityContent"
+                class="score-explainability-content">
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
-    <div class="drawer-card property-detail">
 
-        <span>📐</span>
+    <!-- ==========================================
+         EXECUTIVE INVESTMENT THESIS
+    ========================================== -->
 
-        <div>
+    <section class="drawer-report-section executive-thesis-section">
 
-            <label>Building Size</label>
+        <div class="report-section-label">
 
-            <strong id="drawerSize"></strong>
-
-        </div>
-
-    </div>
-
-    <div class="drawer-card property-detail">
-
-        <span>🏗</span>
-
-        <div>
-
-            <label>Year Built</label>
-
-            <strong id="drawerYear"></strong>
+            Investment Thesis
 
         </div>
 
-    </div>
+        <h2
+            id="drawerNarrativeHeadline"
+            class="report-headline">
+        </h2>
 
-    <div class="drawer-card property-detail">
+        <p
+            id="drawerInvestmentThesis"
+            class="report-narrative">
+        </p>
 
-        <span>📦</span>
+    </section>
 
-        <div>
 
-            <label>Units</label>
+    <!-- ==========================================
+         PROPERTY PROFILE
+    ========================================== -->
 
-            <strong id="drawerUnits"></strong>
+    <section class="drawer-report-section">
 
-        </div>
+        <div class="report-section-label">
 
-    </div>
-
-    <div class="drawer-card property-detail">
-
-        <span>📊</span>
-
-        <div>
-
-            <label>Occupancy</label>
-
-            <strong id="drawerOccupancy"></strong>
+            Property
 
         </div>
 
-    </div>
+        <div class="property-details">
 
-    <div class="drawer-card property-detail">
+            <div class="drawer-card property-detail">
 
-        <span>💎</span>
+                <span>🏷</span>
 
-        <div>
+                <div>
 
-            <label>Estimated Value</label>
+                    <label>Asset Class</label>
 
-            <strong id="drawerEstimatedValue"></strong>
+                    <strong id="drawerAssetClass"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="drawer-card property-detail">
+
+                <span>📐</span>
+
+                <div>
+
+                    <label>Building Size</label>
+
+                    <strong id="drawerSize"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="drawer-card property-detail">
+
+                <span>🏗</span>
+
+                <div>
+
+                    <label>Year Built</label>
+
+                    <strong id="drawerYear"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="drawer-card property-detail">
+
+                <span>📦</span>
+
+                <div>
+
+                    <label>Units</label>
+
+                    <strong id="drawerUnits"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="drawer-card property-detail">
+
+                <span>📊</span>
+
+                <div>
+
+                    <label>Occupancy</label>
+
+                    <strong id="drawerOccupancy"></strong>
+
+                </div>
+
+            </div>
+
+            <div class="drawer-card property-detail">
+
+                <span>💎</span>
+
+                <div>
+
+                    <label>Estimated Value</label>
+
+                    <strong id="drawerEstimatedValue"></strong>
+
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
 
-<!-- ==========================================
-     EXECUTIVE SUMMARY
-========================================== -->
+    <!-- ==========================================
+         VALUATION ANALYSIS
+    ========================================== -->
 
-<section class="drawer-summary-section">
+    <section class="drawer-report-section">
 
-    <h3 class="drawer-section-title">
+        <div class="report-section-label">
 
-        📋 Executive Summary
-
-    </h3>
-
-    <div class="drawer-card">
-
-        <div id="drawerExecutiveSummary">
-
-            Waiting for analysis...
+            Valuation
 
         </div>
 
-    </div>
+        <p
+            id="drawerValuationNarrative"
+            class="report-narrative">
+        </p>
 
-</section>
+        <div class="valuation-evidence-grid">
 
-<!-- ==========================================
-     VALUATION INTELLIGENCE
-========================================== -->
+            <div class="drawer-card drawer-metric">
 
-<section class="drawer-valuation">
+                <label>Purchase Price</label>
 
-    <h3 class="drawer-section-title">
+                <strong id="drawerPrice">
 
-        💎 Valuation Intelligence
+                    $0
 
-    </h3>
+                </strong>
 
-    <div class="drawer-card">
+            </div>
 
-        <div id="drawerValuationNarrative">
+            <div class="drawer-card drawer-metric">
+
+                <label>Estimated Value</label>
+
+                <strong id="drawerValuationEstimatedValue">
+
+                    $0
+
+                </strong>
+
+            </div>
+
+            <div class="drawer-card drawer-metric">
+
+                <label>Embedded Equity</label>
+
+                <strong id="drawerGap">
+
+                    $0
+
+                </strong>
+
+            </div>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
 
-<!-- ==========================================
-     INVESTMENT SNAPSHOT
-========================================== -->
+    <!-- ==========================================
+         OPERATING PERFORMANCE
+    ========================================== -->
 
-<section class="drawer-metrics">
+    <section class="drawer-report-section">
 
-    <h3 class="drawer-section-title">
+        <div class="report-section-label">
 
-        💰 Investment Snapshot
+            Operating Performance
 
-    </h3>
+        </div>
 
-    <div class="drawer-metrics-grid">
+        <p
+            id="drawerOperatingNarrative"
+            class="report-narrative">
+        </p>
 
-    <div class="drawer-card drawer-metric">
+        <div class="drawer-metrics-grid">
 
-        <label>💰 Purchase Price</label>
+            <div class="drawer-card drawer-metric">
 
-        <strong id="drawerPrice">$0</strong>
+                <label>Monthly Cash Flow</label>
 
-        <small id="drawerPriceNote">
+                <strong id="drawerCashFlow">
 
-            Current Asking Price
+                    $0/mo
 
-        </small>
+                </strong>
 
-    </div>
+            </div>
 
-    <div class="drawer-card drawer-metric">
+            <div class="drawer-card drawer-metric">
 
-        <label>📈 Cap Rate</label>
+                <label>NOI</label>
 
-        <strong id="drawerCapRate">0%</strong>
+                <strong id="drawerNOI">
 
-        <small id="drawerCapRateNote">
+                    $0
 
-            Investment Return
+                </strong>
 
-        </small>
+            </div>
 
-    </div>
+            <div class="drawer-card drawer-metric">
 
-    <div class="drawer-card drawer-metric">
+                <label>Cap Rate</label>
 
-        <label>💵 Potential Cash Flow</label>
+                <strong id="drawerCapRate">
 
-        <strong id="drawerCashFlow">$0/mo</strong>
+                    0%
 
-        <small id="drawerCashFlowNote">
+                </strong>
 
-            Monthly Estimate
+            </div>
 
-        </small>
+            <div class="drawer-card drawer-metric">
 
-    </div>
+                <label>Cash-on-Cash Return</label>
 
-    <div class="drawer-card drawer-metric">
+                <strong id="drawerCoC">
 
-        <label>📊 Occupancy</label>
+                    0%
 
-        <strong id="drawerOccupancyMetric">0%</strong>
+                </strong>
 
-        <small id="drawerOccupancyNote">
+            </div>
 
-            Current Occupancy
+            <div class="drawer-card drawer-metric">
 
-        </small>
+                <label>Price / SF</label>
 
-    </div>
+                <strong id="drawerPriceSF">
 
-    <div class="drawer-card drawer-metric">
+                    $0
 
-        <label>🏢 NOI</label>
+                </strong>
 
-        <strong id="drawerNOI">$0</strong>
+            </div>
 
-        <small id="drawerNOINote">
+            <div class="drawer-card drawer-metric">
 
-            Annual Net Income
+                <label>Occupancy</label>
 
-        </small>
+                <strong id="drawerOccupancyMetric">
 
-    </div>
+                    0%
 
-    <div class="drawer-card drawer-metric">
+                </strong>
 
-        <label>📐 Price / SF</label>
+            </div>
 
-        <strong id="drawerPriceSF">$0</strong>
+        </div>
 
-        <small id="drawerPriceSFNote">
+    </section>
 
-            Purchase Cost
 
-        </small>
+    <!-- ==========================================
+         MARKET CONDITIONS
+    ========================================== -->
 
-    </div>
+    <section class="drawer-report-section">
 
-    <div class="drawer-card drawer-metric">
+        <div class="report-section-label">
 
-        <label>💸 Cash-on-Cash Return</label>
+            Market
 
-        <strong id="drawerCoC">0%</strong>
+        </div>
 
-        <small id="drawerCoCNote">
+        <p
+            id="drawerMarketNarrative"
+            class="report-narrative">
+        </p>
 
-            Investor Return
+        <div
+            id="drawerMarketData"
+            class="market-intelligence-card">
+        </div>
 
-        </small>
+    </section>
 
-    </div>
 
-    <div class="drawer-card drawer-metric">
+    <!-- ==========================================
+         RISK ASSESSMENT
+    ========================================== -->
 
-        <label>💎 AI Equity Opportunity</label>
+    <section class="drawer-report-section">
 
-        <strong id="drawerGap">0%</strong>
+        <div class="report-section-label">
 
-        <small id="drawerGapNote">
+            Risk
 
-            Estimated Upside
+        </div>
 
-        </small>
+        <div
+            id="drawerRiskSummary"
+            class="drawer-card risk-summary">
+        </div>
 
-    </div>
+        <p
+            id="drawerRiskNarrative"
+            class="report-narrative">
+        </p>
 
-</div>
+    </section>
 
-</section>
 
+    <!-- ==========================================
+         DETAILED UNDERWRITING
+    ========================================== -->
 
-<!-- ==========================================
-     AI RISK ASSESSMENT
-========================================== -->
+    <section class="drawer-report-section">
 
-<section class="drawer-risk">
+        <div class="report-section-label">
 
-    <h3 class="drawer-section-title">
+            Underwriting
 
-        🛡 Risk Intelligence
-
-    </h3>
-
-    <!-- Overall Risk Summary -->
-
-    <div
-        id="drawerRiskSummary"
-        class="drawer-card risk-summary">
-
-    </div>
-
-    <!-- Individual Risk Cards -->
-
-    <div class="report-section">
-
-    <h3>Risk Assessment</h3>
-
-    <p id="drawerRiskNarrative"></p>
+        </div>
 
         <div id="drawerRisk"></div>
 
+    </section>
+
+
+    <!-- ==========================================
+         MPI RECOMMENDATION
+    ========================================== -->
+
+    <section class="recommendation-callout">
+
+    <div class="callout-label">
+
+        RECOMMENDED NEXT STEP
+
+    </div>
+
+    <div
+    id="drawerRecommendationIcon"
+    class="callout-icon">
 </div>
 
-</section>
+    <h2
+        id="drawerRecommendationAction"
+        class="callout-action">
+    </h2>
 
+    <p
+        id="drawerRecommendationNarrative"
+        class="callout-text">
+    </p>
 
-<!-- ==========================================
-     MARKET INTELLIGENCE
-========================================== -->
+    <div class="callout-divider"></div>
 
-<section class="drawer-market">
+    <div class="callout-footer">
 
-    <h3 class="drawer-section-title">
+        <div class="callout-score">
 
-        🌎 Market Intelligence
+            <span>
 
-    </h3>
+                Investment Score
 
-    <!-- AI Narrative -->
+            </span>
 
-    <div
-        id="drawerMarketNarrative"
-        class="market-narrative">
+            <strong
+                id="drawerRecommendationScore">
 
-    </div>
+                0 / 100
 
-    <!-- Statistics -->
+            </strong>
 
-    <div
-        id="drawerMarketData"
-        class="market-intelligence-card">
+        </div>
 
-    </div>
+        <div class="callout-confidence">
 
-</section>
+            <span>
 
-<section class="drawer-strategy">
+                AI Confidence
 
-    <h3 class="drawer-section-title">
+            </span>
 
-        🎯 Acquisition Strategy
+            <strong
+                id="drawerRecommendationConfidence">
 
-    </h3>
+                0%
 
-    <div class="drawer-card">
+            </strong>
 
-        <div id="drawerStrategy"></div>
-
-    </div>
-
-</section>
-
-<!-- ==========================================
-     KEY STRENGTHS
-========================================== -->
-
-<section class="drawer-strengths">
-
-    <h3 class="drawer-section-title">
-
-        ✅ Key Strengths
-
-    </h3>
-
-    <div class="drawer-card">
-
-        <ul id="drawerStrengths">
-
-        </ul>
+        </div>
 
     </div>
 
 </section>
 
-<!-- ==========================================
-     KEY CONCERNS
-========================================== -->
 
-<section class="drawer-concerns">
+    <!-- ==========================================
+         INVESTMENT CONCLUSION
+    ========================================== -->
 
-    <h3 class="drawer-section-title">
+    <section class="drawer-report-section conclusion-report-section">
 
-        ⚠️ Key Concerns
+        <div class="report-section-label">
 
-    </h3>
+            Investment Conclusion
 
-    <div class="drawer-card">
+        </div>
 
-        <ul id="drawerConcerns">
+        <p
+            id="drawerInvestmentConclusion"
+            class="report-conclusion">
+        </p>
 
-        </ul>
+    </section>
 
-    </div>
 
-</section>
+    <!-- ==========================================
+         DRAWER ACTIONS
+    ========================================== -->
 
-<!--==========================================
-     AI INVESTMENT ANALYSIS
-========================================== -->    
+    <footer class="drawer-actions">
 
-        <section class="drawer-analysis">
+        <button
+            class="btn-primary"
+            id="analyzeDealBtn">
 
-    <h3 class="drawer-section-title">
+            <span class="btn-icon">🧠</span>
 
-        📊 Supporting AI Analysis
+            <span>AI Analysis</span>
 
-    </h3>
+        </button>
 
-    <div id="drawerAnalysis">
+        <button
+            class="btn-secondary"
+            id="saveDealBtn">
 
-    </div>
+            <span class="btn-icon">⭐</span>
 
-</section>
+            <span>Save Deal</span>
 
-        <!-- ==========================================
-     DRAWER ACTIONS
-========================================== -->
+        </button>
 
-<footer class="drawer-actions">
+        <button
+            class="btn-outline"
+            id="underwriteDealBtn">
 
-    <button
-        class="btn-primary"
-        id="analyzeDealBtn">
+            <span class="btn-icon">📊</span>
 
-        <span class="btn-icon">🧠</span>
+            <span>Underwrite Deal</span>
 
-        <span>AI Analysis</span>
+        </button>
 
-    </button>
+        <button
+            class="btn-outline"
+            id="exportReportBtn">
 
-    <button
-        class="btn-secondary"
-        id="saveDealBtn">
+            <span class="btn-icon">📄</span>
 
-        <span class="btn-icon">⭐</span>
+            <span>Export Report</span>
 
-        <span>Save Deal</span>
+        </button>
 
-    </button>
-
-    <button
-        class="btn-outline"
-        id="underwriteDealBtn">
-
-        <span class="btn-icon">📊</span>
-
-        <span>Underwrite Deal</span>
-
-    </button>
-
-    <button
-        class="btn-outline"
-        id="exportReportBtn">
-
-        <span class="btn-icon">📄</span>
-
-        <span>Export Report</span>
-
-    </button>
-
-</footer>
+    </footer>
 
 </div>
 

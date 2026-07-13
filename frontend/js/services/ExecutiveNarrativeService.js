@@ -64,121 +64,102 @@ class ExecutiveNarrativeService {
 
     buildHeadline({ deal, valuation, recommendation }){
 
-        const gap =
-    valuation.metrics.valueGap;
+    const asset =
+        `The ${deal.type}`;
 
-        if(
-            gap >= 15 &&
-            recommendation.score >= 85
-        ){
+    const gap =
+        valuation.metrics.valueGap;
 
-            return (
-                `${deal.name} presents a compelling acquisition ` +
-                `opportunity supported by favorable valuation, ` +
-                `strong operating economics, and limited modeled downside.`
-            );
-
-        }
-
-        if(
-            gap >= 5 &&
-            recommendation.score >= 70
-        ){
-
-            return (
-                `${deal.name} demonstrates attractive investment ` +
-                `fundamentals with a favorable valuation profile ` +
-                `and identifiable return potential.`
-            );
-
-        }
-
-        if(recommendation.score >= 60){
-
-            return (
-                `${deal.name} presents a viable investment opportunity, ` +
-                `although select underwriting considerations should be ` +
-                `validated prior to acquisition.`
-            );
-
-        }
+    if(gap >= 15 && recommendation.score >= 85){
 
         return (
-            `${deal.name} presents a mixed investment profile and ` +
-            `requires additional underwriting before acquisition ` +
-            `should be considered.`
+            `${asset} presents a compelling acquisition ` +
+            `opportunity supported by favorable valuation, ` +
+            `strong operating economics, and limited modeled downside.`
         );
 
     }
 
+    if(gap >= 5 && recommendation.score >= 70){
 
-    // ========================================
-    // Investment Thesis
-    // ========================================
-
-    buildInvestmentThesis({
-        deal,
-        valuation,
-        confidence,
-        recommendation
-    }){
-
-        const parts = [];
-
-        parts.push(
-            `MPI assigns the opportunity an Investment Score of ` +
-            `${recommendation.score}/100 with ${confidence.score}% ` +
-            `analytical confidence.`
+        return (
+            `${asset} demonstrates attractive investment ` +
+            `fundamentals with a favorable valuation profile ` +
+            `and identifiable return potential.`
         );
 
-        if(valuation.metrics.valueGap >= 15){
+    }
 
-            parts.push(
-                `The asset is modeled approximately ` +
-                `${valuation.metrics.valueGap}% below estimated market value, ` +
-                `creating a meaningful embedded equity position at acquisition.`
-            );
+    if(recommendation.score >= 60){
 
-        }
-        else if(valuation.metrics.valueGap >= 5){
-
-            parts.push(
-                `The acquisition price remains favorable relative to ` +
-                `MPI's estimated market value, providing a measurable ` +
-                `valuation advantage.`
-            );
-
-        }
-        else if(valuation.metrics.valueGap >= 0){
-
-            parts.push(
-                `The acquisition price is generally aligned with ` +
-                `MPI's modeled market valuation.`
-            );
-
-        }
-        else{
-
-            parts.push(
-                `The proposed acquisition price exceeds MPI's modeled ` +
-                `valuation and may require price renegotiation.`
-            );
-
-        }
-
-        if(deal.cashFlow >= 5000){
-
-            parts.push(
-                `Projected monthly cash flow of ` +
-                `$${deal.cashFlow.toLocaleString()} further strengthens ` +
-                `the investment thesis.`
-            );
-
-        }
-
-        return parts.join(" ");
+        return (
+            `${asset} presents a viable investment opportunity, ` +
+            `although select underwriting considerations should be ` +
+            `validated prior to acquisition.`
+        );
 
     }
+
+    return (
+        `${asset} presents a mixed investment profile and ` +
+        `requires additional underwriting before acquisition ` +
+        `should be considered.`
+    );
+
+}
+
+
+buildInvestmentThesis({
+    deal,
+    recommendation
+}){
+
+    const asset =
+        deal.type.toLowerCase();
+
+    if(recommendation.score >= 85){
+
+        return (
+            `MPI believes the ${asset} demonstrates institutional-quality ` +
+            `investment characteristics and warrants progression to formal ` +
+            `due diligence. The analysis below outlines the valuation, ` +
+            `operating performance, market conditions, and risk considerations ` +
+            `supporting this recommendation.`
+        );
+
+    }
+
+    if(recommendation.score >= 70){
+
+        return (
+            `MPI believes the ${asset} merits continued underwriting based ` +
+            `on its current investment profile. While additional validation ` +
+            `is recommended, the opportunity demonstrates characteristics ` +
+            `consistent with an attractive acquisition candidate.`
+        );
+
+    }
+
+    if(recommendation.score >= 55){
+
+        return (
+            `MPI identifies measurable investment potential in the ${asset}; ` +
+            `however, additional analysis should be completed before an ` +
+            `acquisition decision is made. The following sections identify ` +
+            `the assumptions and underwriting considerations requiring ` +
+            `further validation.`
+        );
+
+    }
+
+    return (
+        `MPI does not currently recommend advancing the ${asset} under ` +
+        `the present investment assumptions. The analysis below identifies ` +
+        `the valuation, operational, and underwriting factors currently ` +
+        `limiting investment quality.`
+    );
+
+}
 
 
     // ========================================
