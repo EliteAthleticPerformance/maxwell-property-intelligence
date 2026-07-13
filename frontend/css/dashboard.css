@@ -1196,6 +1196,211 @@ backdrop-filter: blur(4px);
 
 }
 
+/* ========================================
+   MPI SCORE EXPLAINABILITY
+======================================== */
+
+.score-explainability {
+
+    margin-top: 16px;
+
+    padding: 14px 16px;
+
+    background: #ffffff;
+
+    border:
+        1px solid rgba(15, 23, 42, 0.08);
+
+    border-radius: 10px;
+
+}
+
+
+/* ========================================
+   EXPLAINABILITY TOGGLE
+======================================== */
+
+.score-explainability-toggle {
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 0;
+
+    border: none;
+
+    background: transparent;
+
+    color: #0f172a;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    text-align: left;
+
+}
+
+
+.score-explainability-arrow {
+
+    font-size: 12px;
+
+    transition:
+        transform 0.2s ease;
+
+}
+
+
+.score-explainability.open
+.score-explainability-arrow {
+
+    transform:
+        rotate(180deg);
+
+}
+
+
+/* ========================================
+   EXPLAINABILITY CONTENT
+======================================== */
+
+.score-explainability-content {
+
+    display: none;
+
+    margin-top: 14px;
+
+}
+
+
+.score-explainability.open
+.score-explainability-content {
+
+    display: block;
+
+}
+
+
+/* ========================================
+   SCORE CONTRIBUTION
+======================================== */
+
+.score-contribution {
+
+    padding:
+        12px 0;
+
+    border-bottom:
+        1px solid rgba(15, 23, 42, 0.06);
+
+}
+
+
+.score-contribution-header {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+
+
+.score-contribution-label {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #0f172a;
+
+}
+
+
+.score-contribution-points {
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    color: #0f172a;
+
+    white-space: nowrap;
+
+}
+
+
+.score-contribution-detail {
+
+    margin-top: 5px;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   FINAL INVESTMENT SCORE
+======================================== */
+
+.score-breakdown-final {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+    margin-top: 16px;
+
+    padding-top: 16px;
+
+    border-top:
+        2px solid rgba(15, 23, 42, 0.10);
+
+}
+
+
+.score-breakdown-final-label {
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    color: #0f172a;
+
+}
+
+
+.score-breakdown-final-value {
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color: #0f172a;
+
+}
+
 /* ==========================================
    Recommendation Badge
 ========================================== */
@@ -2480,6 +2685,98 @@ backdrop-filter: blur(4px);
     font-size:32px;
 
     font-weight:700;
+
+}
+
+/* ========================================
+   SCORE EXPLAINABILITY TOGGLE OVERRIDE
+======================================== */
+
+button.score-explainability-toggle {
+
+    appearance: none;
+
+    -webkit-appearance: none;
+
+    width: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    padding: 0;
+
+    margin: 0;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    box-shadow: none;
+
+    color: #0f172a;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    line-height: 1.4;
+
+    cursor: pointer;
+
+    text-align: left;
+
+}
+
+
+button.score-explainability-toggle:hover,
+button.score-explainability-toggle:focus {
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    box-shadow: none;
+
+}
+
+.score-contribution-points {
+
+    font-size: 13px;
+
+    font-weight: 800;
+
+    color: #0f172a;
+
+    white-space: nowrap;
+
+    font-variant-numeric:
+        tabular-nums;
+
+}
+
+.score-breakdown-final-value {
+
+    font-size: 16px;
+
+    font-weight: 800;
+
+    color: #0f172a;
+
+    white-space: nowrap;
+
+    font-variant-numeric:
+        tabular-nums;
 
 }
 

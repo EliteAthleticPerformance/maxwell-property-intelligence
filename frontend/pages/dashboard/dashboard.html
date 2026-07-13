@@ -656,33 +656,70 @@
 
         </div>
 
-        <!-- Investment Score -->
+<!-- Investment Score -->
 
-        <div class="score-card">
+<div class="score-card">
 
-            <small>
+    <small>
 
-                Investment Score
+        Investment Score
 
-            </small>
+    </small>
 
-            <h2 id="drawerInvestmentScore">
+    <h2 id="drawerInvestmentScore">
 
-                94 / 100
+        94 / 100
 
-            </h2>
+    </h2>
 
-        </div>
+</div>
 
-    </div>
+</div>
+
+
+<!-- ==========================================
+     MPI SCORE EXPLAINABILITY
+========================================== -->
+
+<div
+    id="drawerScoreExplainability"
+    class="score-explainability"
+>
+
+    <button
+        id="drawerScoreExplainabilityToggle"
+        class="score-explainability-toggle"
+        type="button"
+    >
+
+        <span>
+            How MPI calculated this
+        </span>
+
+        <span class="score-explainability-arrow">
+
+            ▾
+
+        </span>
+
+    </button>
 
     <div
-        id="drawerRecommendation"
-        class="drawer-recommendation">
-
-        🟢 STRONG BUY
-
+        id="drawerScoreExplainabilityContent"
+        class="score-explainability-content"
+    >
     </div>
+
+</div>
+
+
+<div
+    id="drawerRecommendation"
+    class="drawer-recommendation">
+
+    🟢 STRONG BUY
+
+</div>
 
 </section>
 
@@ -1156,6 +1193,7 @@
 <script src="../../js/services/valuationService.js"></script>
 <script src="../../js/services/confidenceService.js"></script>
 <script src="../../js/services/recommendationService.js"></script>
+<script src="../../js/services/ExecutiveNarrativeService.js"></script>
 <script src="../../js/services/reportService.js"></script>
 
 <script src="../../js/dashboard.js"></script>

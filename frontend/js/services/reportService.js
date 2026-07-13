@@ -5,21 +5,25 @@
 
 class ReportService {
 
-    generate(deal) {
+    generate(deal){
 
         //----------------------------------
         // Valuation
         //----------------------------------
 
         const valuation =
-            valuationService.analyze(deal);
+            valuationService.analyze(
+                deal
+            );
 
         //----------------------------------
         // Underwriting
         //----------------------------------
 
         const underwriting =
-            underwritingService.analyze(deal);
+            underwritingService.analyze(
+                deal
+            );
 
         //----------------------------------
         // AI Confidence
@@ -44,20 +48,39 @@ class ReportService {
             );
 
         //----------------------------------
-        // Final Report
+        // Executive Narrative
+        //----------------------------------
+
+        const narrative =
+            executiveNarrativeService.generate(
+                deal,
+                valuation,
+                underwriting,
+                confidence,
+                recommendation
+            );
+
+        //----------------------------------
+        // Institutional Investment Report
         //----------------------------------
 
         return {
 
             deal,
 
-            valuation,
+            analysis: {
 
-            underwriting,
+                valuation,
 
-            confidence,
+                underwriting,
 
-            recommendation
+                confidence,
+
+                recommendation
+
+            },
+
+            narrative
 
         };
 

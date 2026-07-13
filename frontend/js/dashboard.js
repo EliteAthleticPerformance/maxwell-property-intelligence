@@ -751,7 +751,42 @@ document.addEventListener("keydown", (e) => {
 
 });
 
+
+// ========================================
+// Score Explainability Toggle
+// ========================================
+
+const scoreToggle =
+    document.getElementById(
+        "drawerScoreExplainabilityToggle"
+    );
+
+const scoreExplainability =
+    document.getElementById(
+        "drawerScoreExplainability"
+    );
+
+if(
+    scoreToggle &&
+    scoreExplainability
+){
+
+    scoreToggle.addEventListener(
+        "click",
+        () => {
+
+            scoreExplainability
+                .classList
+                .toggle("open");
+
+        }
+    );
+
+}
+
 },
+
+
 
     // ------------------------------------
     // Event Listeners
@@ -811,13 +846,16 @@ refreshDashboard(period) {
 createDealCard(deal) {
 
     deal.report ??=
-    reportService.generate(deal);
+        reportService.generate(
+            deal
+        );
 
-const report =
-    deal.report;
+    const report =
+        deal.report;
 
-const confidence =
-    report.confidence;
+    const {
+        confidence
+    } = report.analysis;
 
     return `
 
@@ -827,67 +865,69 @@ const confidence =
 
         <div class="deal-header">
 
-                <h3>
+            <h3>
 
-    <span class="deal-icon">
+                <span class="deal-icon">
 
-        ${deal.icon}
-
-    </span>
-
-    ${deal.type}
-
-</h3>
-
-                <span class="deal-confidence">
-
-                    ${confidence.score}% AI
+                    ${deal.icon}
 
                 </span>
 
+                ${deal.type}
+
+            </h3>
+
+            <span class="deal-confidence">
+
+                ${confidence.score}% AI
+
+            </span>
+
+        </div>
+
+        <p class="deal-city">
+
+            ${deal.city}
+
+        </p>
+
+        <div class="deal-price">
+
+            $${deal.price.toLocaleString()}
+
+        </div>
+
+        <hr class="deal-divider">
+
+        <div class="deal-stats">
+
+            <div class="deal-stat">
+
+                <span>📈 Cap Rate</span>
+
+                <strong>${deal.capRate}%</strong>
+
             </div>
 
-            <p class="deal-city">
+            <div class="deal-stat">
 
-                ${deal.city}
+                <span>💵 Potential CF</span>
 
-            </p>
-
-            <div class="deal-price">
-
-                $${deal.price.toLocaleString()}
+                <strong>
+                    $${deal.cashFlow.toLocaleString()}/mo
+                </strong>
 
             </div>
 
-            <hr class="deal-divider">
+        </div>
 
-            <div class="deal-stats">
+        <div class="deal-footer">
 
-    <div class="deal-stat">
+            AI Analysis →
 
-        <span>📈 Cap Rate</span>
+        </div>
 
-        <strong>${deal.capRate}%</strong>
-
-    </div>
-
-    <div class="deal-stat">
-
-        <span>💵 Potential CF</span>
-
-        <strong>$${deal.cashFlow.toLocaleString()}/mo</strong>
-
-    </div>
-
-</div>
-
- <div class="deal-footer">
-
-        AI Analysis →
-
-    </div>
-
-        </article>
+    </article>
 
     `;
 
@@ -928,7 +968,7 @@ const report =
     deal.report;
 
 const confidence =
-    report.confidence;
+    report.analysis.confidence;
 
     if(confidence.score >= 97){
 
@@ -1163,7 +1203,7 @@ const report =
     deal.report;
 
 const confidence =
-    report.confidence;
+    report.analysis.confidence;
 
     const badgeClass = {
 
@@ -1425,7 +1465,10 @@ const {
 
     recommendation
 
-} = report;
+} = report.analysis;
+
+const narrative =
+    report.narrative;
 
 const {
 
@@ -1480,40 +1523,11 @@ img.onerror = function(){
 document.getElementById("drawerInvestmentScore").textContent =
     recommendation.score + "/100";
 
-    document.getElementById(
-    "drawerAnalysis"
-).innerHTML =
+this.renderScoreExplainability(
+    recommendation.scoreBreakdown
+);    
 
-recommendation.analysis.map(item => `
-
-<div class="drawer-card analysis-card">
-
-    <div class="analysis-icon">
-
-        ${item.icon}
-
-    </div>
-
-    <div>
-
-        <strong>
-
-            ${item.title}
-
-        </strong>
-
-        <p>
-
-            ${item.text}
-
-        </p>
-
-    </div>
-
-</div>
-
-`).join("");
-
+    
 // ========================================
 // 3. AI Investment Score
 // ========================================
@@ -1664,7 +1678,7 @@ ${overallRisk.summary.map(item => `
 document.getElementById(
     "drawerRiskNarrative"
 ).textContent =
-    report.riskNarrative;
+    narrative.riskNarrative;
 
 const cards =
     underwriting.riskCards;
@@ -1730,7 +1744,6 @@ cards.map(card => `
 `).join("");
 
 
-
 // ========================================
 // Render Market Intelligence
 // ========================================
@@ -1753,8 +1766,6 @@ const equity =
 const valueGap =
     metrics.valueGap;
 
-const strategy =
-    recommendation.memo.acquisitionStrategy;    
 
 gap.innerHTML = `
 
@@ -1793,65 +1804,8 @@ gap.className =
 
 document.getElementById(
     "drawerMarketNarrative"
-).innerHTML =
-    recommendation.memo.marketNarrative;
-
-document.getElementById(
-    "drawerStrategy"
-).innerHTML = `
-
-<div class="strategy-card">
-
-    <div class="strategy-header">
-
-        <span class="strategy-icon">
-            ${strategy.icon}
-        </span>
-
-        <div>
-
-            <h3>
-                ${strategy.title}
-            </h3>
-
-            <span class="${strategy.className}">
-                ${recommendation.level}
-            </span>
-
-        </div>
-
-    </div>
-
-    <p class="strategy-description">
-
-        ${strategy.description}
-
-    </p>
-
-</div>
-
-`;
-    
-document.getElementById(
-    "drawerStrengths"
-).innerHTML =
-    recommendation.memo.strengths
-        .map(item => `
-
-<li class="strength-item">
-
-    <span class="strength-icon">
-        ✅
-    </span>
-
-    <span class="strength-text">
-        ${item}
-    </span>
-
-</li>
-
-`)
-        .join("");
+).textContent =
+    narrative.marketNarrative;
 
 document.getElementById(
     "drawerConcerns"
@@ -1874,6 +1828,23 @@ document.getElementById(
 `)
         .join("");        
 
+
+// ========================================
+// Reset Score Explainability
+// ========================================
+
+const scoreExplainability =
+    document.getElementById(
+        "drawerScoreExplainability"
+    );
+
+if(scoreExplainability){
+
+    scoreExplainability
+        .classList
+        .remove("open");
+
+}
 
 
 // ========================================
@@ -1911,6 +1882,114 @@ formatMonthly(value) {
     return "$" + Number(value).toLocaleString() + "/mo";
 
 },
+
+// ========================================
+// Render Score Explainability
+// ========================================
+
+renderScoreExplainability(scoreBreakdown){
+
+    const container =
+        document.getElementById(
+            "drawerScoreExplainabilityContent"
+        );
+
+    if(!container){
+
+        return;
+
+    }
+
+    if(
+        !scoreBreakdown ||
+        !scoreBreakdown.details
+    ){
+
+        container.innerHTML = "";
+
+        return;
+
+    }
+
+    const details =
+        scoreBreakdown.details;
+
+    const contributions = [
+
+        details.confidence,
+
+        details.equity,
+
+        details.cashFlow,
+
+        details.appreciation,
+
+        details.capRate,
+
+        details.risk
+
+    ];
+
+    const rows =
+        contributions
+            .filter(Boolean)
+            .map(detail => `
+
+<div class="score-contribution">
+
+    <div class="score-contribution-header">
+
+        <span class="score-contribution-label">
+
+            ${detail.label}
+
+        </span>
+
+        <span class="score-contribution-points">
+
+            +${detail.points}
+            / ${detail.maxPoints}
+
+        </span>
+
+    </div>
+
+    <div class="score-contribution-detail">
+
+        ${detail.reason}
+
+    </div>
+
+</div>
+
+            `)
+            .join("");
+
+    container.innerHTML = `
+
+${rows}
+
+<div class="score-breakdown-final">
+
+    <span class="score-breakdown-final-label">
+
+        Final Investment Score
+
+    </span>
+
+    <span class="score-breakdown-final-value">
+
+        ${scoreBreakdown.finalScore}
+        / 100
+
+    </span>
+
+</div>
+
+    `;
+
+},
+
 
 
 // ========================================
