@@ -12,31 +12,41 @@
 
     <title>
 
-        Investment Memorandum
+        Maxwell Property Intelligence | Investment Memorandum
 
     </title>
 
     <link
         rel="stylesheet"
-        href="css/memorandum.css">
+        href="../../css/memorandum.css">
 
 </head>
 
 <body>
 
+    <div class="memo-watermark">
+
+    MPI
+
+</div>
+
     <div id="memorandumRoot"></div>
 
-    <!-- Services -->
+    <!-- Core Analysis Services -->
 
-    <script src="js/services/InvestmentMemorandumService.js"></script>
+    <script src="../../js/services/marketService.js"></script>
+    <script src="../../js/services/valuationService.js"></script>
+    <script src="../../js/services/underwritingService.js"></script>
+    <script src="../../js/services/confidenceService.js"></script>
+    <script src="../../js/services/recommendationService.js"></script>
+    <script src="../../js/services/ExecutiveNarrativeService.js"></script>
+    <script src="../../js/services/reportService.js"></script>
 
-    <!-- Renderer -->
+    <!-- Investment Memorandum -->
 
-    <script src="js/renderers/InvestmentMemorandumRenderer.js"></script>
-
-    <!-- Bootstrap -->
-
-    <script src="js/memorandum.js"></script>
+    <script src="../../js/services/InvestmentMemorandumService.js"></script>
+    <script src="../../js/renderers/InvestmentMemorandumRenderer.js"></script>
+    <script src="../../js/memorandum.js"></script>
 
 </body>
 

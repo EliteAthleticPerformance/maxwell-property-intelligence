@@ -5,19 +5,79 @@
 
 class InvestmentMemorandumRenderer {
 
-    // ========================================
-    // Render Memorandum
-    // ========================================
+   // ========================================
+// MPI Branding
+// ========================================
+
+static DOCUMENT = {
+
+    TITLE:
+        "Investment Memorandum",
+
+    VERSION:
+        "1.0"
+
+};
+
+static BRAND = {
+
+    company:
+        "Maxwell Property Intelligence",
+
+    document:
+        InvestmentMemorandumRenderer.DOCUMENT.TITLE,
+
+    analyst:
+        "MPI AI Investment Engine",
+
+    confidentiality:
+        "Confidential",
+
+    version:
+        InvestmentMemorandumRenderer.DOCUMENT.VERSION
+
+};
+
+
+// ========================================
+// Memorandum Pages
+// ========================================
+
+static PAGE = {
+
+    COVER: 1,
+
+    EXECUTIVE_SUMMARY: 2,
+
+    PROPERTY_OVERVIEW: 3,
+
+    VALUATION: 4,
+
+    OPERATING_PERFORMANCE: 5,
+
+    MARKET: 6,
+
+    RISK: 7,
+
+    UNDERWRITING: 8,
+
+    RECOMMENDATION: 9,
+
+    CONCLUSION: 10,
+
+    APPENDIX: 11
+
+};
 
      // ========================================
     // Default Assets
     // ========================================
 
      static DEFAULT_IMAGE =
-        "images/no-image.png";
+    "../../images/no-image.png";
 
     static REPORT_TITLE =
-        "Investment Memorandum";
+        InvestmentMemorandumRenderer.DOCUMENT.TITLE;
 
     static REPORT_SUBTITLE =
         "Maxwell Property Intelligence";
@@ -30,35 +90,11 @@ class InvestmentMemorandumRenderer {
 
     render(memorandum){
 
+    this.memorandum = memorandum;
+
     const { sections } = memorandum;
 
     return `
-
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-<meta charset="UTF-8">
-
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
-
-<title>
-
-${InvestmentMemorandumRenderer.REPORT_TITLE}
-
-</title>
-
-<link
-    rel="stylesheet"
-    href="memorandum.css">
-
-</head>
-
-<body>
 
 ${this.renderCover(sections.cover)}
 
@@ -102,16 +138,12 @@ ${this.renderAppendix(
     sections.appendix
 )}
 
-</body>
-
-</html>
-
 `;
 
 }
 
 // ========================================
-// Render Cover Page
+// Render Cover
 // ========================================
 
 renderCover(cover){
@@ -120,21 +152,19 @@ renderCover(cover){
 
 <section class="memo-page memo-cover">
 
-    <div class="memo-cover-header">
+    <div class="memo-brand">
+
+        <div class="memo-brand-subtitle">
+
+            ${cover.subtitle}
+
+        </div>
 
         <h1>
 
-            ${cover.title ??
-    InvestmentMemorandumRenderer.REPORT_TITLE}
+            ${cover.title}
 
         </h1>
-
-        <h2>
-
-            ${cover.subtitle ??
-    InvestmentMemorandumRenderer.REPORT_SUBTITLE}
-
-        </h2>
 
     </div>
 
@@ -146,91 +176,31 @@ renderCover(cover){
 
     </div>
 
-    <div class="memo-cover-details">
+    <div class="memo-cover-property">
 
-        <div class="memo-detail">
+        <h2>
 
-            <span class="memo-label">
+            ${cover.property}
 
-                Property
+        </h2>
 
-            </span>
+        <p>
 
-            <span class="memo-value">
+            ${cover.location}
 
-                ${cover.property}
+        </p>
 
-            </span>
+    </div>
 
-        </div>
+    <div class="memo-cover-recommendation">
 
-        <div class="memo-detail">
+        ${cover.recommendation}
 
-            <span class="memo-label">
+    </div>
 
-                Asset Class
+    <div class="memo-cover-score-grid">
 
-            </span>
-
-            <span class="memo-value">
-
-                ${cover.assetClass}
-
-            </span>
-
-        </div>
-
-        <div class="memo-detail">
-
-            <span class="memo-label">
-
-                Location
-
-            </span>
-
-            <span class="memo-value">
-
-                ${cover.location}
-
-            </span>
-
-        </div>
-
-        <div class="memo-detail">
-
-            <span class="memo-label">
-
-                Purchase Price
-
-            </span>
-
-            <span class="memo-value">
-
-                ${this.currency(
-                    cover.purchasePrice
-                )}
-
-            </span>
-
-        </div>
-
-        <div class="memo-detail">
-
-            <span class="memo-label">
-
-                Recommendation
-
-            </span>
-
-            <span class="memo-value">
-
-                ${cover.recommendation}
-
-            </span>
-
-        </div>
-
-        <div class="memo-detail">
+        <div class="memo-cover-score">
 
             <span class="memo-label">
 
@@ -246,7 +216,7 @@ renderCover(cover){
 
         </div>
 
-        <div class="memo-detail">
+        <div class="memo-cover-score">
 
             <span class="memo-label">
 
@@ -264,7 +234,67 @@ renderCover(cover){
 
     </div>
 
+    <div class="memo-cover-footer">
+
+        <div>
+
+            Prepared By
+
+        </div>
+
+        <strong>
+
+            ${InvestmentMemorandumRenderer.BRAND.analyst}
+
+        </strong>
+
+        <div>
+
+            Version ${InvestmentMemorandumRenderer.BRAND.version}
+
+        </div>
+
+        <div>
+
+            ${this.date(
+    this.memorandum.generatedAt
+)}
+
+        </div>
+
+        <div>
+
+            ${InvestmentMemorandumRenderer.BRAND.confidentiality}
+
+        </div>
+
+    </div>
+
 </section>
+
+`;
+
+}
+
+renderHeader(property){
+
+    return `
+
+<header class="memo-header">
+
+    <div>
+
+        ${InvestmentMemorandumRenderer.BRAND.company}
+
+    </div>
+
+    <div>
+
+        ${property}
+
+    </div>
+
+</header>
 
 `;
 
@@ -391,6 +421,8 @@ renderExecutiveSummary(summary){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(summary.property)}
 
     <section class="memo-section">
 
@@ -610,7 +642,11 @@ renderExecutiveSummary(summary){
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.EXECUTIVE_SUMMARY
+)}
 
 </section>
 
@@ -627,6 +663,8 @@ renderPropertyOverview(property){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(property.property)}
 
     <section class="memo-section">
 
@@ -864,7 +902,11 @@ renderPropertyOverview(property){
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.PROPERTY_OVERVIEW
+)}
 
 </section>
 
@@ -881,6 +923,8 @@ renderValuation(valuation){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(valuation.property)}
 
     <section class="memo-section">
 
@@ -912,113 +956,51 @@ renderValuation(valuation){
 
         <div class="memo-metrics-grid">
 
-            <div class="memo-metric">
+            ${this.metric(
+    "Purchase Price",
+    this.currency(
+        valuation.metrics.purchasePrice
+    )
+)}
 
-                <span class="memo-label">
+${this.metric(
+    "Estimated Value",
+    this.currency(
+        valuation.metrics.estimatedValue
+    )
+)}
 
-                    Purchase Price
+${this.metric(
+    "Modeled Equity",
+    this.currency(
+        valuation.metrics.modeledEquity
+    )
+)}
 
-                </span>
+${this.metric(
+    "Value Gap",
+    this.percent(
+        valuation.metrics.valueGap
+    )
+)}
 
-                <span class="memo-value">
+${this.metric(
+    "Valuation",
+    valuation.metrics.valuationLabel
+)}
 
-                    ${this.currency(
-                        valuation.metrics.purchasePrice
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Estimated Value
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.currency(
-                        valuation.metrics.estimatedValue
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Modeled Equity
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.currency(
-                        valuation.metrics.modeledEquity
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Value Gap
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        valuation.metrics.valueGap
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Valuation
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${valuation.metrics.valuationLabel}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    MPI Recommendation
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${valuation.metrics.recommendation}
-
-                </span>
-
-            </div>
+${this.metric(
+    "MPI Recommendation",
+    valuation.metrics.recommendation
+)}
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.VALUATION
+)}
 
 </section>
 
@@ -1035,6 +1017,8 @@ renderOperatingPerformance(performance){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(performance.property)}
 
     <section class="memo-section">
 
@@ -1060,115 +1044,53 @@ renderOperatingPerformance(performance){
 
         <div class="memo-metrics-grid">
 
-            <div class="memo-metric">
+            ${this.metric(
+    "Projected Cash Flow",
+    `${this.currency(
+        performance.metrics.projectedCashFlow
+    )}/mo`
+)}
 
-                <span class="memo-label">
+${this.metric(
+    "Net Operating Income",
+    this.currency(
+        performance.metrics.netOperatingIncome
+    )
+)}
 
-                    Projected Cash Flow
+${this.metric(
+    "Cap Rate",
+    this.percent(
+        performance.metrics.capRate
+    )
+)}
 
-                </span>
+${this.metric(
+    "Cash-on-Cash Return",
+    this.percent(
+        performance.metrics.cashOnCashReturn
+    )
+)}
 
-                <span class="memo-value">
+${this.metric(
+    "Occupancy",
+    this.percent(
+        performance.metrics.occupancy
+    )
+)}
 
-                    ${this.currency(
-                        performance.metrics.projectedCashFlow
-                    )}/mo
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Net Operating Income
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.currency(
-                        performance.metrics.netOperatingIncome
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Cap Rate
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        performance.metrics.capRate
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Cash-on-Cash Return
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        performance.metrics.cashOnCashReturn
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Occupancy
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        performance.metrics.occupancy
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Debt Service Coverage
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${performance.metrics.debtServiceCoverage ?? "—"}
-
-                </span>
-
-            </div>
+${this.metric(
+    "Debt Service Coverage",
+    performance.metrics.debtServiceCoverage
+)}
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.OPERATING_PERFORMANCE
+)}
 
 </section>
 
@@ -1185,6 +1107,8 @@ renderMarket(market){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(market.property)}
 
     <section class="memo-section">
 
@@ -1220,115 +1144,53 @@ renderMarket(market){
 
         <div class="memo-metrics-grid">
 
-            <div class="memo-metric">
+            ${this.metric(
+    "Inventory",
+    `${market.intelligence.inventoryMonths} Months`
+)}
 
-                <span class="memo-label">
+${this.metric(
+    "Rent Growth",
+    this.percent(
+        market.intelligence.rentGrowth
+    )
+)}
 
-                    Inventory
+${this.metric(
+    "Vacancy Rate",
+    this.percent(
+        market.intelligence.vacancyRate
+    )
+)}
 
-                </span>
+${this.metric(
+    "Appreciation",
+    this.percent(
+        market.intelligence.appreciation
+    )
+)}
 
-                <span class="memo-value">
+${this.metric(
+    "Employment Growth",
+    this.percent(
+        market.intelligence.employmentGrowth
+    )
+)}
 
-                    ${market.intelligence.inventoryMonths ?? "—"} Months
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Rent Growth
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        market.intelligence.rentGrowth
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Vacancy Rate
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        market.intelligence.vacancyRate
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Appreciation
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        market.intelligence.appreciation
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Employment Growth
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        market.intelligence.employmentGrowth
-                    )}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Interest Rate
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${this.percent(
-                        market.intelligence.interestRate
-                    )}
-
-                </span>
-
-            </div>
+${this.metric(
+    "Interest Rate",
+    this.percent(
+        market.intelligence.interestRate
+    )
+)}
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.MARKET
+)}
 
 </section>
 
@@ -1345,6 +1207,8 @@ renderRisk(risk){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(risk.property)}
 
     <section class="memo-section">
 
@@ -1410,73 +1274,33 @@ renderRisk(risk){
 
         <div class="memo-metrics-grid">
 
-            <div class="memo-metric">
+            ${this.metric(
+    "Market",
+    risk.categories.market?.level
+)}
 
-                <span class="memo-label">
+${this.metric(
+    "Vacancy",
+    risk.categories.vacancy?.level
+)}
 
-                    Market
+${this.metric(
+    "Condition",
+    risk.categories.condition?.level
+)}
 
-                </span>
-
-                <span class="memo-value">
-
-                    ${risk.categories.market?.level ?? "—"}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Vacancy
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${risk.categories.vacancy?.level ?? "—"}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Condition
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${risk.categories.condition?.level ?? "—"}
-
-                </span>
-
-            </div>
-
-            <div class="memo-metric">
-
-                <span class="memo-label">
-
-                    Financing
-
-                </span>
-
-                <span class="memo-value">
-
-                    ${risk.categories.financing?.level ?? "—"}
-
-                </span>
-
-            </div>
+${this.metric(
+    "Financing",
+    risk.categories.financing?.level
+)}
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.RISK
+)}
 
 </section>
 
@@ -1493,6 +1317,8 @@ renderUnderwriting(underwriting){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(underwriting.property)}
 
     <section class="memo-section">
 
@@ -1528,7 +1354,11 @@ renderUnderwriting(underwriting){
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.UNDERWRITING
+)}
 
 </section>
 
@@ -1550,10 +1380,10 @@ renderUnderwritingCard(card){
 
     } = card;
 
-    return `
-
     const level =
-    (data.level ?? "").toLowerCase();
+        (data.level ?? "").toLowerCase();
+
+    return `
 
 <div class="memo-underwriting-card">
 
@@ -1567,9 +1397,9 @@ renderUnderwritingCard(card){
 
         <div class="memo-underwriting-level memo-underwriting-level-${level}">
 
-    ${data.level ?? "—"}
+            ${data.level ?? "—"}
 
-</div>
+        </div>
 
     </div>
 
@@ -1577,27 +1407,27 @@ renderUnderwritingCard(card){
 
         ${data.description ? `
 
-        <p>
+            <p>
 
-            ${data.description}
+                ${data.description}
 
-        </p>
+            </p>
 
         ` : ""}
 
         ${data.reason ? `
 
-        <div class="memo-underwriting-reason">
+            <div class="memo-underwriting-reason">
 
-            <strong>
+                <strong>
 
-                Reason:
+                    Reason:
 
-            </strong>
+                </strong>
 
-            ${data.reason}
+                ${data.reason}
 
-        </div>
+            </div>
 
         ` : ""}
 
@@ -1619,7 +1449,9 @@ renderRecommendation(recommendation){
 
 <section class="memo-page">
 
-    <section class="memo-section memo-callout">
+    ${this.renderHeader(recommendation.property)}
+
+    <section class="memo-section">
 
         <div class="memo-callout-header">
 
@@ -1633,7 +1465,7 @@ renderRecommendation(recommendation){
 
         <div class="memo-callout-action">
 
-            ${recommendation.recommendedAction}
+            ${recommendation.action}
 
         </div>
 
@@ -1681,7 +1513,13 @@ renderRecommendation(recommendation){
 
                 <span class="memo-value">
 
-                    ${recommendation.overallRisk ?? "—"}
+                    ${recommendation.overallRisk?.label ??
+
+  recommendation.overallRisk?.level ??
+
+  recommendation.overallRisk ??
+
+  "—"}
 
                 </span>
 
@@ -1699,7 +1537,11 @@ renderRecommendation(recommendation){
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.RECOMMENDATION
+)}
 
 </section>
 
@@ -1716,6 +1558,8 @@ renderConclusion(conclusion){
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader(conclusion.property)}
 
     <section class="memo-section">
 
@@ -1773,7 +1617,7 @@ renderConclusion(conclusion){
 
                 <span class="memo-value">
 
-                    ${conclusion.recommendedAction}
+                    ${conclusion.recommendation}
 
                 </span>
 
@@ -1806,7 +1650,11 @@ renderConclusion(conclusion){
 
         </div>
 
-    </section>
+        </section>
+
+    ${this.renderFooter(
+    InvestmentMemorandumRenderer.PAGE.CONCLUSION
+)}
 
 </section>
 
@@ -1814,22 +1662,18 @@ renderConclusion(conclusion){
 
 }
 
-    // ========================================
-    // Appendix
-    // ========================================
-
+   
 // ========================================
 // Render Appendix
 // ========================================
 
 renderAppendix(appendix){
 
-    const scoreBreakdown =
-        appendix.investmentScore.breakdown ?? [];
-
     return `
 
 <section class="memo-page">
+
+    ${this.renderHeader("Appendix")}
 
     <section class="memo-section">
 
@@ -1843,235 +1687,403 @@ renderAppendix(appendix){
 
         </div>
 
-        <!-- ================================= -->
-        <!-- AI Confidence -->
-        <!-- ================================= -->
-
-        <div class="memo-subsection">
-
-            <h3>
-
-                AI Confidence
-
-            </h3>
-
-            <div class="memo-metric">
-
-                <span class="memo-value">
-
-                    ${appendix.confidence.score}%
-
-                </span>
-
-            </div>
-
-        </div>
-
-        <!-- ================================= -->
-        <!-- Investment Score Breakdown -->
-        <!-- ================================= -->
-
-        <div class="memo-subsection">
-
-            <h3>
-
-                Investment Score Breakdown
-
-            </h3>
-
-            <div class="memo-metrics-grid">
-
-                ${scoreBreakdown.map(item => `
-
-                    <div class="memo-metric">
-
-                        <span class="memo-label">
-
-                            ${item.label}
-
-                        </span>
-
-                        <span class="memo-value">
-
-                            ${item.value}
-
-                        </span>
-
-                    </div>
-
-                `).join("")}
-
-            </div>
-
-        </div>
-
-        <!-- ================================= -->
-        <!-- Underwriting Summary -->
-        <!-- ================================= -->
-
-        <div class="memo-subsection">
-
-            <h3>
-
-                Underwriting Summary
-
-            </h3>
-
-            <div class="memo-metrics-grid">
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Overall Risk
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.underwriting.overallRisk.level}
-
-                    </span>
-
-                </div>
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Market
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.underwriting.market.level}
-
-                    </span>
-
-                </div>
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Vacancy
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.underwriting.vacancy.level}
-
-                    </span>
-
-                </div>
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Condition
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.underwriting.condition.level}
-
-                    </span>
-
-                </div>
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Financing
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.underwriting.financing.level}
-
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- ================================= -->
-        <!-- Methodology -->
-        <!-- ================================= -->
-
-        <div class="memo-subsection">
-
-            <h3>
-
-                Methodology
-
-            </h3>
-
-            <div class="memo-metrics-grid">
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Generated By
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.assumptions.generatedBy}
-
-                    </span>
-
-                </div>
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Methodology
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.assumptions.methodology}
-
-                    </span>
-
-                </div>
-
-                <div class="memo-metric">
-
-                    <span class="memo-label">
-
-                        Report Version
-
-                    </span>
-
-                    <span class="memo-value">
-
-                        ${appendix.assumptions.reportVersion}
-
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
+        ${this.renderConfidenceAppendix(
+            appendix.confidence
+        )}
+
+        ${this.renderInvestmentScoreAppendix(
+            appendix.investmentScore
+        )}
+
+        ${this.renderUnderwritingAppendix(
+            appendix.underwriting
+        )}
+
+        ${this.renderMarketAppendix(
+            appendix.market
+        )}
+
+        ${this.renderValuationAppendix(
+            appendix.valuation
+        )}
+
+        ${this.renderAssumptionsAppendix(
+            appendix.assumptions
+        )}
+
+        ${this.renderMetadataAppendix(
+            appendix.metadata
+        )}
 
     </section>
 
+    ${this.renderFooter(
+        InvestmentMemorandumRenderer.PAGE.APPENDIX
+    )}
+
 </section>
+
+`;
+
+}
+
+// ========================================
+// Render Confidence Appendix
+// ========================================
+
+renderConfidenceAppendix(confidence){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        AI Confidence
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Confidence Score",
+            `${confidence.score}%`
+        )}
+
+        ${this.metric(
+            "Confidence Level",
+            confidence.label
+        )}
+
+    </div>
+
+    <p class="memo-narrative">
+
+        ${confidence.explanation}
+
+    </p>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Investment Score Appendix
+// ========================================
+
+renderInvestmentScoreAppendix(score){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        Investment Score
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Investment Score",
+            `${score.score}/100`
+        )}
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Underwriting Appendix
+// ========================================
+
+renderUnderwritingAppendix(underwriting){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        Underwriting Summary
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Overall Risk",
+            underwriting.market?.level ?? "—"
+        )}
+
+        ${this.metric(
+            "Market",
+            underwriting.market?.level ?? "—"
+        )}
+
+        ${this.metric(
+            "Vacancy",
+            underwriting.vacancy?.level ?? "—"
+        )}
+
+        ${this.metric(
+            "Condition",
+            underwriting.condition?.level ?? "—"
+        )}
+
+        ${this.metric(
+            "Financing",
+            underwriting.financing?.level ?? "—"
+        )}
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Market Appendix
+// ========================================
+
+renderMarketAppendix(market){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        Market Intelligence
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Inventory",
+            market.inventoryMonths
+        )}
+
+        ${this.metric(
+            "Rent Growth",
+            this.percent(market.rentGrowth)
+        )}
+
+        ${this.metric(
+            "Vacancy Rate",
+            this.percent(market.vacancyRate)
+        )}
+
+        ${this.metric(
+            "Interest Rate",
+            this.percent(market.interestRate)
+        )}
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Valuation Appendix
+// ========================================
+
+renderValuationAppendix(valuation){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        Valuation Summary
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Purchase Price",
+            this.currency(
+                valuation.purchasePrice
+            )
+        )}
+
+        ${this.metric(
+            "Estimated Value",
+            this.currency(
+                valuation.estimatedValue
+            )
+        )}
+
+        ${this.metric(
+            "Equity",
+            this.currency(
+                valuation.equity
+            )
+        )}
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Assumptions Appendix
+// ========================================
+
+renderAssumptionsAppendix(assumptions){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        Methodology
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Generated By",
+            assumptions.generatedBy
+        )}
+
+        ${this.metric(
+            "Methodology",
+            assumptions.methodology
+        )}
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Metadata Appendix
+// ========================================
+
+renderMetadataAppendix(metadata){
+
+    return `
+
+<div class="memo-subsection">
+
+    <h3>
+
+        Report Metadata
+
+    </h3>
+
+    <div class="memo-metrics-grid">
+
+        ${this.metric(
+            "Report ID",
+            metadata?.reportId ?? "—"
+        )}
+
+        ${this.metric(
+            "Version",
+            metadata?.version ?? "—"
+        )}
+
+        ${this.metric(
+            "Generated",
+            this.date(
+                metadata?.generatedAt ?? "—"
+            )
+        )}
+
+    </div>
+
+</div>
+
+`;
+
+}
+
+// ========================================
+// Render Metric
+// ========================================
+
+metric(label, value){
+
+    return `
+
+<div class="memo-metric">
+
+    <span class="memo-label">
+
+        ${label}
+
+    </span>
+
+    <span class="memo-value">
+
+        ${value ?? "—"}
+
+    </span>
+
+</div>
+
+`;
+
+}
+
+renderFooter(page){
+
+    return `
+
+<footer class="memo-footer">
+
+    <div>
+
+        ${InvestmentMemorandumRenderer.BRAND.analyst}
+
+    </div>
+
+    <div>
+
+        ${InvestmentMemorandumRenderer.BRAND.version}
+
+    </div>
+
+    <div>
+
+        ${this.date(
+    this.memorandum.generatedAt
+)}
+
+    </div>
+
+    <div>
+
+        Page ${page}
+
+    </div>
+
+</footer>
 
 `;
 

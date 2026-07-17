@@ -749,6 +749,21 @@ document.addEventListener("keydown", (e) => {
 
     }
 
+// ========================================
+// Export Report
+// ========================================
+
+document
+    .getElementById("exportReportBtn")
+    ?.addEventListener(
+
+        "click",
+
+        () =>
+            this.exportInvestmentMemorandum()
+
+    );    
+
 });
 
 
@@ -1443,6 +1458,8 @@ openDeal(dealType){
 
     if(!deal) return;
 
+    this.currentDeal = deal;
+
     // ========================================
     // Generate Complete MPI Report
     // ========================================
@@ -2104,7 +2121,41 @@ ${rows}
 
 },
 
+// ========================================
+// Export Investment Memorandum
+// ========================================
 
+exportInvestmentMemorandum(){
+
+    if(!this.currentDeal){
+
+        console.warn(
+            "No deal selected."
+        );
+
+        return;
+
+    }
+
+    sessionStorage.setItem(
+
+        "selectedDeal",
+
+        JSON.stringify(
+            this.currentDeal
+        )
+
+    );
+
+    window.open(
+
+        "../memorandum/memorandum.html",
+
+        "_blank"
+
+    );
+
+},
 
 // ========================================
 // Render Market Intelligence

@@ -11,61 +11,64 @@ class InvestmentMemorandumService {
 
     generate(report){
 
-        const context =
-            this.buildContext(report);
+    const context =
+        this.buildContext(report);
 
-        return {
+    return {
 
-            documentType:
-                "Investment Memorandum",
+    reportType:
+        "Investment Memorandum",
 
-            version:
-                "1.0",
+    version:
+        "1.0",
 
-            generatedAt:
-                new Date(),
+    generatedAt:
+        context.metadata.generatedAt,
 
-            sections:{
+    reportId:
+        context.metadata.reportId,
 
-                metadata:
-                    this.metadata(context),
+    sections:{
 
-                cover:
-                    this.cover(context),
+        metadata:
+            this.metadata(context),
 
-                executiveSummary:
-                    this.executiveSummary(context),
+        cover:
+            this.cover(context),
 
-                propertyOverview:
-                    this.propertyOverview(context),
+        executiveSummary:
+            this.executiveSummary(context),
 
-                valuation:
-                    this.valuation(context),
+        propertyOverview:
+            this.propertyOverview(context),
 
-                operatingPerformance:
-                    this.operatingPerformance(context),
+        valuation:
+            this.valuation(context),
 
-                market:
-                    this.market(context),
+        operatingPerformance:
+            this.operatingPerformance(context),
 
-                risk:
-                    this.risk(context),
+        market:
+            this.market(context),
 
-                underwriting:
-                    this.underwriting(context),
+        risk:
+            this.risk(context),
 
-                recommendation:
-                    this.recommendation(context),
+        underwriting:
+            this.underwriting(context),
 
-                conclusion:
-                    this.conclusion(context),
+        recommendation:
+            this.recommendation(context),
 
-                appendix:
-                    this.appendix(context)
+        conclusion:
+            this.conclusion(context),
 
-            }
+        appendix:
+            this.appendix(context)
 
-        };
+    }
+
+};
 
     }
 
@@ -89,17 +92,44 @@ class InvestmentMemorandumService {
 
         return Object.freeze({
 
-            metadata,
+    metadata:{
 
-            deal,
+        ...metadata,
 
-            analysis,
+        generatedAt:
+            metadata.generatedAt ?? new Date(),
 
-            narrative
+        reportId:
+            metadata.reportId ?? this.generateReportId()
 
-        });
+    },
+
+    deal,
+
+    analysis,
+
+    narrative
+
+});
 
     }
+
+    generateReportId(){
+
+    const today =
+        new Date()
+            .toISOString()
+            .slice(0,10)
+            .replaceAll("-", "");
+
+    const random =
+        Math.floor(Math.random() * 10000)
+            .toString()
+            .padStart(4, "0");
+
+    return `MPI-${today}-${random}`;
+
+}
 
 // ========================================
 // Memorandum Metadata
@@ -107,21 +137,39 @@ class InvestmentMemorandumService {
 
 metadata(context){
 
-    return {
+const {
 
-        analyst:
-            "MPI AI",
+    metadata
 
-        confidentiality:
-            "Confidential",
+} = context;
 
-        methodology:
-            "Maxwell Property Intelligence",
+return {
 
-        copyright:
-            "© Maxwell Property Intelligence"
+    reportId:
+        metadata.reportId,
 
-    };
+    reportType:
+        "Investment Memorandum",
+
+    version:
+        "1.0",
+
+    generatedAt:
+        metadata.generatedAt,
+
+    analyst:
+        "MPI AI",
+
+    confidentiality:
+        "Confidential",
+
+    methodology:
+        "Maxwell Property Intelligence",
+
+    copyright:
+        "© Maxwell Property Intelligence"
+
+};
 
 }
 
@@ -238,7 +286,16 @@ executiveSummary(context){
             deal.capRate,
 
         overallRisk:
-            recommendation.overallRisk
+
+    recommendation.overallRisk?.label ??
+
+    recommendation.overallRisk?.level ??
+
+    analysis.underwriting?.overallRisk?.label ??
+
+    analysis.underwriting?.overallRisk?.level ??
+
+    "Unknown"
 
     };
 
@@ -325,6 +382,8 @@ valuation(context){
 
     const {
 
+        deal,
+
         analysis,
 
         narrative
@@ -347,6 +406,12 @@ valuation(context){
 
         narrative:
             narrative.valuationNarrative,
+
+        property:
+             deal.type,
+        
+        location:
+             deal.city,
 
         metrics:{
 
@@ -374,17 +439,131 @@ valuation(context){
 
 }
 
-operatingPerformance(context)
+// ========================================
+// Operating Performance
+// ========================================
 
-    // ========================================
-    // Market
-    // ========================================
+operatingPerformance(context){
 
-    market(context){
+    const {
 
-        return {};
+        deal,
 
-    }
+        narrative
+
+    } = context;
+
+    return {
+
+        title:
+            "Operating Performance",
+
+        narrative:
+            narrative.operatingPerformanceNarrative ??
+
+            "Operating performance reflects the projected income, occupancy assumptions, and capitalization metrics used in MPI's underwriting analysis.",
+
+        property:
+            deal.type,
+
+        location:
+            deal.city,
+
+        metrics:{
+
+            projectedCashFlow:
+                deal.cashFlow,
+
+            netOperatingIncome:
+                deal.noi ??
+
+                null,
+
+            capRate:
+                deal.capRate,
+
+            cashOnCashReturn:
+                deal.cashOnCash ??
+
+                null,
+
+            occupancy:
+                deal.occupancy,
+
+            debtServiceCoverage:
+                deal.dscr ??
+
+                null
+
+        }
+
+    };
+
+}
+
+// ========================================
+// Market
+// ========================================
+
+market(context){
+
+    const {
+
+        deal,
+
+        analysis,
+
+        narrative
+
+    } = context;
+
+    const market =
+
+        analysis.underwriting.market;
+
+    return {
+
+        title:
+            "Market",
+
+        narrative:
+            narrative.marketNarrative ??
+
+            market.reason ??
+
+            "",
+
+        property:
+            deal.type,
+        
+        location:
+            deal.city,
+
+        intelligence:{
+
+            inventoryMonths:
+                market.inventoryMonths,
+
+            rentGrowth:
+                market.rentGrowth,
+
+            vacancyRate:
+                market.vacancyRate,
+
+            appreciation:
+                market.appreciation,
+
+            employmentGrowth:
+                market.employmentGrowth,
+
+            interestRate:
+                market.interestRate
+
+        }
+
+    };
+
+}
 
 // ========================================
 // Risk
@@ -393,6 +572,8 @@ operatingPerformance(context)
 risk(context){
 
     const {
+
+        deal,
 
         analysis,
 
@@ -413,6 +594,12 @@ risk(context){
 
         narrative:
             narrative.riskNarrative,
+
+        property:
+            deal.type,
+
+        location:
+            deal.city,
 
         overall:{
 
@@ -464,6 +651,8 @@ underwriting(context){
 
     const {
 
+        deal,
+
         analysis
 
     } = context;
@@ -482,6 +671,12 @@ underwriting(context){
         summary:
             underwriting.summary ??
             null,
+
+        property:
+            deal.type,
+
+        location:
+            deal.city,
 
         cards:[
 
@@ -539,6 +734,8 @@ recommendation(context){
 
     const {
 
+        deal,
+
         analysis,
 
         narrative
@@ -558,7 +755,13 @@ recommendation(context){
         title:
             "Recommended Next Step",
 
-        action:
+        property:
+            deal.type,
+
+        location:
+            deal.city,
+        
+            action:
             recommendation.action,
 
         investmentScore:
@@ -568,7 +771,16 @@ recommendation(context){
             confidence.score,
 
         overallRisk:
-            recommendation.overallRisk,
+
+    recommendation.overallRisk?.label ??
+
+    recommendation.overallRisk?.level ??
+
+    analysis.underwriting?.overallRisk?.label ??
+
+    analysis.underwriting?.overallRisk?.level ??
+
+    "Unknown",
 
         narrative:
             narrative.recommendationNarrative
@@ -577,17 +789,15 @@ recommendation(context){
 
 }
 
-    // ========================================
-    // Conclusion
-    // ========================================
-
-// ========================================
+   // ========================================
 // Investment Conclusion
 // ========================================
 
 conclusion(context){
 
     const {
+
+        deal,
 
         analysis,
 
@@ -608,7 +818,13 @@ conclusion(context){
         title:
             "Investment Conclusion",
 
-        investmentScore:
+        property:
+            deal.type,
+        
+        location:
+            deal.city,
+       
+            investmentScore:
             recommendation.score,
 
         confidence:
@@ -630,6 +846,43 @@ conclusion(context){
 
 appendix(context){
 
+    return {
+
+        title:
+            "Appendix",
+
+        confidence:
+            this.buildConfidenceAppendix(context),
+
+        investmentScore:
+            this.buildInvestmentScoreAppendix(context),
+
+        underwriting:
+            this.buildUnderwritingAppendix(context),
+
+        market:
+            this.buildMarketAppendix(context),
+
+        valuation:
+            this.buildValuationAppendix(context),
+
+        assumptions:
+            this.buildAssumptionsAppendix(context),
+
+        metadata:
+            this.buildMetadataAppendix(context)
+
+    };
+
+}
+
+// ========================================
+// Appendix
+// AI Confidence
+// ========================================
+
+buildConfidenceAppendix(context){
+
     const {
 
         analysis
@@ -638,76 +891,174 @@ appendix(context){
 
     const {
 
-        confidence,
-
-        recommendation,
-
-        underwriting
+        confidence
 
     } = analysis;
 
     return {
 
-        title:
-            "Appendix",
+        score:
+            confidence.score,
 
-        confidence:{
+        label:
+            confidence.label,
 
-            score:
-                confidence.score,
+        explanation:
+            "Confidence reflects the quality and consistency of the market, valuation, underwriting, and financing analysis used by MPI.",
 
-            label:
-                confidence.label ??
+        inputs:[
 
-                null
+            "Market Intelligence",
 
-        },
+            "Valuation",
 
-        investmentScore:{
+            "Underwriting",
 
-            score:
-                recommendation.score,
+            "Cash Flow",
 
-            breakdown:
-                recommendation.scoreBreakdown ??
+            "Financing"
 
-                null
-
-        },
-
-        underwriting:{
-
-            overallRisk:
-                underwriting.overallRisk,
-
-            market:
-                underwriting.market,
-
-            vacancy:
-                underwriting.vacancy,
-
-            condition:
-                underwriting.condition,
-
-            financing:
-                underwriting.financing
-
-        },
-
-        assumptions:{
-
-            generatedBy:
-                "MPI AI",
-
-            methodology:
-                "Maxwell Property Intelligence",
-
-            reportVersion:
-                "MPI 1.0"
-
-        }
+        ]
 
     };
+
+}
+
+// ========================================
+// Appendix
+// Investment Score
+// ========================================
+
+buildInvestmentScoreAppendix(context){
+
+    const {
+
+        analysis
+
+    } = context;
+
+    return {
+
+        score:
+            analysis.recommendation.score,
+
+        breakdown:
+
+            analysis.recommendation.scoreBreakdown ??
+
+            []
+
+    };
+
+}
+
+// ========================================
+// Appendix
+// Underwriting
+// ========================================
+
+buildUnderwritingAppendix(context){
+
+    return context.analysis.underwriting;
+
+}
+
+// ========================================
+// Appendix
+// Market Intelligence
+// ========================================
+
+buildMarketAppendix(context){
+
+    return context.analysis.underwriting.market;
+
+}
+
+// ========================================
+// Appendix
+// Valuation
+// ========================================
+
+buildValuationAppendix(context){
+
+    return context.analysis.valuation;
+
+}
+
+// ========================================
+// Appendix
+// Assumptions
+// ========================================
+
+buildAssumptionsAppendix(context){
+
+    const {
+
+        deal
+
+    } = context;
+
+    return {
+
+        purchasePrice:
+            deal.price,
+
+        capRate:
+            deal.capRate,
+
+        occupancy:
+            deal.occupancy,
+
+        cashFlow:
+            deal.cashFlow,
+
+        generatedBy:
+            "MPI AI",
+
+        methodology:
+            "Maxwell Property Intelligence"
+
+    };
+
+}
+
+// ========================================
+// Appendix
+// Metadata
+// ========================================
+
+buildMetadataAppendix(context){
+
+    const {
+
+    metadata
+
+} = context;
+
+return {
+
+    reportId:
+        metadata.reportId,
+
+    reportType:
+        "Investment Memorandum",
+
+    version:
+        "1.0",
+
+    generatedAt:
+        metadata.generatedAt,
+
+    analyst:
+        "MPI AI",
+
+    methodology:
+        "Maxwell Property Intelligence",
+
+    confidentiality:
+        "Confidential"
+
+};
 
 }
 

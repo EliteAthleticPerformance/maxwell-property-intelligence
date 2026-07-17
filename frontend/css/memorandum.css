@@ -1,0 +1,685 @@
+/* ==========================================
+   Maxwell Property Intelligence
+   Investment Memorandum
+   Version 1.0
+
+   Document Design System
+
+   DS-12.3
+========================================== */
+
+/* ==========================================
+   Design Tokens
+========================================== */
+
+:root{
+
+    /* Colors */
+
+    --primary:#163A5F;
+    --secondary:#F5F7FA;
+
+    --success:#2E7D32;
+    --warning:#F9A825;
+    --danger:#C62828;
+
+    --text:#1F2937;
+    --muted:#6B7280;
+
+    --border:#E5E7EB;
+    --background:#F3F4F6;
+
+    /* Page */
+
+    --page-width:8.5in;
+    --page-height:11in;
+
+    --page-padding:0.75in;
+
+    /* Radius */
+
+    --radius:12px;
+
+    /* Shadows */
+
+    --shadow:
+
+        0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   Document
+========================================== */
+
+body{
+
+    margin:0;
+
+    background:var(--background);
+
+    font-family:
+
+        Inter,
+
+        Arial,
+
+        sans-serif;
+
+    color:var(--text);
+
+}
+
+#memorandumRoot{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    padding:40px;
+
+    gap:40px;
+
+}
+
+/* ==========================================
+   Printed Page
+========================================== */
+
+.memo-page{
+
+    width:var(--page-width);
+
+    min-height:var(--page-height);
+
+    background:white;
+
+    padding:var(--page-padding);
+
+    box-sizing:border-box;
+
+    box-shadow:var(--shadow);
+
+    page-break-after:always;
+
+}
+
+.memo-cover{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+}
+
+.memo-section{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:32px;
+
+}
+
+.memo-section-header{
+
+    border-bottom:
+
+        2px solid var(--border);
+
+    padding-bottom:16px;
+
+}
+
+.memo-section-header h2{
+
+    margin:0;
+
+    font-size:28px;
+
+    color:var(--primary);
+
+    font-weight:700;
+
+}
+
+.memo-narrative{
+
+    line-height:1.8;
+
+    font-size:16px;
+
+    color:var(--text);
+
+}
+
+.memo-metrics-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(2,1fr);
+
+    gap:20px;
+
+}
+
+.memo-metric{
+
+    border:
+
+        1px solid var(--border);
+
+    border-radius:
+
+        var(--radius);
+
+    padding:20px;
+
+    background:white;
+
+}
+
+.memo-label{
+
+    display:block;
+
+    font-size:11px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    color:var(--muted);
+
+    margin-bottom:10px;
+
+}
+
+.memo-value{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+}
+
+.memo-callout{
+
+    border:
+
+        2px solid var(--primary);
+
+    border-radius:
+
+        18px;
+
+    padding:48px;
+
+    text-align:center;
+
+}
+
+.memo-underwriting-card{
+
+    border:
+
+        1px solid var(--border);
+
+    border-radius:
+
+        var(--radius);
+
+    padding:24px;
+
+    margin-bottom:24px;
+
+}
+
+.memo-underwriting-level-low{
+
+    color:var(--success);
+
+}
+
+.memo-underwriting-level-moderate{
+
+    color:var(--warning);
+
+}
+
+.memo-underwriting-level-high{
+
+    color:var(--danger);
+
+}
+
+@media print{
+
+    body{
+
+        background:white;
+
+    }
+
+    #memorandumRoot{
+
+        padding:0;
+
+    }
+
+    .memo-page{
+
+        box-shadow:none;
+
+        margin:0;
+
+        page-break-after:always;
+
+    }
+
+}
+
+/* ==========================================
+   Subsection Headers
+========================================== */
+
+.memo-subsection-header{
+
+    margin-top:12px;
+
+    margin-bottom:12px;
+
+}
+
+.memo-subsection-header h3{
+
+    margin:0;
+
+    font-size:18px;
+
+    font-weight:600;
+
+    color:var(--primary);
+
+}
+
+/* ==========================================
+   Headlines
+========================================== */
+
+.memo-headline{
+
+    font-size:34px;
+
+    font-weight:700;
+
+    line-height:1.25;
+
+    color:var(--primary);
+
+    max-width:800px;
+
+}
+
+/* ==========================================
+   Cover Image
+========================================== */
+
+.memo-cover-image{
+
+    width:100%;
+
+    max-width:720px;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    margin:32px 0;
+
+}
+
+.memo-cover-image img{
+
+    width:100%;
+
+    display:block;
+
+}
+
+.memo-property-image{
+
+    width:100%;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    margin-bottom:24px;
+
+}
+
+.memo-property-image img{
+
+    width:100%;
+
+    display:block;
+
+}
+
+/* ==========================================
+   Recommendation Callout
+========================================== */
+
+.memo-callout{
+
+    border:2px solid var(--primary);
+
+    border-radius:20px;
+
+    padding:48px;
+
+    text-align:center;
+
+    background:white;
+
+}
+
+.memo-callout-header h2{
+
+    margin:0;
+
+    color:var(--primary);
+
+    font-size:16px;
+
+    text-transform:uppercase;
+
+    letter-spacing:3px;
+
+}
+
+.memo-callout-action{
+
+    margin-top:24px;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.memo-callout-score-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+        repeat(3,1fr);
+
+    gap:24px;
+
+    margin:48px 0;
+
+}.memo-underwriting-grid{
+
+    display:grid;
+
+    gap:24px;
+
+}
+
+.memo-underwriting-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:18px;
+
+}
+
+.memo-underwriting-title{
+
+    font-size:22px;
+
+    font-weight:600;
+
+}
+
+.memo-underwriting-level{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.memo-underwriting-body{
+
+    line-height:1.7;
+
+}
+
+.memo-divider{
+
+    height:1px;
+
+    background:var(--border);
+
+    margin:48px 0;
+
+}
+
+/* ==========================================
+   Cover Branding
+========================================== */
+
+.memo-brand{
+
+    text-align:center;
+
+    margin-bottom:36px;
+
+}
+
+.memo-brand-subtitle{
+
+    color:var(--muted);
+
+    text-transform:uppercase;
+
+    letter-spacing:4px;
+
+    font-size:13px;
+
+}
+
+.memo-brand h1{
+
+    margin:12px 0 0;
+
+    font-size:42px;
+
+    color:var(--primary);
+
+}
+
+.memo-cover-property{
+
+    text-align:center;
+
+    margin:36px 0;
+
+}
+
+.memo-cover-property h2{
+
+    margin:0;
+
+    font-size:44px;
+
+    font-weight:700;
+
+}
+
+.memo-cover-property p{
+
+    margin-top:10px;
+
+    color:var(--muted);
+
+    font-size:20px;
+
+}
+
+.memo-cover-recommendation{
+
+    display:inline-block;
+
+    margin:0 auto;
+
+    padding:14px 28px;
+
+    border-radius:999px;
+
+    background:#E8F8EC;
+
+    color:var(--success);
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+}
+
+.memo-cover-score-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:24px;
+
+    margin:48px 0;
+
+}
+
+.memo-cover-footer{
+
+    margin-top:auto;
+
+    text-align:center;
+
+    color:var(--muted);
+
+    line-height:1.8;
+
+    font-size:14px;
+
+}
+
+.memo-cover{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    min-height:100%;
+
+    text-align:center;
+
+}
+
+.memo-logo{
+
+    width:90px;
+
+    margin-bottom:20px;
+
+}
+
+.memo-company{
+
+    font-size:32px;
+
+    font-weight:700;
+
+    color:var(--primary);
+
+}
+
+.memo-document{
+
+    text-transform:uppercase;
+
+    letter-spacing:5px;
+
+    color:var(--muted);
+
+    margin-top:12px;
+
+}
+
+.memo-footer{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-top:40px;
+
+    border-top:1px solid var(--border);
+
+    padding-top:12px;
+
+    font-size:12px;
+
+    color:var(--muted);
+
+}
+
+.memo-watermark{
+
+    position:fixed;
+
+    top:50%;
+
+    left:50%;
+
+    transform:
+
+        translate(-50%,-50%)
+
+        rotate(-35deg);
+
+    font-size:180px;
+
+    font-weight:700;
+
+    opacity:.03;
+
+    color:#000;
+
+    pointer-events:none;
+
+}
