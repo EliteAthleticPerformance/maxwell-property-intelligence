@@ -2137,6 +2137,39 @@ exportInvestmentMemorandum(){
 
     }
 
+    // ------------------------------------
+    // Generate MPI Report
+    // ------------------------------------
+
+    const report =
+
+    this.currentDeal.report ??
+
+    reportService.generate(
+        this.currentDeal
+    );
+
+    // ------------------------------------
+    // Generate Investment Memorandum
+    // ------------------------------------
+
+    const memorandum =
+        investmentMemorandumService.generate(
+            report
+        );
+
+    // ------------------------------------
+    // Save to Report Library
+    // ------------------------------------
+
+    reportLibraryService.saveReport(
+        memorandum
+    );
+
+    // ------------------------------------
+    // Store Selected Deal
+    // ------------------------------------
+
     sessionStorage.setItem(
 
         "selectedDeal",
@@ -2146,6 +2179,10 @@ exportInvestmentMemorandum(){
         )
 
     );
+
+    // ------------------------------------
+    // Open Memorandum
+    // ------------------------------------
 
     window.open(
 

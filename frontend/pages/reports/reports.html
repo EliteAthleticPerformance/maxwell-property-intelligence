@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>
+
+MPI Reports
+
+</title>
+
+<link
+    rel="stylesheet"
+    href="../../css/dashboard.css">
+
+<link
+    rel="stylesheet"
+    href="reports.css">
+
+</head>
+
+<body>
+
+<div class="reports-page">
+
+    <header class="reports-header">
+
+        <h1>
+
+            Investment Memorandums
+
+        </h1>
+
+        <p>
+
+            Maxwell Property Intelligence Report Library
+
+        </p>
+
+    </header>
+
+    <section id="reportStats">
+
+    </section>
+
+    <section class="reports-toolbar">
+
+        <input
+            id="reportSearch"
+            type="search"
+            placeholder="Search reports...">
+
+        <select id="reportSort">
+
+            <option value="newest">
+
+                Newest
+
+            </option>
+
+            <option value="score">
+
+                Investment Score
+
+            </option>
+
+            <option value="recommendation">
+
+                Recommendation
+
+            </option>
+
+        </select>
+
+    </section>
+
+    <section
+        id="reportGrid"
+        class="report-grid">
+
+    </section>
+
+</div>
+
+<script src="../../js/services/ReportLibraryService.js"></script>
+<script src="reports.js"></script>
+
+</body>
+
+</html>

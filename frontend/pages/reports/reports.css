@@ -1,0 +1,21 @@
+.recommendation.buy{
+
+    background:#1B5E20;
+
+    color:white;
+
+}
+
+.recommendation.hold{
+
+    background:#F9A825;
+
+}
+
+.recommendation.pass{
+
+    background:#C62828;
+
+    color:white;
+
+}

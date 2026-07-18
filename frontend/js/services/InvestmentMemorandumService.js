@@ -210,18 +210,24 @@ cover(context){
             null,
 
         purchasePrice:
-            deal.price,
+    deal.price,
 
-        recommendation:
-            analysis.recommendation.action,
+recommendation:
+    analysis.recommendation.action,
 
-        investmentScore:
-            analysis.recommendation.score,
+investmentScore:
+    analysis.recommendation.score,
 
-        confidence:
-            analysis.confidence.score
+confidence:
+    analysis.confidence.score,
 
-    };
+generatedAt:
+    context.metadata.generatedAt,
+
+reportId:
+    context.metadata.reportId
+
+};
 
 }
 

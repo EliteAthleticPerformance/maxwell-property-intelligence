@@ -6,6 +6,10 @@
 const storedDeal =
 
     sessionStorage.getItem(
+        "selectedReport"
+    );
+
+    sessionStorage.getItem(
         "selectedDeal"
     );
 
