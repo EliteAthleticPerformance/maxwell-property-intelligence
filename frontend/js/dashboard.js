@@ -2172,25 +2172,19 @@ exportInvestmentMemorandum(){
 
     sessionStorage.setItem(
 
-        "selectedDeal",
+    "selectedReport",
 
-        JSON.stringify(
-            this.currentDeal
-        )
+    JSON.stringify(memorandum)
 
-    );
+);
 
-    // ------------------------------------
-    // Open Memorandum
-    // ------------------------------------
+window.open(
 
-    window.open(
+    "../memorandum/memorandum.html",
 
-        "../memorandum/memorandum.html",
+    "_blank"
 
-        "_blank"
-
-    );
+);
 
 },
 

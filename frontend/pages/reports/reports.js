@@ -2,17 +2,10 @@ const SELECTED_REPORT_KEY =
 
     "selectedReport";
 
-    
+   
 const reportLibraryService =
     new ReportLibraryService();
 
-sessionStorage.setItem(
-
-    SELECTED_REPORT_KEY,
-
-    JSON.stringify(report)
-
-);
 
 const searchInput =
 
@@ -28,9 +21,55 @@ searchInput.addEventListener(
 
 );
 
+const RECOMMENDATIONS = {
+
+    ALL: "ALL",
+
+    BUY: "BUY",
+
+    HOLD: "HOLD",
+
+    PASS: "PASS"
+
+};
+
+
+const recommendationSelect =
+
+    document.getElementById(
+        "reportRecommendation"
+    );
+
+recommendationSelect.addEventListener(
+
+    "change",
+
+    refreshReports
+
+);
+
+const sortSelect =
+
+    document.getElementById(
+        "reportSort"
+    );
+
+sortSelect.addEventListener(
+
+    "change",
+
+    refreshReports
+
+);
+
 const reportGrid =
     document.getElementById(
         "reportGrid"
+    );
+
+const reportStats =
+    document.getElementById(
+        "reportStats"
     );
 
 // ========================================
@@ -41,15 +80,130 @@ refreshReports();
 
 function refreshReports(){
 
-    renderReports(
+    const reports =
+        reportLibraryService.getReports();
 
-        getFilteredReports(
+    renderStatistics();
 
-            searchInput.value.trim()
+    const searchResults =
 
-        )
+    filterReports(
+
+        reports,
+
+        searchInput.value
 
     );
+
+const recommendationResults =
+
+    filterRecommendation(
+
+        searchResults,
+
+        recommendationSelect.value
+
+    );
+
+    
+
+const sortedReports =
+
+    sortReports(
+
+        recommendationResults,
+
+        sortSelect.value
+
+    );
+
+    
+
+renderReports(
+
+    sortedReports
+
+);
+
+    
+}
+
+// ========================================
+// Render Statistics
+// ========================================
+
+function renderStatistics(){
+
+    const stats =
+        reportLibraryService.statistics();
+
+    reportStats.innerHTML = `
+
+        <div class="kpi-card">
+
+            <div class="kpi-value">
+
+                ${stats.totalReports}
+
+            </div>
+
+            <div class="kpi-label">
+
+                Reports
+
+            </div>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <div class="kpi-value">
+
+                ${stats.averageScore}
+
+            </div>
+
+            <div class="kpi-label">
+
+                Avg Score
+
+            </div>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <div class="kpi-value">
+
+                ${stats.averageConfidence}%
+
+            </div>
+
+            <div class="kpi-label">
+
+                Avg Confidence
+
+            </div>
+
+        </div>
+
+        <div class="kpi-card">
+
+            <div class="kpi-value">
+
+                ${formatCurrency(stats.totalValueAnalyzed)}
+
+            </div>
+
+            <div class="kpi-label">
+
+                Total Value Analyzed
+
+            </div>
+
+        </div>
+
+    `;
 
 }
 
@@ -57,12 +211,9 @@ function refreshReports(){
 // Filter Reports
 // ========================================
 
-function getFilteredReports(query){
+function filterReports(reports, query){
 
-    const reports =
-
-        reportLibraryService.getReports();
-
+   
     if(!query){
 
         return reports;
@@ -109,6 +260,164 @@ function getFilteredReports(query){
         );
 
     });
+
+}
+
+// ========================================
+// Filter Recommendation
+// ========================================
+
+function filterRecommendation(
+    reports,
+    recommendation
+){
+
+    if(
+
+        recommendation === RECOMMENDATIONS.ALL
+
+    ){
+
+        return reports;
+
+    }
+
+    return reports.filter(report =>
+
+        report.sections?.cover?.recommendation ===
+
+        recommendation
+
+    );
+
+}
+
+
+// ========================================
+// Sort Reports
+// ========================================
+
+function sortReports(reports, sortBy){
+
+    const sorted = [...reports];
+
+    switch(sortBy){
+
+        case "oldest":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                    new Date(
+
+    a.sections?.cover?.generatedAt ?? 0) -
+
+                    new Date(
+
+    b.sections?.cover?.generatedAt ?? 0
+
+)
+
+            );
+
+            break;
+
+        case "score":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                    (b.sections?.cover?.investmentScore ?? 0) -
+
+                    (a.sections?.cover?.investmentScore ?? 0)
+
+            );
+
+            break;
+
+        case "confidence":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                    (b.sections?.cover?.confidence ?? 0) -
+
+                    (a.sections?.cover?.confidence ?? 0)
+
+            );
+
+            break;
+
+        case "property":
+
+            sorted.sort(
+
+                (a,b)=>
+
+                    (a.sections?.cover?.property ?? "")
+                        .localeCompare(
+
+                            b.sections?.cover?.property ?? ""
+
+                        )
+
+            );
+
+            break;
+
+        case "recommendation":{
+
+            const order = {
+
+    [RECOMMENDATIONS.BUY]: 3,
+    [RECOMMENDATIONS.HOLD]: 2,
+    [RECOMMENDATIONS.PASS]: 1
+
+};
+
+            sorted.sort(
+
+                (a,b)=>
+
+                    (order[b.sections?.cover?.recommendation] ?? 0) -
+
+                    (order[a.sections?.cover?.recommendation] ?? 0)
+
+            );
+
+            break;
+
+        }
+
+        case "newest":
+        default:
+
+            sorted.sort(
+
+                (a,b)=>
+
+                    new Date(
+
+                b.sections?.cover?.generatedAt ?? 0
+
+            ) -
+
+                    new Date(
+
+                a.sections?.cover?.generatedAt ?? 0
+
+            )
+
+            );
+
+            break;
+
+    }
+
+    return sorted;
 
 }
 
@@ -251,6 +560,28 @@ function formatDate(date){
 
 }
 
+function formatCurrency(value){
+
+    return new Intl.NumberFormat(
+
+        "en-US",
+
+        {
+
+            style:"currency",
+
+            currency:"USD",
+
+            notation:"compact",
+
+            maximumFractionDigits:1
+
+        }
+
+    ).format(value);
+
+}
+
 // ========================================
 // Open Report
 // ========================================
@@ -269,7 +600,13 @@ function openReport(reportId){
 
     }
 
-    
+    sessionStorage.setItem(
+
+    SELECTED_REPORT_KEY,
+
+    JSON.stringify(report)
+
+);    
 
     window.open(
 

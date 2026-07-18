@@ -48,10 +48,54 @@ MPI Reports
 
     <section class="reports-toolbar">
 
+    <div class="toolbar-search">
+
         <input
             id="reportSearch"
             type="search"
             placeholder="Search reports...">
+
+    </div>
+
+    <div class="toolbar-controls">
+
+    <select id="reportRecommendation">
+
+        <option value="ALL">
+
+            All Recommendations
+
+        </option>
+
+        <option value="BUY">
+
+            BUY
+
+        </option>
+
+        <option value="HOLD">
+
+            HOLD
+
+        </option>
+
+        <option value="PASS">
+
+            PASS
+
+        </option>
+
+    </select>
+
+    <select id="reportSort">
+
+        ...
+
+    </select>
+
+</div>
+
+    <div class="toolbar-controls">
 
         <select id="reportSort">
 
@@ -61,9 +105,27 @@ MPI Reports
 
             </option>
 
+            <option value="oldest">
+
+                Oldest
+
+            </option>
+
             <option value="score">
 
                 Investment Score
+
+            </option>
+
+            <option value="confidence">
+
+                AI Confidence
+
+            </option>
+
+            <option value="property">
+
+                Property Name
 
             </option>
 
@@ -75,7 +137,9 @@ MPI Reports
 
         </select>
 
-    </section>
+    </div>
+
+</section>
 
     <section
         id="reportGrid"

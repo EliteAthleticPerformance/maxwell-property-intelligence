@@ -3,17 +3,31 @@
 // Bootstrap
 // ========================================
 
-const storedDeal =
-
+const storedReport =
     sessionStorage.getItem(
         "selectedReport"
     );
 
+const storedDeal =
     sessionStorage.getItem(
         "selectedDeal"
     );
 
-if(storedDeal){
+if(storedReport){
+
+    const memorandum =
+        JSON.parse(storedReport);
+
+    document.getElementById(
+        "memorandumRoot"
+    ).innerHTML =
+
+        investmentMemorandumRenderer.render(
+            memorandum
+        );
+
+}
+else if(storedDeal){
 
     const deal =
         JSON.parse(storedDeal);
@@ -28,14 +42,13 @@ if(storedDeal){
             report
         );
 
-    const html =
+    document.getElementById(
+        "memorandumRoot"
+    ).innerHTML =
+
         investmentMemorandumRenderer.render(
             memorandum
         );
-
-    document.getElementById(
-        "memorandumRoot"
-    ).innerHTML = html;
 
 }
 else{
@@ -44,17 +57,9 @@ else{
         "memorandumRoot"
     ).innerHTML = `
 
-        <h1>
+        <h1>No Investment Memorandum Available</h1>
 
-            No Investment Memorandum Available
-
-        </h1>
-
-        <p>
-
-            Please export a deal from the MPI Dashboard.
-
-        </p>
+        <p>Please export a deal from the MPI Dashboard.</p>
 
     `;
 
