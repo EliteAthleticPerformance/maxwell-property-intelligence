@@ -1068,5 +1068,7 @@ return {
 
 }
 
+}
+
 const investmentMemorandumService =
     new InvestmentMemorandumService();

@@ -472,9 +472,30 @@ function renderCard(report){
 
             .replace(/\s+/g, "-");
 
+    const image =
+
+    cover.image ??
+
+    "../../images/property-placeholder.jpg";
+
+    console.log("Cover:", cover);
+console.log("Cover Image:", cover.image);
+
     return `
 
 <div class="report-card">
+
+    <div class="report-card-image">
+
+        <img
+
+            src="${image}"
+
+            alt="${cover.property}"
+
+            loading="lazy">
+
+    </div>
 
     <div class="report-card-header">
 

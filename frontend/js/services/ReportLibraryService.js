@@ -78,6 +78,10 @@ saveReport(report){
 
     this.save(reports);
 
+    console.log("Saving Report:", report);
+console.log("Cover:", report.sections.cover);
+console.log("Image:", report.sections.cover.image);
+
 }
 
     return report;
@@ -321,3 +325,10 @@ clear(){
 }
 
 }
+
+// ========================================
+// Service Singleton
+// ========================================
+
+const reportLibraryService =
+    new ReportLibraryService();

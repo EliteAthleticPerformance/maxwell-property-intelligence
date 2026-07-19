@@ -705,103 +705,248 @@ init() {
 
     this.attachEvents();
 
+    this.initializeDrawer();
+
+    this.initializeExportButton();
+
+    this.initializeUnderwriteButton();
+
+    this.initializeSaveButton();
+
+    this.initializeScoreExplainability();
+
     this.renderDeals();
 
-    this.refreshDashboard(this.period);
+this.refreshDashboard(this.period);
 
-    this.startScanner();
+this.restoreSelectedDeal();
 
-    // =====================================
-// Deal Drawer Controls
-// =====================================
-
-const closeDrawer = () => {
-
-    document
-        .getElementById("dealDrawer")
-        .classList.remove("open");
-
-    document
-        .getElementById("drawerOverlay")
-        .classList.remove("show");
-
-};
-
-// Close Button
-
-document
-    .getElementById("closeDrawer")
-    .addEventListener("click", closeDrawer);
-
-// Click Outside Drawer
-
-document
-    .getElementById("drawerOverlay")
-    .addEventListener("click", closeDrawer);
-
-// Escape Key
-
-document.addEventListener("keydown", (e) => {
-
-    if (e.key === "Escape") {
-
-        closeDrawer();
-
-    }
-
-// ========================================
-// Export Report
-// ========================================
-
-document
-    .getElementById("exportReportBtn")
-    ?.addEventListener(
-
-        "click",
-
-        () =>
-            this.exportInvestmentMemorandum()
-
-    );    
-
-});
-
-
-// ========================================
-// Score Explainability Toggle
-// ========================================
-
-const scoreToggle =
-    document.getElementById(
-        "drawerScoreExplainabilityToggle"
-    );
-
-const scoreExplainability =
-    document.getElementById(
-        "drawerScoreExplainability"
-    );
-
-if(
-    scoreToggle &&
-    scoreExplainability
-){
-
-    scoreToggle.addEventListener(
-        "click",
-        () => {
-
-            scoreExplainability
-                .classList
-                .toggle("open");
-
-        }
-    );
-
-}
+this.startScanner();
 
 },
 
+ // ========================================
+// Initialize Drawer
+// ========================================
 
+initializeDrawer(){
+
+    const closeDrawer = () => {
+
+        document
+            .getElementById("dealDrawer")
+            .classList.remove("open");
+
+        document
+            .getElementById("drawerOverlay")
+            .classList.remove("show");
+
+    };
+
+    document
+        .getElementById("closeDrawer")
+        ?.addEventListener(
+            "click",
+            closeDrawer
+        );
+
+    document
+        .getElementById("drawerOverlay")
+        ?.addEventListener(
+            "click",
+            closeDrawer
+        );
+
+    document.addEventListener("keydown",(e)=>{
+
+        if(e.key==="Escape"){
+
+            closeDrawer();
+
+        }
+
+    });
+
+},
+
+// ========================================
+// Initialize Export Button
+// ========================================
+
+initializeExportButton(){
+
+    const button =
+        document.getElementById(
+            "exportReportBtn"
+        );
+
+    if(!button){
+
+        console.warn(
+            "Export Report button not found."
+        );
+
+        return;
+
+    }
+
+    button.onclick = () =>
+        this.exportInvestmentMemorandum();
+
+},
+
+// ========================================
+// Initialize Underwrite Button
+// ========================================
+
+initializeUnderwriteButton(){
+
+    const button =
+        document.getElementById(
+            "underwriteDealBtn"
+        );
+
+    if(!button) return;
+
+    button.onclick = () =>
+        this.openUnderwritingWorkspace();
+
+},
+
+// ========================================
+// Initialize Save Deal Button
+// ========================================
+
+initializeSaveButton(){
+
+    const button =
+        document.getElementById(
+            "saveDealBtn"
+        );
+
+    if(!button) return;
+
+    button.onclick = () =>
+        this.saveCurrentDeal();
+
+},
+
+// ========================================
+// Save Current Deal
+// ========================================
+
+saveCurrentDeal(){
+
+    if(!this.currentDeal){
+
+        console.warn(
+            "No deal selected."
+        );
+
+        return;
+
+    }
+
+    const {
+
+        report,
+
+        ...dealData
+
+    } = this.currentDeal;
+
+    const saved =
+
+        savedDealsService.save({
+
+            ...dealData,
+
+            favorite: false,
+
+            notes: "",
+
+            tags: []
+
+        });
+
+    if(saved){
+
+        alert("Deal saved successfully.");
+
+    }else{
+
+        alert("Deal already saved.");
+
+    }
+
+},
+
+// ========================================
+// Restore Selected Saved Deal
+// ========================================
+
+restoreSelectedDeal(){
+
+    const selectedDeal =
+
+        sessionStorage.getItem(
+            "selectedDeal"
+        );
+
+    if(!selectedDeal){
+
+        return;
+
+    }
+
+    sessionStorage.removeItem(
+        "selectedDeal"
+    );
+
+    this.openDeal(selectedDeal);
+
+},
+
+// ========================================
+// Initialize Score Explainability
+// ========================================
+
+initializeScoreExplainability(){
+
+    const scoreToggle =
+
+        document.getElementById(
+            "drawerScoreExplainabilityToggle"
+        );
+
+    const scoreExplainability =
+
+        document.getElementById(
+            "drawerScoreExplainability"
+        );
+
+    if(
+        scoreToggle &&
+        scoreExplainability
+    ){
+
+        scoreToggle.addEventListener(
+
+            "click",
+
+            ()=>{
+
+                scoreExplainability
+                    .classList
+                    .toggle("open");
+
+            }
+
+        );
+
+    }
+
+},
 
     // ------------------------------------
     // Event Listeners
@@ -2143,17 +2288,24 @@ exportInvestmentMemorandum(){
 
     const report =
 
-    this.currentDeal.report ??
+        this.currentDeal.report ??
 
-    reportService.generate(
-        this.currentDeal
-    );
+        reportService.generate(
+            this.currentDeal
+        );
+
+    // ------------------------------------
+    // Cache Report
+    // ------------------------------------
+
+    this.currentDeal.report = report;
 
     // ------------------------------------
     // Generate Investment Memorandum
     // ------------------------------------
 
     const memorandum =
+
         investmentMemorandumService.generate(
             report
         );
@@ -2167,24 +2319,75 @@ exportInvestmentMemorandum(){
     );
 
     // ------------------------------------
-    // Store Selected Deal
+    // Store Selected Report
     // ------------------------------------
 
     sessionStorage.setItem(
 
-    "selectedReport",
+        "selectedReport",
 
-    JSON.stringify(memorandum)
+        JSON.stringify(
+            memorandum
+        )
 
-);
+    );
 
-window.open(
+    // ------------------------------------
+    // Open Memorandum
+    // ------------------------------------
 
-    "../memorandum/memorandum.html",
+    window.open(
 
-    "_blank"
+        "../memorandum/memorandum.html",
 
-);
+        "_blank"
+
+    );
+
+},
+
+// ========================================
+// Open Underwriting Workspace
+// ========================================
+
+openUnderwritingWorkspace(){
+
+    if(!this.currentDeal){
+
+        console.warn(
+            "No deal selected."
+        );
+
+        return;
+
+    }
+
+    const section =
+        document.getElementById(
+            "drawerRisk"
+        );
+
+    if(!section) return;
+
+    section.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "start"
+
+    });
+
+    section.classList.add(
+        "underwriting-focus"
+    );
+
+    setTimeout(()=>{
+
+        section.classList.remove(
+            "underwriting-focus"
+        );
+
+    },1500);
 
 },
 
@@ -2199,25 +2402,46 @@ renderMarketIntelligence(market){
             "drawerMarketData"
         );
 
-    if(!container) return;
+    if(!container){
 
-    if(!market.market){
+        return;
+
+    }
+
+    //----------------------------------
+    // No Market Data Available
+    //----------------------------------
+
+    if(!market || !market.market){
 
         container.innerHTML = `
+
 <div class="drawer-card">
 
-    <strong>Market Intelligence</strong>
+    <h3>📈 Market Intelligence</h3>
 
     <p>
 
-        Market intelligence is unavailable.
+        Market intelligence is currently unavailable.
 
     </p>
 
 </div>
-`;
 
-container.innerHTML = `
+        `;
+
+        return;
+
+    }
+
+    //----------------------------------
+    // Market Data Available
+    //----------------------------------
+
+    const m =
+        market.market;
+
+    container.innerHTML = `
 
 <div class="market-intelligence-card">
 
@@ -2235,7 +2459,7 @@ container.innerHTML = `
 
     <div class="market-narrative">
 
-        ${market.outlook}
+        ${market.reason}
 
     </div>
 
@@ -2245,7 +2469,7 @@ container.innerHTML = `
 
             <label>Inventory</label>
 
-            <strong>${market.inventoryMonths} Months</strong>
+            <strong>${m.inventoryMonths} Months</strong>
 
         </div>
 
@@ -2253,7 +2477,7 @@ container.innerHTML = `
 
             <label>Rent Growth</label>
 
-            <strong>${market.rentGrowth}%</strong>
+            <strong>${m.rentGrowth}%</strong>
 
         </div>
 
@@ -2261,7 +2485,7 @@ container.innerHTML = `
 
             <label>Vacancy</label>
 
-            <strong>${market.vacancyRate}%</strong>
+            <strong>${m.vacancyRate}%</strong>
 
         </div>
 
@@ -2269,7 +2493,7 @@ container.innerHTML = `
 
             <label>Appreciation</label>
 
-            <strong>${market.appreciation}%</strong>
+            <strong>${m.appreciation}%</strong>
 
         </div>
 
@@ -2277,7 +2501,7 @@ container.innerHTML = `
 
             <label>Employment Growth</label>
 
-            <strong>${market.employmentGrowth}%</strong>
+            <strong>${m.employmentGrowth}%</strong>
 
         </div>
 
@@ -2285,7 +2509,7 @@ container.innerHTML = `
 
             <label>Interest Rate</label>
 
-            <strong>${market.interestRate}%</strong>
+            <strong>${m.interestRate}%</strong>
 
         </div>
 
@@ -2293,7 +2517,11 @@ container.innerHTML = `
 
     <div class="market-outlook">
 
-        <strong>Investment Outlook</strong>
+        <strong>
+
+            Investment Outlook
+
+        </strong>
 
         <p>
 
@@ -2308,46 +2536,11 @@ container.innerHTML = `
 
 </div>
 
-`;
-
-        return;
-
-    }
-
-    const m =
-        market.market;
-
-    container.innerHTML = `
-
-<div class="drawer-card">
-
-    <h3>📈 Market Intelligence</h3>
-
-    <p>
-        ${market.reason}
-    </p>
-
-    <ul>
-
-        <li>Inventory: ${m.inventoryMonths} months</li>
-
-        <li>Rent Growth: ${m.rentGrowth}%</li>
-
-        <li>Vacancy: ${m.vacancyRate}%</li>
-
-        <li>Appreciation: ${m.appreciation}%</li>
-
-        <li>Employment Growth: ${m.employmentGrowth}%</li>
-
-    </ul>
-
-</div>
-
-`;
+    `;
 
 }
 
-};
+}
 
 // ========================================
 // Start Dashboard

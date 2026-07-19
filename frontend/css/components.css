@@ -239,3 +239,33 @@
     opacity:1;
 
 }
+
+.underwriting-focus{
+
+    animation:
+        underwritingGlow 1.5s ease;
+
+}
+
+@keyframes underwritingGlow{
+
+    0%{
+
+        box-shadow:none;
+
+    }
+
+    50%{
+
+        box-shadow:
+            0 0 20px rgba(37,99,235,.45);
+
+    }
+
+    100%{
+
+        box-shadow:none;
+
+    }
+
+}

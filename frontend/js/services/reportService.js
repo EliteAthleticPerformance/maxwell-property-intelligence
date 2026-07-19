@@ -66,23 +66,41 @@ class ReportService {
 
         return {
 
-            deal,
+    deal: {
 
-            analysis: {
+        type: deal.type,
 
-                valuation,
+        city: deal.city,
 
-                underwriting,
+        assetClass: deal.assetClass,
 
-                confidence,
+        image: deal.image,
 
-                recommendation
+        price: deal.price,
 
-            },
+        estimatedValue: deal.estimatedValue,
 
-            narrative
+        cashFlow: deal.cashFlow,
 
-        };
+        capRate: deal.capRate
+
+    },
+
+    analysis: {
+
+        valuation,
+
+        underwriting,
+
+        confidence,
+
+        recommendation
+
+    },
+
+    narrative
+
+};
 
     }
 
